@@ -13,7 +13,7 @@
   <Grid RowDefinitions="Auto,*,Auto" Margin="8,8,8,8">
     <TextBlock Text="{loc:Str Profiles_Available}" FontWeight="SemiBold" Margin="0,0,0,8" />
 
-    <ScrollViewer Grid.Row="1" Padding="0,0,18,0" HorizontalScrollBarVisibility="Disabled">
+    <ScrollViewer Grid.Row="1" Margin="0,0,-8,0" Padding="0,0,6,0" HorizontalScrollBarVisibility="Disabled">
       <ItemsControl ItemsSource="{Binding Session.Profiles}">
         <ItemsControl.ItemTemplate>
           <DataTemplate x:DataType="vm:ProfileItemViewModel">

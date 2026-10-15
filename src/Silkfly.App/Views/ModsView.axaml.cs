@@ -23,30 +23,13 @@ public sealed partial class ModsView : UserControl
 
         ModScroll.AddHandler(PointerWheelChangedEvent, OnWheel, Avalonia.Interactivity.RoutingStrategies.Tunnel);
         _scrollTimer = new DispatcherTimer(TimeSpan.FromMilliseconds(15), DispatcherPriority.Render, OnScrollTick);
-
-        ModScroll.AllowAutoHide = true;
-        ModScroll.PointerMoved += (_, e) => SetScrollBarNear(e.GetPosition(ModScroll).X >= ModScroll.Bounds.Width - ScrollBarRevealDistance);
-        ModScroll.PointerExited += (_, _) => SetScrollBarNear(false);
-    }
-
-    private const double ScrollBarRevealDistance = 18;
-
-    private const double ScrollBarWidth = 16;
-
-    private void SetScrollBarNear(bool near)
-    {
-        if (ModScroll.AllowAutoHide != near)
-            return;
-
-        // the expanded bar takes layout space
-        ModScroll.AllowAutoHide = !near;
-        ModList.Margin = new Thickness(0, 0, near ? 0 : ScrollBarWidth, 0);
     }
 
     private const double WheelStep = 100;
     private readonly DispatcherTimer _scrollTimer;
     private ScrollViewer? _scroll;
     private double _targetY;
+    private double _lastSetY;
 
     private void OnWheel(object? sender, PointerWheelEventArgs e)
     {
@@ -54,8 +37,11 @@ public sealed partial class ModsView : UserControl
         if (_scroll is null || e.Delta.Y == 0)
             return;
 
-        if (!_scrollTimer.IsEnabled)
+        if (!_scrollTimer.IsEnabled || MovedElsewhere(_scroll))
+        {
             _targetY = _scroll.Offset.Y;
+            _lastSetY = _scroll.Offset.Y;
+        }
 
         _targetY = Math.Clamp(_targetY - e.Delta.Y * WheelStep, 0, MaxScroll(_scroll));
         e.Handled = true;
@@ -65,6 +51,13 @@ public sealed partial class ModsView : UserControl
     private void OnScrollTick(object? sender, EventArgs e)
     {
         if (_scroll is null)
+        {
+            _scrollTimer.Stop();
+            return;
+        }
+
+        // moved by the thumb, keyboard or a jump: don't pull it back
+        if (MovedElsewhere(_scroll))
         {
             _scrollTimer.Stop();
             return;
@@ -80,7 +73,10 @@ public sealed partial class ModsView : UserControl
         }
 
         _scroll.Offset = _scroll.Offset.WithY(next);
+        _lastSetY = _scroll.Offset.Y;
     }
+
+    private bool MovedElsewhere(ScrollViewer scroll) => _scrollTimer.IsEnabled && Math.Abs(scroll.Offset.Y - _lastSetY) > 1;
 
     private static double MaxScroll(ScrollViewer scroll) => Math.Max(0, scroll.Extent.Height - scroll.Viewport.Height);
 
@@ -145,6 +141,7 @@ public sealed partial class ModsView : UserControl
             {
                 _scrollTimer.Stop();
                 ModScroll.Offset = ModScroll.Offset.WithY(Math.Clamp(offset - 8, 0, MaxScroll(ModScroll)));
+                _lastSetY = ModScroll.Offset.Y;
             }
         }, DispatcherPriority.Background);
 

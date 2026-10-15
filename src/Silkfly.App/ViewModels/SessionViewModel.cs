@@ -107,12 +107,12 @@ public sealed partial class SessionViewModel : ObservableObject
     private bool _syncingActive;
 
     [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(HasGame), nameof(GamePathText), nameof(StatusText))]
+    [NotifyPropertyChangedFor(nameof(HasGame), nameof(GamePathText))]
     [NotifyCanExecuteChangedFor(nameof(LaunchModdedCommand), nameof(LaunchVanillaCommand), nameof(InstallLoaderCommand), nameof(RemoveLoaderCommand))]
     private GameInstall? _game;
 
     [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(LoaderText), nameof(IsLoaderInstalled), nameof(LoaderButtonText), nameof(StatusText), nameof(ForeignLoader))]
+    [NotifyPropertyChangedFor(nameof(LoaderText), nameof(IsLoaderInstalled), nameof(LoaderButtonText), nameof(ForeignLoader))]
     [NotifyCanExecuteChangedFor(nameof(LaunchModdedCommand), nameof(RemoveLoaderCommand))]
     private LoaderStatus? _loaderStatus;
 
@@ -124,7 +124,6 @@ public sealed partial class SessionViewModel : ObservableObject
     private double _loaderProgress;
 
     [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(StatusText))]
     [NotifyCanExecuteChangedFor(nameof(LaunchModdedCommand))]
     private ProfileItemViewModel? _activeProfile;
 
@@ -195,10 +194,6 @@ public sealed partial class SessionViewModel : ObservableObject
     };
 
     public string LoaderButtonText => IsLoaderInstalled ? _localizer["Loader_Update"] : _localizer["Loader_Install"];
-
-    public string StatusText => !HasGame
-        ? _localizer["Info_Status_NoGame"]
-        : $"{(ActiveProfile is { } p ? _localizer.Format("Info_Status_Profile", p.Name) : _localizer["Info_Status_ProfileNone"])} · {_localizer.Format("Info_Status_Loader", LoaderText)}";
 
     public string PlayTooltip => IsGameRunning ? _localizer["Header_Running"] : _localizer["Header_Play"];
 

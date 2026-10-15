@@ -18,8 +18,6 @@
   <data name="Caption_Close" xml:space="preserve"><value>Закрыть</value></data>
   <data name="Info_LaunchVanilla" xml:space="preserve"><value>Играть без модов</value></data>
   <data name="Info_LaunchModded" xml:space="preserve"><value>Играть с модами</value></data>
-  <data name="Info_Status_ProfileNone" xml:space="preserve"><value>Профиль: не выбран</value></data>
-  <data name="Info_Status_LoaderNotInstalled" xml:space="preserve"><value>Загрузчик: не установлен</value></data>
   <data name="Mods_Search_Placeholder" xml:space="preserve"><value>Поиск модов</value></data>
   <data name="Mods_AdvancedSearch" xml:space="preserve"><value>Расширенный поиск</value></data>
   <data name="Mods_Filter_Label" xml:space="preserve"><value>Фильтр:</value></data>
@@ -156,9 +154,6 @@
   <data name="Loader_Done" xml:space="preserve"><value>BepInEx установлен</value></data>
   <data name="Loader_Removed" xml:space="preserve"><value>Загрузчик удалён из папки игры</value></data>
   <data name="Header_Running" xml:space="preserve"><value>Игра запущена</value></data>
-  <data name="Info_Status_Profile" xml:space="preserve"><value>Профиль: {0}</value></data>
-  <data name="Info_Status_Loader" xml:space="preserve"><value>Загрузчик: {0}</value></data>
-  <data name="Info_Status_NoGame" xml:space="preserve"><value>Игра не найдена</value></data>
   <data name="Launch_Started" xml:space="preserve"><value>Игра запускается…</value></data>
   <data name="Error_GameAlreadyRunning" xml:space="preserve"><value>Игра уже запущена</value></data>
   <data name="Error_LaunchFailed" xml:space="preserve"><value>Не удалось запустить игру: {0}</value></data>

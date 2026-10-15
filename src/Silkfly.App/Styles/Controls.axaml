@@ -65,6 +65,25 @@
     <Setter Property="Background" Value="{DynamicResource AccentPressedBrush}" />
     <Setter Property="BorderBrush" Value="{DynamicResource AccentPressedBrush}" />
   </Style>
+  <Style Selector="Button.soft">
+    <Setter Property="Background" Value="{DynamicResource AccentSoftBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource BorderStrongBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource AccentHoverBrush}" />
+  </Style>
+  <Style Selector="Button.soft:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="{DynamicResource AccentBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource OnAccentBrush}" />
+  </Style>
+  <Style Selector="Button.soft:pressed /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="{DynamicResource AccentPressedBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource AccentPressedBrush}" />
+  </Style>
+  <Style Selector="Button.soft:disabled /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="{DynamicResource SurfaceBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource BorderStrongBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource TextMutedBrush}" />
+  </Style>
   <Style Selector="Button.primary:disabled /template/ ContentPresenter#PART_ContentPresenter">
     <Setter Property="Background" Value="{DynamicResource AccentSoftBrush}" />
     <Setter Property="BorderBrush" Value="{DynamicResource AccentSoftBrush}" />
@@ -447,6 +466,34 @@
     <Setter Property="CornerRadius" Value="4" />
     <Setter Property="Padding" Value="22,18" />
     <Setter Property="BoxShadow" Value="0 8 30 0 #A0000000" />
+  </Style>
+
+  <Style Selector="ScrollViewer">
+    <Setter Property="AllowAutoHide" Value="False" />
+  </Style>
+  <Style Selector="ScrollViewer /template/ ScrollBar#PART_VerticalScrollBar">
+    <Setter Property="RenderTransformOrigin" Value="100%,50%" />
+    <Setter Property="RenderTransform" Value="scaleX(0.3)" />
+    <Setter Property="Opacity" Value="0.85" />
+    <Setter Property="Transitions">
+      <Transitions>
+        <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.12" />
+        <DoubleTransition Property="Opacity" Duration="0:0:0.12" />
+      </Transitions>
+    </Setter>
+  </Style>
+  <Style Selector="ScrollViewer /template/ ScrollBar#PART_VerticalScrollBar">
+    <Setter Property="CornerRadius" Value="3" />
+  </Style>
+  <Style Selector="ScrollViewer /template/ ScrollBar#PART_VerticalScrollBar /template/ Thumb">
+    <Setter Property="CornerRadius" Value="3" />
+  </Style>
+  <Style Selector="ScrollViewer:not(.near) /template/ ScrollBar#PART_VerticalScrollBar /template/ Thumb">
+    <Setter Property="Background" Value="{DynamicResource TextPrimaryBrush}" />
+  </Style>
+  <Style Selector="ScrollViewer.near /template/ ScrollBar#PART_VerticalScrollBar">
+    <Setter Property="RenderTransform" Value="scaleX(1)" />
+    <Setter Property="Opacity" Value="1" />
   </Style>
 
   <Style Selector="Grid.row">

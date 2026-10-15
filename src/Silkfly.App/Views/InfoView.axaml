@@ -62,10 +62,10 @@
   </UserControl.Styles>
 
   <Panel>
-    <Image x:Name="Flies" Source="{x:Static app:ArtAssets.FliesScatter}" Stretch="UniformToFill" Opacity="0.45"
+    <Image x:Name="Flies" Source="{x:Static app:ArtAssets.FliesScatter}" Stretch="Uniform" Opacity="0.45"
            IsHitTestVisible="False" />
 
-    <Grid RowDefinitions="Auto,*,Auto,Auto,Auto" Margin="16,8,16,12">
+    <Grid RowDefinitions="Auto,*,Auto,Auto" Margin="16,8,16,12">
 
       <Button Grid.Row="0" Classes="news" HorizontalAlignment="Center" IsVisible="{Binding HasNews}"
               IsHitTestVisible="{Binding HasNewsLink}" Command="{Binding OpenNewsCommand}">
@@ -115,9 +115,8 @@
         </Button>
       </StackPanel>
 
-      <TextBlock Grid.Row="3" Classes="caption" HorizontalAlignment="Center" Text="{Binding Session.StatusText}" />
 
-      <StackPanel Grid.Row="4" HorizontalAlignment="Center" Spacing="8" Margin="0,10,0,0">
+      <StackPanel Grid.Row="3" HorizontalAlignment="Center" Spacing="8" Margin="0,10,0,0">
         <TextBlock Text="{loc:Str Info_Links}" FontWeight="SemiBold" FontSize="15" HorizontalAlignment="Center" />
         <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Center">
           <Button Classes="tile" Command="{Binding OpenThunderstoreCommand}">

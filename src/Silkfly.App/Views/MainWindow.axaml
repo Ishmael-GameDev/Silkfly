@@ -82,7 +82,7 @@
               </DataTemplate>
             </ComboBox.ItemTemplate>
           </ComboBox>
-          <Button Classes="primary icon" Width="34" Height="30" CornerRadius="0,3,3,0" Command="{Binding Session.LaunchModdedCommand}"
+          <Button Classes="soft icon" Width="34" Height="30" CornerRadius="0,3,3,0" Command="{Binding Session.LaunchModdedCommand}"
                   ToolTip.Tip="{Binding Session.PlayTooltip}">
             <Panel>
               <controls:GlyphIcon Width="13" Height="13" IsFilled="True" Data="{StaticResource Icon.Play}"

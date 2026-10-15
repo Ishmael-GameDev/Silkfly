@@ -18,8 +18,6 @@
   <data name="Caption_Close" xml:space="preserve"><value>Close</value></data>
   <data name="Info_LaunchVanilla" xml:space="preserve"><value>Play without mods</value></data>
   <data name="Info_LaunchModded" xml:space="preserve"><value>Play with mods</value></data>
-  <data name="Info_Status_ProfileNone" xml:space="preserve"><value>Profile: not selected</value></data>
-  <data name="Info_Status_LoaderNotInstalled" xml:space="preserve"><value>Loader: not installed</value></data>
   <data name="Mods_Search_Placeholder" xml:space="preserve"><value>Search mods</value></data>
   <data name="Mods_AdvancedSearch" xml:space="preserve"><value>Advanced search</value></data>
   <data name="Mods_Filter_Label" xml:space="preserve"><value>Filter mods:</value></data>
@@ -156,9 +154,6 @@
   <data name="Loader_Done" xml:space="preserve"><value>BepInEx is installed</value></data>
   <data name="Loader_Removed" xml:space="preserve"><value>The loader was removed from the game folder</value></data>
   <data name="Header_Running" xml:space="preserve"><value>The game is running</value></data>
-  <data name="Info_Status_Profile" xml:space="preserve"><value>Profile: {0}</value></data>
-  <data name="Info_Status_Loader" xml:space="preserve"><value>Loader: {0}</value></data>
-  <data name="Info_Status_NoGame" xml:space="preserve"><value>Game not found</value></data>
   <data name="Launch_Started" xml:space="preserve"><value>The game is starting…</value></data>
   <data name="Error_GameAlreadyRunning" xml:space="preserve"><value>The game is already running</value></data>
   <data name="Error_LaunchFailed" xml:space="preserve"><value>Could not start the game: {0}</value></data>

@@ -5,6 +5,26 @@ versions follow [SemVer](https://semver.org/). The release workflow uses the sec
 
 ## [Unreleased]
 
+## [0.1.0-beta.2]
+
+### Changed
+
+- Dependencies that are already installed are shown in a calm color in the mod card; missing ones stay highlighted.
+- Scroll bars are rounder, and the thin one is brighter, so it is easier to find.
+- The Info screen no longer shows the profile and loader line under the Play buttons.
+
+### Fixed
+
+- The window can be dragged by its header again.
+- The Play button in the header is less bright; it lights up on hover.
+- Scroll bars everywhere stay a thin line and widen only while the pointer is right next to them (also at the very
+  window edge); mod cards no longer change width.
+- Wheel scrolling no longer jumps back with many expanded cards (their sizes are kept across list refreshes), and keeps
+  working after opening a dependency from a mod card.
+- Collapsing a card near the end of the list no longer leaves the list empty until it is scrolled.
+- Changing the interface scale resizes the window right away, also after it was maximized and restored.
+- Info screen: in large windows the silk flies are no longer cut off at the window edge.
+
 ## [0.1.0]
 
 First public release.

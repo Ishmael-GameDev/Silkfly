@@ -44,6 +44,12 @@
       <Setter Property="TextWrapping" Value="NoWrap" />
       <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
+    <Style Selector="Button.link.installed">
+      <Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}" />
+    </Style>
+    <Style Selector="Button.link.installed:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" />
+    </Style>
   </UserControl.Styles>
 
   <Grid ColumnDefinitions="36,*" DragDrop.AllowDrop="True">
@@ -156,8 +162,8 @@
           </Grid>
         </Border>
 
-        <ScrollViewer x:Name="ModScroll" Grid.Row="1" HorizontalScrollBarVisibility="Disabled">
-          <controls:CardListPanel x:Name="ModList" Items="{Binding Items}" Margin="0,0,16,0">
+        <ScrollViewer x:Name="ModScroll" Grid.Row="1" Margin="0,0,-8,0" HorizontalScrollBarVisibility="Disabled">
+          <controls:CardListPanel x:Name="ModList" Items="{Binding Items}" Margin="0,0,4,0">
           <controls:CardListPanel.DataTemplates>
             <DataTemplate x:DataType="vm:ModItemViewModel">
               <Border Classes="card hoverable" Padding="0">
@@ -286,7 +292,7 @@
                           </ItemsControl.ItemsPanel>
                           <ItemsControl.ItemTemplate>
                             <DataTemplate x:DataType="vm:DependencyItem">
-                              <Button Classes="link" Margin="0,0,12,2" Content="{Binding Text}" IsEnabled="{Binding InCatalog}"
+                              <Button Classes="link" Classes.installed="{Binding Installed}" Margin="0,0,12,2" Content="{Binding Text}" IsEnabled="{Binding InCatalog}"
                                       Command="{Binding $parent[ItemsControl].((vm:ModItemViewModel)DataContext).OpenDependencyCommand}"
                                       CommandParameter="{Binding}" />
                             </DataTemplate>

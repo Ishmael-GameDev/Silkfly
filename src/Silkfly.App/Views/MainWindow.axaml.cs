@@ -55,20 +55,16 @@ public sealed partial class MainWindow : Window
         MinWidth = UiScaleLimits.BaseMinWidth * scale;
         MinHeight = UiScaleLimits.BaseMinHeight * scale;
 
+        Scaler.InvalidateMeasure();
         if (WindowState != WindowState.Normal)
             return;
 
-        var width = double.IsNaN(Width) ? ClientSize.Width : Width;
-        var height = double.IsNaN(Height) ? ClientSize.Height : Height;
-        if (!force)
-        {
-            width *= ratio;
-            height *= ratio;
-        }
-
-        width = Math.Max(width, MinWidth);
-        height = Math.Max(height, MinHeight);
-        if (Math.Abs(width - Width) > 0.5 || Math.Abs(height - Height) > 0.5)
+        // Width is NaN after maximize/restore: compare with the real size
+        var currentWidth = double.IsNaN(Width) ? ClientSize.Width : Width;
+        var currentHeight = double.IsNaN(Height) ? ClientSize.Height : Height;
+        var width = Math.Max(force ? currentWidth : currentWidth * ratio, MinWidth);
+        var height = Math.Max(force ? currentHeight : currentHeight * ratio, MinHeight);
+        if (Math.Abs(width - currentWidth) > 0.5 || Math.Abs(height - currentHeight) > 0.5)
         {
             Width = width;
             Height = height;
@@ -166,16 +162,28 @@ public sealed partial class MainWindow : Window
     // no drag from controls: ComboBox doesn't handle the press and the drag eats its release
     private void OnHeaderPointerPressed(object? sender, PointerPressedEventArgs e)
     {
-        if (e.Source is Visual source && source.FindAncestorOfType<Avalonia.Controls.Primitives.TemplatedControl>(includeSelf: true) is not null)
+        if (IsOnControl(e.Source))
             return;
 
         if (e.GetCurrentPoint(this).Properties.IsLeftButtonPressed && e.ClickCount == 1)
             BeginMoveDrag(e);
     }
 
+    // only up to the header: the window itself is a TemplatedControl too
+    private bool IsOnControl(object? source)
+    {
+        for (var visual = source as Visual; visual is not null && visual != Header; visual = visual.GetVisualParent())
+        {
+            if (visual is Avalonia.Controls.Primitives.TemplatedControl)
+                return true;
+        }
+
+        return false;
+    }
+
     private void OnHeaderDoubleTapped(object? sender, TappedEventArgs e)
     {
-        if (e.Source is Visual source && source.FindAncestorOfType<Avalonia.Controls.Primitives.TemplatedControl>(includeSelf: true) is not null)
+        if (IsOnControl(e.Source))
             return;
 
         ToggleMaximize();

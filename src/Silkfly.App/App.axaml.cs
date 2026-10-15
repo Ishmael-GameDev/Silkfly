@@ -15,7 +15,11 @@ public sealed class App : Application
 {
     private ServiceProvider? _services;
 
-    public override void Initialize() => AvaloniaXamlLoader.Load(this);
+    public override void Initialize()
+    {
+        AvaloniaXamlLoader.Load(this);
+        Controls.ScrollBarReveal.Register();
+    }
 
     public override void OnFrameworkInitializationCompleted()
     {

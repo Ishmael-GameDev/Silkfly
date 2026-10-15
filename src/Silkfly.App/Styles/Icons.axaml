@@ -4,7 +4,7 @@
   <StreamGeometry x:Key="Icon.Upload">M21 15 v4 a2 2 0 0 1 -2 2 H5 a2 2 0 0 1 -2 -2 v-4 M17 8 l-5 -5 l-5 5 M12 3 v12</StreamGeometry>
   <StreamGeometry x:Key="Icon.Trash">M3 6 h18 M19 6 v14 c0 1 -1 2 -2 2 H7 c-1 0 -2 -1 -2 -2 V6 M8 6 V4 c0 -1 1 -2 2 -2 h4 c1 0 2 1 2 2 v2 M10 11 v6 M14 11 v6</StreamGeometry>
   <StreamGeometry x:Key="Icon.Refresh">M3 12 a9 9 0 0 1 9 -9 a9.75 9.75 0 0 1 6.74 2.74 L21 8 M21 3 v5 h-5 M21 12 a9 9 0 0 1 -9 9 a9.75 9.75 0 0 1 -6.74 -2.74 L3 16 M8 16 H3 v5</StreamGeometry>
-  <StreamGeometry x:Key="Icon.ToggleLeft">M9 5 h6 a7 7 0 0 1 0 14 H9 A7 7 0 0 1 9 5 Z M12 12 a3 3 0 1 1 -6 0 a3 3 0 1 1 6 0 Z</StreamGeometry>
+  <StreamGeometry x:Key="Icon.ToggleLeft">M6 7 h12 a5 5 0 0 1 0 10 H6 A5 5 0 0 1 6 7 Z M8.5 12 a2.5 2.5 0 1 1 -5 0 a2.5 2.5 0 1 1 5 0 Z</StreamGeometry>
   <StreamGeometry x:Key="Icon.ArrowUpCircle">M22 12 a10 10 0 1 1 -20 0 a10 10 0 1 1 20 0 Z M16 12 l-4 -4 l-4 4 M12 16 V8</StreamGeometry>
   <StreamGeometry x:Key="Icon.FolderOpen">M6 14 l1.5 -2.9 A2 2 0 0 1 9.24 10 H20 a2 2 0 0 1 1.94 2.5 l-1.54 6 a2 2 0 0 1 -1.95 1.5 H4 a2 2 0 0 1 -2 -2 V5 a2 2 0 0 1 2 -2 h3.9 a2 2 0 0 1 1.69 0.9 l0.81 1.2 a2 2 0 0 0 1.67 0.9 H18 a2 2 0 0 1 2 2 v2</StreamGeometry>
   <StreamGeometry x:Key="Icon.FileText">M15 2 H6 a2 2 0 0 0 -2 2 v16 a2 2 0 0 0 2 2 h12 a2 2 0 0 0 2 -2 V7 Z M14 2 v4 a2 2 0 0 0 2 2 h4 M10 9 H8 M16 13 H8 M16 17 H8</StreamGeometry>

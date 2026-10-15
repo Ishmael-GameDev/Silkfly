@@ -188,7 +188,7 @@ public sealed partial class ModListViewModel : ObservableObject
         _environment = environment;
         _logger = logger;
         _itemContext = new ModItemContext(localizer, shell, clipboard, dialogs, icons, thunderstore, queue, toasts,
-            catalog.Find, () => session.ActiveProfile?.Profile, ShowPackage);
+            catalog.Find, id => _snapshot.Installed.ContainsKey(id), () => session.ActiveProfile?.Profile, ShowPackage);
 
         SortOptions =
         [

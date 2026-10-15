@@ -21,10 +21,11 @@ public sealed record ModItemContext(
     IOperationQueue Queue,
     IToastService Toasts,
     Func<PackageId, Package?> Find,
+    Func<PackageId, bool> IsInstalled,
     Func<Profile?> ActiveProfile,
     Action<PackageId> ShowPackage);
 
-public sealed record DependencyItem(PackageId Id, string Text, bool InCatalog);
+public sealed record DependencyItem(PackageId Id, string Text, bool InCatalog, bool Installed);
 
 public sealed record ModDetails(ModItemViewModel Mod);
 
@@ -171,7 +172,7 @@ public sealed partial class ModItemViewModel : ObservableObject, Controls.IExpan
     public IReadOnlyList<DependencyItem> DependencyList =>
         (Installed is { } mod && Package.FindVersion(mod.Version) is { } installedVersion ? installedVersion : Package.Latest).Dependencies
             .Where(d => !d.IsLoaderPack)
-            .Select(d => new DependencyItem(d.Id, $"{d.Id.DisplayName} {d.Version}", _ctx.Find(d.Id) is not null))
+            .Select(d => new DependencyItem(d.Id, $"{d.Id.DisplayName} {d.Version}", _ctx.Find(d.Id) is not null, _ctx.IsInstalled(d.Id)))
             .ToList();
 
     public bool HasDependencies => DependencyList.Count > 0;

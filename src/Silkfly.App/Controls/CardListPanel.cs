@@ -1,6 +1,7 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Layout;
+using Avalonia.Threading;
 
 namespace Silkfly.App.Controls;
 
@@ -9,7 +10,7 @@ public interface IExpandableItem
     bool IsExpanded { get; }
 }
 
-// Virtualizing card list. Heights are exact (collapsed size + measured expanded ones), so scrolling never jumps.
+// Virtualizing card list with exact heights, so nothing shifts while scrolling.
 public sealed class CardListPanel : Panel
 {
     public static readonly StyledProperty<IReadOnlyList<object>?> ItemsProperty =
@@ -19,13 +20,16 @@ public sealed class CardListPanel : Panel
         AvaloniaProperty.Register<CardListPanel, double>(nameof(Spacing), 6);
 
     private const double Overscan = 500;
+    private const double DefaultCollapsedHeight = 44;
+    private const int MaxRetries = 3;
 
     private readonly Dictionary<object, ContentControl> _realized = new(ReferenceEqualityComparer.Instance);
-    private readonly Dictionary<object, double> _expandedHeights = new(ReferenceEqualityComparer.Instance);
+    private readonly Dictionary<object, (bool Expanded, double Height)> _heights = new(ReferenceEqualityComparer.Instance);
     private readonly Dictionary<object, int> _indexOf = new(ReferenceEqualityComparer.Instance);
+    private readonly Dictionary<object, int> _retries = new(ReferenceEqualityComparer.Instance);
     private readonly Dictionary<Type, Stack<ContentControl>> _pool = new();
     private double[] _offsets = [];
-    private double _collapsedHeight = 44;
+    private double _collapsedHeight = double.NaN;
     private double _width = double.NaN;
     private Rect _viewport;
 
@@ -60,53 +64,53 @@ public sealed class CardListPanel : Panel
     public double? OffsetOf(object item) =>
         _indexOf.TryGetValue(item, out var index) && index < _offsets.Length ? _offsets[index] : null;
 
-    protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
-    {
-        base.OnPropertyChanged(change);
-        if (change.Property == ItemsProperty)
-        {
-            foreach (var item in _realized.Keys.ToList())
-                Recycle(item);
-            _expandedHeights.Clear();
-        }
-    }
-
     protected override Size MeasureOverride(Size availableSize)
     {
         var items = Items ?? [];
         var width = double.IsInfinity(availableSize.Width) ? 0 : availableSize.Width;
         if (!width.Equals(_width))
         {
-            _expandedHeights.Clear();
+            // text wraps differently now
+            foreach (var item in _heights.Where(h => h.Value.Expanded).Select(h => h.Key).ToList())
+                _heights.Remove(item);
             _width = width;
         }
 
         _indexOf.Clear();
         for (var i = 0; i < items.Count; i++)
             _indexOf[items[i]] = i;
-
-        ComputeOffsets(items);
-        var top = _viewport.Y - Overscan;
-        var bottom = (_viewport.Height > 0 ? _viewport.Bottom : 1000) + Overscan;
+        if (_heights.Count > items.Count * 2)
+        {
+            foreach (var stale in _heights.Keys.Where(k => !_indexOf.ContainsKey(k)).ToList())
+                _heights.Remove(stale);
+        }
 
         var keep = new HashSet<object>(ReferenceEqualityComparer.Instance);
+        var constraint = new Size(width, double.PositiveInfinity);
+
+        // measure expanded cards even off screen
+        foreach (var item in items)
+        {
+            if (IsExpanded(item) && !HasExactHeight(item))
+                MeasureItem(item, constraint);
+        }
+
+        var total = ComputeOffsets(items);
+        var viewportHeight = _viewport.Height > 0 ? _viewport.Height : 1000;
+        // the list may have got shorter than the scroll position
+        var viewTop = Math.Clamp(_viewport.Y, 0, Math.Max(0, total - viewportHeight));
+        var top = viewTop - Overscan;
+        var bottom = viewTop + viewportHeight + Overscan;
+
         for (var i = 0; i < items.Count; i++)
         {
-            var itemTop = _offsets[i];
-            if (itemTop > bottom)
+            if (_offsets[i] > bottom)
                 break;
-            if (itemTop + HeightOf(items[i]) < top)
+            if (_offsets[i] + HeightOf(items[i]) < top)
                 continue;
 
-            var item = items[i];
-            var container = Realize(item);
-            container.Measure(new Size(width, double.PositiveInfinity));
-            var height = container.DesiredSize.Height;
-            if (IsExpanded(item))
-                _expandedHeights[item] = height;
-            else if (height > 0)
-                _collapsedHeight = height;
-            keep.Add(item);
+            MeasureItem(items[i], constraint);
+            keep.Add(items[i]);
         }
 
         // keep the focused card realized
@@ -119,7 +123,7 @@ public sealed class CardListPanel : Panel
         foreach (var item in _realized.Keys.Where(k => !keep.Contains(k)).ToList())
             Recycle(item);
 
-        var total = ComputeOffsets(items);
+        total = ComputeOffsets(items);
         return new Size(width, total);
     }
 
@@ -135,6 +139,30 @@ public sealed class CardListPanel : Panel
             spare.Arrange(default);
 
         return finalSize;
+    }
+
+    private void MeasureItem(object item, Size constraint)
+    {
+        var container = Realize(item);
+        container.Measure(constraint);
+        var height = container.DesiredSize.Height;
+        if (height <= 0)
+            return;
+
+        var expanded = IsExpanded(item);
+        if (expanded && height <= CollapsedHeight + 1 && _retries.GetValueOrDefault(item) < MaxRetries)
+        {
+            // a reused container may still show the collapsed card: try again next frame
+            _retries[item] = _retries.GetValueOrDefault(item) + 1;
+            Dispatcher.UIThread.Post(InvalidateMeasure, DispatcherPriority.Render);
+            return;
+        }
+
+        _retries.Remove(item);
+        _heights[item] = (expanded, height);
+        // smallest one, so a card caught mid-collapse can't inflate it
+        if (!expanded && (double.IsNaN(_collapsedHeight) || height < _collapsedHeight))
+            _collapsedHeight = height;
     }
 
     private double ComputeOffsets(IReadOnlyList<object> items)
@@ -153,8 +181,17 @@ public sealed class CardListPanel : Panel
         return items.Count > 0 ? y - spacing : 0;
     }
 
-    private double HeightOf(object item) =>
-        IsExpanded(item) && _expandedHeights.TryGetValue(item, out var height) ? height : _collapsedHeight;
+    private bool HasExactHeight(object item) =>
+        _heights.TryGetValue(item, out var known) && known.Expanded == IsExpanded(item);
+
+    private double HeightOf(object item)
+    {
+        if (_heights.TryGetValue(item, out var known) && known.Expanded == IsExpanded(item))
+            return known.Height;
+        return CollapsedHeight;
+    }
+
+    private double CollapsedHeight => double.IsNaN(_collapsedHeight) ? DefaultCollapsedHeight : _collapsedHeight;
 
     private static bool IsExpanded(object item) => item is IExpandableItem { IsExpanded: true };
 
@@ -175,6 +212,8 @@ public sealed class CardListPanel : Panel
 
         container.Content = item;
         container.IsVisible = true;
+        container.ApplyTemplate();
+        container.Presenter?.UpdateChild();
         _realized[item] = container;
         return container;
     }
