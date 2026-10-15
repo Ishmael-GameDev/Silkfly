@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="App_Title" xml:space="preserve"><value>Silkfly</value></data>
+  <data name="Tab_Info" xml:space="preserve"><value>Инфо</value></data>
+  <data name="Tab_Mods" xml:space="preserve"><value>Моды</value></data>
+  <data name="Tab_Profiles" xml:space="preserve"><value>Профили</value></data>
+  <data name="Tab_Settings" xml:space="preserve"><value>Настройки</value></data>
+  <data name="Header_Play" xml:space="preserve"><value>Играть с модами</value></data>
+  <data name="Header_NoProfile" xml:space="preserve"><value>Нет профиля</value></data>
+  <data name="Header_Profile_Tooltip" xml:space="preserve"><value>Активный профиль</value></data>
+  <data name="Caption_Minimize" xml:space="preserve"><value>Свернуть</value></data>
+  <data name="Caption_Maximize" xml:space="preserve"><value>Развернуть</value></data>
+  <data name="Caption_Restore" xml:space="preserve"><value>Восстановить</value></data>
+  <data name="Caption_Close" xml:space="preserve"><value>Закрыть</value></data>
+  <data name="Info_LaunchVanilla" xml:space="preserve"><value>Играть без модов</value></data>
+  <data name="Info_LaunchModded" xml:space="preserve"><value>Играть с модами</value></data>
+  <data name="Info_Status_ProfileNone" xml:space="preserve"><value>Профиль: не выбран</value></data>
+  <data name="Info_Status_LoaderNotInstalled" xml:space="preserve"><value>Загрузчик: не установлен</value></data>
+  <data name="Mods_Search_Placeholder" xml:space="preserve"><value>Поиск модов</value></data>
+  <data name="Mods_AdvancedSearch" xml:space="preserve"><value>Расширенный поиск</value></data>
+  <data name="Mods_Filter_Label" xml:space="preserve"><value>Фильтр:</value></data>
+  <data name="Mods_Filter_All" xml:space="preserve"><value>Все</value></data>
+  <data name="Mods_Filter_Installed" xml:space="preserve"><value>Установленные</value></data>
+  <data name="Mods_Filter_Enabled" xml:space="preserve"><value>Включённые</value></data>
+  <data name="Mods_Filter_Outdated" xml:space="preserve"><value>Обновления</value></data>
+  <data name="Mods_Filter_WhatsNew" xml:space="preserve"><value>Новое</value></data>
+  <data name="Mods_Empty_NoCatalog_Title" xml:space="preserve"><value>Каталог недоступен</value></data>
+  <data name="Mods_Empty_NoCatalog_Text" xml:space="preserve"><value>Не удалось связаться с Thunderstore. Проверьте соединение и попробуйте ещё раз.</value></data>
+  <data name="Rail_UpdateAll" xml:space="preserve"><value>Обновить всё</value></data>
+  <data name="Rail_ToggleAll" xml:space="preserve"><value>Включить / выключить все</value></data>
+  <data name="Rail_RefreshCatalog" xml:space="preserve"><value>Обновить каталог</value></data>
+  <data name="Rail_ManualInstall" xml:space="preserve"><value>Установить из файла</value></data>
+  <data name="Rail_OpenProfileFolder" xml:space="preserve"><value>Открыть папку профиля</value></data>
+  <data name="Rail_OpenGameLog" xml:space="preserve"><value>Открыть лог игры</value></data>
+  <data name="Rail_ExportProfile" xml:space="preserve"><value>Экспорт профиля</value></data>
+  <data name="Profiles_Title" xml:space="preserve"><value>Профили</value></data>
+  <data name="Profiles_Create" xml:space="preserve"><value>Создать профиль</value></data>
+  <data name="Profiles_Empty_Title" xml:space="preserve"><value>Профилей пока нет</value></data>
+  <data name="Profiles_Empty_Text" xml:space="preserve"><value>Профиль — это отдельный набор модов. Создайте первый, чтобы начать.</value></data>
+  <data name="Settings_Title" xml:space="preserve"><value>Настройки</value></data>
+  <data name="Settings_Group_Game" xml:space="preserve"><value>Игра</value></data>
+  <data name="Settings_Game_Path" xml:space="preserve"><value>Папка игры</value></data>
+  <data name="Settings_Game_NotFound" xml:space="preserve"><value>Не найдена</value></data>
+  <data name="Settings_Group_Loader" xml:space="preserve"><value>Загрузчик</value></data>
+  <data name="Settings_Loader_NotInstalled" xml:space="preserve"><value>BepInEx не установлен</value></data>
+  <data name="Settings_Group_Interface" xml:space="preserve"><value>Интерфейс</value></data>
+  <data name="Settings_Language" xml:space="preserve"><value>Язык</value></data>
+  <data name="Settings_Language_Auto" xml:space="preserve"><value>Авто (как в системе)</value></data>
+  <data name="Settings_Group_Diagnostics" xml:space="preserve"><value>Диагностика</value></data>
+  <data name="Settings_OpenLogs" xml:space="preserve"><value>Открыть папку логов</value></data>
+  <data name="Settings_CopySystemInfo" xml:space="preserve"><value>Скопировать сведения о системе</value></data>
+  <data name="Settings_CopySystemInfo_Done" xml:space="preserve"><value>Скопировано</value></data>
+  <data name="Settings_Group_About" xml:space="preserve"><value>О программе</value></data>
+  <data name="Settings_Version" xml:space="preserve"><value>Версия {0}</value></data>
+  <data name="Settings_DataFolder" xml:space="preserve"><value>Папка данных</value></data>
+  <data name="Error_ThunderstoreUnavailable" xml:space="preserve"><value>Thunderstore недоступен</value></data>
+  <data name="Error_ThunderstoreFormat" xml:space="preserve"><value>Thunderstore вернул неожиданные данные</value></data>
+  <data name="Error_GameNotFound" xml:space="preserve"><value>Hollow Knight: Silksong не найдена</value></data>
+  <data name="Error_GameRunning" xml:space="preserve"><value>Игра запущена с этим профилем. Сначала закройте её.</value></data>
+  <data name="Error_LoaderMissing" xml:space="preserve"><value>Загрузчик модов (BepInEx) не установлен</value></data>
+  <data name="Error_InstallConflict" xml:space="preserve"><value>Файл уже существует и принадлежит другому: {0}</value></data>
+  <data name="Error_UnsafeArchive" xml:space="preserve"><value>Архив содержит небезопасный путь: {0}</value></data>
+  <data name="Error_ProfileCorrupt" xml:space="preserve"><value>Профиль «{0}» повреждён</value></data>
+  <data name="Error_InsufficientPermissions" xml:space="preserve"><value>Нет прав на запись в {0}</value></data>
+  <data name="Mods_Empty_NothingFound" xml:space="preserve"><value>Ничего не найдено</value></data>
+  <data name="Mods_ResetFilters" xml:space="preserve"><value>Сбросить фильтры</value></data>
+  <data name="Mods_Retry" xml:space="preserve"><value>Повторить</value></data>
+  <data name="Mods_Offline" xml:space="preserve"><value>Нет соединения с Thunderstore — показан каталог от {0}</value></data>
+  <data name="Mods_Updated" xml:space="preserve"><value>Обновлено {0}</value></data>
+  <data name="Mods_Refreshing" xml:space="preserve"><value>Обновление каталога…</value></data>
+  <data name="Mods_Refresh_Tooltip" xml:space="preserve"><value>Обновить каталог (Ctrl+R)</value></data>
+  <data name="Mods_Sort" xml:space="preserve"><value>Сортировка</value></data>
+  <data name="Mods_Sort_Name" xml:space="preserve"><value>По имени</value></data>
+  <data name="Mods_Sort_Downloads" xml:space="preserve"><value>По загрузкам</value></data>
+  <data name="Mods_Sort_Rating" xml:space="preserve"><value>По рейтингу</value></data>
+  <data name="Mods_Sort_Updated" xml:space="preserve"><value>По дате обновления</value></data>
+  <data name="Mods_Sort_Created" xml:space="preserve"><value>По дате создания</value></data>
+  <data name="Mods_Author" xml:space="preserve"><value>Автор</value></data>
+  <data name="Mods_Author_Any" xml:space="preserve"><value>Любой автор</value></data>
+  <data name="Mods_Categories" xml:space="preserve"><value>Категории</value></data>
+  <data name="Mods_ShowDeprecated" xml:space="preserve"><value>Показывать устаревшие моды</value></data>
+  <data name="Mods_ShowNsfw" xml:space="preserve"><value>Показывать NSFW-моды</value></data>
+  <data name="Mod_Install" xml:space="preserve"><value>Установить</value></data>
+  <data name="Mod_Uninstall" xml:space="preserve"><value>Удалить</value></data>
+  <data name="Mod_Update" xml:space="preserve"><value>Обновить</value></data>
+  <data name="Mod_On" xml:space="preserve"><value>Вкл</value></data>
+  <data name="Mod_Off" xml:space="preserve"><value>Выкл</value></data>
+  <data name="Mod_Version" xml:space="preserve"><value>Версия:</value></data>
+  <data name="Mod_Dependencies" xml:space="preserve"><value>Зависимости:</value></data>
+  <data name="Mod_NoDependencies" xml:space="preserve"><value>Нет</value></data>
+  <data name="Mod_Author" xml:space="preserve"><value>Автор:</value></data>
+  <data name="Mod_Categories" xml:space="preserve"><value>Категории:</value></data>
+  <data name="Mod_Stats" xml:space="preserve"><value>Статистика:</value></data>
+  <data name="Mod_Downloads" xml:space="preserve"><value>Загрузок: {0}</value></data>
+  <data name="Mod_Rating" xml:space="preserve"><value>Рейтинг {0}</value></data>
+  <data name="Mod_UpdatedOn" xml:space="preserve"><value>обновлён {0}</value></data>
+  <data name="Mod_Readme" xml:space="preserve"><value>README</value></data>
+  <data name="Mod_Changelog" xml:space="preserve"><value>История изменений</value></data>
+  <data name="Mod_OpenPage" xml:space="preserve"><value>Открыть на Thunderstore</value></data>
+  <data name="Mod_OpenWebsite" xml:space="preserve"><value>Сайт мода</value></data>
+  <data name="Mod_CopyLink" xml:space="preserve"><value>Скопировать ссылку</value></data>
+  <data name="Mod_LinkCopied" xml:space="preserve"><value>Ссылка скопирована</value></data>
+  <data name="Mod_OpenFolder" xml:space="preserve"><value>Открыть папку мода</value></data>
+  <data name="Mod_Deprecated" xml:space="preserve"><value>Устарел</value></data>
+  <data name="Mod_Nsfw" xml:space="preserve"><value>NSFW</value></data>
+  <data name="Mod_Pinned" xml:space="preserve"><value>Закреплён</value></data>
+  <data name="Mod_NotInCatalog" xml:space="preserve"><value>нет в каталоге</value></data>
+  <data name="Readme_Loading" xml:space="preserve"><value>Загрузка…</value></data>
+  <data name="Readme_Empty" xml:space="preserve"><value>У этой версии нет {0}.</value></data>
+  <data name="Readme_Error" xml:space="preserve"><value>Не удалось загрузить: {0}</value></data>
+  <data name="Readme_Close" xml:space="preserve"><value>Закрыть</value></data>
+  <data name="Time_JustNow" xml:space="preserve"><value>только что</value></data>
+  <data name="Time_Minutes_One" xml:space="preserve"><value>{0} минуту назад</value></data>
+  <data name="Time_Minutes_Few" xml:space="preserve"><value>{0} минуты назад</value></data>
+  <data name="Time_Minutes_Many" xml:space="preserve"><value>{0} минут назад</value></data>
+  <data name="Time_Hours_One" xml:space="preserve"><value>{0} час назад</value></data>
+  <data name="Time_Hours_Few" xml:space="preserve"><value>{0} часа назад</value></data>
+  <data name="Time_Hours_Many" xml:space="preserve"><value>{0} часов назад</value></data>
+  <data name="Time_Days_One" xml:space="preserve"><value>{0} день назад</value></data>
+  <data name="Time_Days_Few" xml:space="preserve"><value>{0} дня назад</value></data>
+  <data name="Time_Days_Many" xml:space="preserve"><value>{0} дней назад</value></data>
+  <data name="Rail_UninstallAll" xml:space="preserve"><value>Удалить все моды</value></data>
+  <data name="Info_Links" xml:space="preserve"><value>Полезные ссылки</value></data>
+  <data name="Info_Link_Thunderstore" xml:space="preserve"><value>Thunderstore</value></data>
+  <data name="Info_Link_BepInEx" xml:space="preserve"><value>Доки BepInEx</value></data>
+  <data name="Info_Link_CreateMods" xml:space="preserve"><value>Создать мод</value></data>
+  <data name="Info_Link_Logs" xml:space="preserve"><value>Логи</value></data>
+  <data name="Settings_ChangePath" xml:space="preserve"><value>Изменить путь</value></data>
+  <data name="Settings_CheckUpdates" xml:space="preserve"><value>Проверить обновления</value></data>
+  <data name="Error_DownloadSizeMismatch" xml:space="preserve"><value>Загрузка {0} неполная ({2} из {1} байт)</value></data>
+  <data name="Error_UntrustedHost" xml:space="preserve"><value>Загрузка с недоверенного адреса запрещена: {0}</value></data>
+  <data name="Error_HttpStatus" xml:space="preserve"><value>Сервер вернул HTTP {0}</value></data>
+  <data name="Profiles_Available" xml:space="preserve"><value>Доступные профили:</value></data>
+  <data name="Profiles_Import" xml:space="preserve"><value>Импортировать профиль</value></data>
+  <data name="Game_Problem_NotFound" xml:space="preserve"><value>Папка не найдена</value></data>
+  <data name="Game_Problem_NoExecutable" xml:space="preserve"><value>В папке нет исполняемого файла Hollow Knight Silksong</value></data>
+  <data name="Game_Problem_NoDataFolder" xml:space="preserve"><value>В папке нет «Hollow Knight Silksong_Data»</value></data>
+  <data name="Game_Problem_NotMono" xml:space="preserve"><value>Файлы игры неполные (нет Managed/Assembly-CSharp.dll)</value></data>
+  <data name="Game_Source_Steam" xml:space="preserve"><value>Steam</value></data>
+  <data name="Game_Source_Gog" xml:space="preserve"><value>GOG</value></data>
+  <data name="Game_Source_Xbox" xml:space="preserve"><value>Xbox / Game Pass</value></data>
+  <data name="Game_Source_Manual" xml:space="preserve"><value>Указана вручную</value></data>
+  <data name="Loader_Problem_FilesMissing" xml:space="preserve"><value>В папке игры не хватает файлов загрузчика</value></data>
+  <data name="Loader_NotInstalled" xml:space="preserve"><value>BepInEx не установлен</value></data>
+  <data name="Loader_Installed" xml:space="preserve"><value>BepInEx pack {0}</value></data>
+  <data name="Loader_UpdateAvailable" xml:space="preserve"><value>BepInEx pack {0} — доступно обновление до {1}</value></data>
+  <data name="Loader_Foreign" xml:space="preserve"><value>В папке игры найден загрузчик другого мод-менеджера. Silkfly перенесёт его файлы в .silkfly-backup и сможет вернуть их обратно.</value></data>
+  <data name="Loader_Install" xml:space="preserve"><value>Установить загрузчик</value></data>
+  <data name="Loader_Update" xml:space="preserve"><value>Обновить загрузчик</value></data>
+  <data name="Loader_Remove" xml:space="preserve"><value>Удалить из папки игры</value></data>
+  <data name="Loader_Installing" xml:space="preserve"><value>Установка BepInEx…</value></data>
+  <data name="Loader_Done" xml:space="preserve"><value>BepInEx установлен</value></data>
+  <data name="Loader_Removed" xml:space="preserve"><value>Загрузчик удалён из папки игры</value></data>
+  <data name="Header_Running" xml:space="preserve"><value>Игра запущена</value></data>
+  <data name="Info_Status_Profile" xml:space="preserve"><value>Профиль: {0}</value></data>
+  <data name="Info_Status_Loader" xml:space="preserve"><value>Загрузчик: {0}</value></data>
+  <data name="Info_Status_NoGame" xml:space="preserve"><value>Игра не найдена</value></data>
+  <data name="Launch_Started" xml:space="preserve"><value>Игра запускается…</value></data>
+  <data name="Error_GameAlreadyRunning" xml:space="preserve"><value>Игра уже запущена</value></data>
+  <data name="Error_LaunchFailed" xml:space="preserve"><value>Не удалось запустить игру: {0}</value></data>
+  <data name="Error_LoaderNotInCatalog" xml:space="preserve"><value>Пакета загрузчика пока нет в каталоге. Обновите каталог и попробуйте снова.</value></data>
+  <data name="Error_LoaderPackInvalid" xml:space="preserve"><value>У пакета загрузчика неожиданная структура</value></data>
+  <data name="Error_BadArchive" xml:space="preserve"><value>Архив {0} повреждён</value></data>
+  <data name="Error_NoActiveProfile" xml:space="preserve"><value>Сначала выберите профиль</value></data>
+  <data name="Toast_Details" xml:space="preserve"><value>Подробнее</value></data>
+  <data name="Toast_Close" xml:space="preserve"><value>Закрыть</value></data>
+  <data name="Dialog_Ok" xml:space="preserve"><value>ОК</value></data>
+  <data name="Dialog_Cancel" xml:space="preserve"><value>Отмена</value></data>
+  <data name="Dialog_Copy" xml:space="preserve"><value>Скопировать</value></data>
+  <data name="Dialog_OpenLog" xml:space="preserve"><value>Открыть лог</value></data>
+  <data name="Dialog_Error_Title" xml:space="preserve"><value>Что-то пошло не так</value></data>
+  <data name="Profile_Error_NameEmpty" xml:space="preserve"><value>Введите имя</value></data>
+  <data name="Profile_Error_NameTooLong" xml:space="preserve"><value>Имя длиннее {0} символов</value></data>
+  <data name="Profile_Error_NameTaken" xml:space="preserve"><value>Профиль «{0}» уже существует</value></data>
+  <data name="Profiles_Create_Title" xml:space="preserve"><value>Новый профиль</value></data>
+  <data name="Profiles_Name" xml:space="preserve"><value>Имя профиля</value></data>
+  <data name="Profiles_Rename" xml:space="preserve"><value>Переименовать</value></data>
+  <data name="Profiles_Rename_Title" xml:space="preserve"><value>Переименование профиля</value></data>
+  <data name="Profiles_Duplicate" xml:space="preserve"><value>Дублировать</value></data>
+  <data name="Profiles_Duplicate_Name" xml:space="preserve"><value>{0} (копия)</value></data>
+  <data name="Profiles_Delete" xml:space="preserve"><value>Удалить</value></data>
+  <data name="Profiles_Delete_Title" xml:space="preserve"><value>Удалить профиль?</value></data>
+  <data name="Profiles_Delete_Text" xml:space="preserve"><value>Профиль «{0}» со всеми модами и настройками будет удалён (по возможности — в корзину).</value></data>
+  <data name="Profiles_OpenFolder" xml:space="preserve"><value>Открыть папку</value></data>
+  <data name="Profiles_SetActive" xml:space="preserve"><value>Выбрать</value></data>
+  <data name="Profiles_Active" xml:space="preserve"><value>Активный</value></data>
+  <data name="Profiles_Play" xml:space="preserve"><value>Играть</value></data>
+  <data name="Profiles_Mods" xml:space="preserve"><value>Модов: {0}</value></data>
+  <data name="Profiles_LastPlayed" xml:space="preserve"><value>запуск {0}</value></data>
+  <data name="Profiles_NeverPlayed" xml:space="preserve"><value>ещё не запускался</value></data>
+  <data name="Profiles_Created" xml:space="preserve"><value>Профиль «{0}» создан</value></data>
+  <data name="Onboarding_Title" xml:space="preserve"><value>Добро пожаловать в Silkfly</value></data>
+  <data name="Onboarding_Step" xml:space="preserve"><value>Шаг {0} из 3</value></data>
+  <data name="Onboarding_Game_Title" xml:space="preserve"><value>Найдите игру</value></data>
+  <data name="Onboarding_Game_Text" xml:space="preserve"><value>Silkfly поискал Hollow Knight: Silksong в Steam, GOG и Xbox. Выберите установку или укажите папку игры.</value></data>
+  <data name="Onboarding_Game_None" xml:space="preserve"><value>Автоматически ничего не найдено.</value></data>
+  <data name="Onboarding_Game_Browse" xml:space="preserve"><value>Указать вручную…</value></data>
+  <data name="Onboarding_Game_PickTitle" xml:space="preserve"><value>Папка Hollow Knight: Silksong</value></data>
+  <data name="Onboarding_Loader_Title" xml:space="preserve"><value>Установите загрузчик модов</value></data>
+  <data name="Onboarding_Loader_Text" xml:space="preserve"><value>Моды для Silksong работают на BepInEx. Silkfly положит в папку игры небольшой загрузчик; сама игра не изменяется и из Steam или GOG по-прежнему запускается без модов.</value></data>
+  <data name="Onboarding_Profile_Title" xml:space="preserve"><value>Создайте профиль</value></data>
+  <data name="Onboarding_Profile_Text" xml:space="preserve"><value>Профиль — это отдельный набор модов со своими настройками. Позже можно добавить ещё.</value></data>
+  <data name="Onboarding_Back" xml:space="preserve"><value>Назад</value></data>
+  <data name="Onboarding_Next" xml:space="preserve"><value>Далее</value></data>
+  <data name="Onboarding_Finish" xml:space="preserve"><value>Готово</value></data>
+  <data name="Onboarding_Skip" xml:space="preserve"><value>Пропустить</value></data>
+  <data name="Onboarding_DefaultProfile" xml:space="preserve"><value>Основной</value></data>
+  <data name="Settings_RunOnboarding" xml:space="preserve"><value>Запустить мастер настройки</value></data>
+  <data name="Settings_Group_Launch" xml:space="preserve"><value>Режим запуска</value></data>
+  <data name="Settings_Launch_Direct" xml:space="preserve"><value>Напрямую (рекомендуется)</value></data>
+  <data name="Settings_Launch_ViaSteam" xml:space="preserve"><value>Через Steam</value></data>
+  <data name="Settings_Launch_Proton" xml:space="preserve"><value>Proton (Linux, Windows-сборка)</value></data>
+  <data name="Settings_GameChanged" xml:space="preserve"><value>Папка игры изменена</value></data>
+  <data name="Prompt_Deps_Title" xml:space="preserve"><value>Установка {0}</value></data>
+  <data name="Prompt_Deps_Text" xml:space="preserve"><value>Будут установлены также:</value></data>
+  <data name="Prompt_Issue_NotInCatalog" xml:space="preserve"><value>{0} нет в каталоге ({1}) — мод может не работать.</value></data>
+  <data name="Prompt_Issue_ConflictingMajor" xml:space="preserve"><value>{0}: моды требуют несовместимые версии ({1}); будет установлена новейшая.</value></data>
+  <data name="Prompt_Issue_VersionNotFound" xml:space="preserve"><value>{0}: версия {1} не найдена.</value></data>
+  <data name="Prompt_Dependents_Remove_Title" xml:space="preserve"><value>Удалить {0}?</value></data>
+  <data name="Prompt_Dependents_Disable_Title" xml:space="preserve"><value>Отключить {0}?</value></data>
+  <data name="Prompt_Dependents_Text" xml:space="preserve"><value>От него зависят установленные моды, они могут перестать работать:</value></data>
+  <data name="Prompt_Remove_Anyway" xml:space="preserve"><value>Всё равно удалить</value></data>
+  <data name="Prompt_Disable_Anyway" xml:space="preserve"><value>Всё равно отключить</value></data>
+  <data name="Prompt_Orphans_Title" xml:space="preserve"><value>Удалить ненужные зависимости?</value></data>
+  <data name="Prompt_Orphans_Text" xml:space="preserve"><value>Эти моды ставились только как зависимости, и теперь они никому не нужны:</value></data>
+  <data name="Prompt_Orphans_Remove" xml:space="preserve"><value>Удалить выбранные</value></data>
+  <data name="Prompt_Orphans_Keep" xml:space="preserve"><value>Оставить</value></data>
+  <data name="Prompt_EnableDeps_Title" xml:space="preserve"><value>Включить зависимости?</value></data>
+  <data name="Prompt_EnableDeps_Text" xml:space="preserve"><value>{0} нужны эти отключённые моды. Включить их тоже?</value></data>
+  <data name="Prompt_EnableDeps_Yes" xml:space="preserve"><value>Включить всё</value></data>
+  <data name="Prompt_EnableDeps_No" xml:space="preserve"><value>Только этот мод</value></data>
+  <data name="Mod_Retry" xml:space="preserve"><value>Повторить</value></data>
+  <data name="Mod_Cancel" xml:space="preserve"><value>Отмена</value></data>
+  <data name="Mod_Manual" xml:space="preserve"><value>Вручную</value></data>
+  <data name="Mod_Broken" xml:space="preserve"><value>Файлы мода повреждены — переустановите</value></data>
+  <data name="Mod_Reinstall" xml:space="preserve"><value>Переустановить</value></data>
+  <data name="Mod_Versions" xml:space="preserve"><value>Другие версии</value></data>
+  <data name="Mod_InstallVersion" xml:space="preserve"><value>Установить {0}</value></data>
+  <data name="Mod_Dependents" xml:space="preserve"><value>От него зависят:</value></data>
+  <data name="Mod_LocalOnly" xml:space="preserve"><value>Нет в каталоге Thunderstore</value></data>
+  <data name="Mod_Phase_Queued" xml:space="preserve"><value>В очереди…</value></data>
+  <data name="Mod_Phase_Downloading" xml:space="preserve"><value>Загрузка…</value></data>
+  <data name="Mod_Phase_Applying" xml:space="preserve"><value>Установка…</value></data>
+  <data name="Op_Installed" xml:space="preserve"><value>{0} установлен</value></data>
+  <data name="Op_Updated" xml:space="preserve"><value>{0} обновлён</value></data>
+  <data name="Op_Uninstalled" xml:space="preserve"><value>{0} удалён</value></data>
+  <data name="Op_Enabled" xml:space="preserve"><value>{0} включён</value></data>
+  <data name="Op_Disabled" xml:space="preserve"><value>{0} отключён</value></data>
+  <data name="Op_UpdatedAll" xml:space="preserve"><value>Все моды обновлены</value></data>
+  <data name="Op_ManualInstalled" xml:space="preserve"><value>Установлено из файла</value></data>
+  <data name="Op_Failed" xml:space="preserve"><value>Не удалось выполнить операцию</value></data>
+  <data name="Op_Running" xml:space="preserve"><value>Операций в работе: {0}</value></data>
+  <data name="Error_NotInCatalog" xml:space="preserve"><value>Нет в каталоге: {0}</value></data>
+  <data name="Error_VersionNotFound" xml:space="preserve"><value>Версия не найдена: {0}</value></data>
+  <data name="Error_ModNotInstalled" xml:space="preserve"><value>Не установлен: {0}</value></data>
+  <data name="Error_EmptyPackage" xml:space="preserve"><value>В пакете {0} нет файлов для установки</value></data>
+  <data name="Error_NoProfile" xml:space="preserve"><value>Сначала создайте или выберите профиль</value></data>
+  <data name="Manual_PickTitle" xml:space="preserve"><value>Установить мод из файла</value></data>
+  <data name="Manual_FileTypes" xml:space="preserve"><value>Моды (.zip, .dll)</value></data>
+  <data name="Manual_Unsupported" xml:space="preserve"><value>Устанавливать можно только файлы .zip и .dll</value></data>
+  <data name="Mods_DropHint" xml:space="preserve"><value>Отпустите .zip или .dll для установки</value></data>
+  <data name="Rail_EnableAll" xml:space="preserve"><value>Включить все</value></data>
+  <data name="Rail_DisableAll" xml:space="preserve"><value>Выключить все</value></data>
+  <data name="Profiles_Share" xml:space="preserve"><value>Поделиться</value></data>
+  <data name="Profiles_ExportFile" xml:space="preserve"><value>Экспорт в файл (.r2z)</value></data>
+  <data name="Profiles_ExportCode" xml:space="preserve"><value>Получить код</value></data>
+  <data name="Profiles_ImportFile" xml:space="preserve"><value>Из файла (.r2z)</value></data>
+  <data name="Profiles_ImportCode" xml:space="preserve"><value>По коду</value></data>
+  <data name="Profiles_ImportCode_Title" xml:space="preserve"><value>Импорт по коду</value></data>
+  <data name="Profiles_ImportCode_Label" xml:space="preserve"><value>Код профиля</value></data>
+  <data name="Profiles_Exported" xml:space="preserve"><value>Экспортировано модов: {0}, файлов настроек: {1}</value></data>
+  <data name="Profiles_ExportedSkipped" xml:space="preserve"><value>Не экспортированы (установлены вручную): {0}</value></data>
+  <data name="Profiles_Code_Confirm_Title" xml:space="preserve"><value>Загрузить профиль на Thunderstore?</value></data>
+  <data name="Profiles_Code_Confirm_Text" xml:space="preserve"><value>Список модов и файлы настроек профиля «{0}» будут загружены на Thunderstore, скачать их сможет любой, у кого есть код.</value></data>
+  <data name="Profiles_Code_Upload" xml:space="preserve"><value>Загрузить</value></data>
+  <data name="Profiles_Code_Title" xml:space="preserve"><value>Код профиля</value></data>
+  <data name="Profiles_Code_Text" xml:space="preserve"><value>Поделитесь этим кодом — его можно импортировать в Silkfly или r2modman.</value></data>
+  <data name="Profiles_Importing" xml:space="preserve"><value>Импорт «{0}»: устанавливается модов: {1}</value></data>
+  <data name="Profiles_Import_Title" xml:space="preserve"><value>Импорт профиля</value></data>
+  <data name="Profiles_ExportPickTitle" xml:space="preserve"><value>Экспорт профиля</value></data>
+  <data name="Profiles_ImportPickTitle" xml:space="preserve"><value>Импорт профиля</value></data>
+  <data name="Profiles_FileType" xml:space="preserve"><value>Профиль мод-менеджера (.r2z)</value></data>
+  <data name="Op_ImportDone" xml:space="preserve"><value>Импорт профиля завершён</value></data>
+  <data name="Error_ImportNoManifest" xml:space="preserve"><value>Файл не является экспортом профиля (нет export.r2x)</value></data>
+  <data name="Error_ImportBadManifest" xml:space="preserve"><value>Экспорт профиля повреждён</value></data>
+  <data name="Error_ImportMissingMods" xml:space="preserve"><value>Импортировано, но эти моды не найдены: {0}</value></data>
+  <data name="Error_BadProfileCode" xml:space="preserve"><value>Это не код профиля</value></data>
+  <data name="Error_ProfileCodeNotFound" xml:space="preserve"><value>Профиль с кодом {0} не найден</value></data>
+  <data name="Info_Link_Discord" xml:space="preserve"><value>Discord</value></data>
+  <data name="Settings_UiScale" xml:space="preserve"><value>Масштаб интерфейса</value></data>
+  <data name="Settings_ShowDeprecated" xml:space="preserve"><value>Показывать устаревшие моды</value></data>
+  <data name="Settings_ShowNsfw" xml:space="preserve"><value>Показывать NSFW-моды</value></data>
+  <data name="Settings_WhatsNewDays" xml:space="preserve"><value>«Новое» — за сколько дней</value></data>
+  <data name="Settings_Policy" xml:space="preserve"><value>Версии зависимостей</value></data>
+  <data name="Settings_Policy_LatestSameMajor" xml:space="preserve"><value>Новейшая совместимая (рекомендуется)</value></data>
+  <data name="Settings_Policy_Exact" xml:space="preserve"><value>Ровно как требует мод</value></data>
+  <data name="Settings_Policy_Latest" xml:space="preserve"><value>Всегда новейшая</value></data>
+  <data name="Settings_Cache" xml:space="preserve"><value>Кэш загрузок</value></data>
+  <data name="Settings_ClearCache" xml:space="preserve"><value>Очистить кэш</value></data>
+  <data name="Settings_CacheCleared" xml:space="preserve"><value>Кэш очищен</value></data>
+  <data name="Settings_On" xml:space="preserve"><value>Вкл</value></data>
+  <data name="Settings_Off" xml:space="preserve"><value>Выкл</value></data>
+  <data name="Launch_Hint_Steam" xml:space="preserve"><value>В Steam откройте Свойства игры → Параметры запуска и вставьте:</value></data>
+  <data name="Launch_Hint_SteamWindows" xml:space="preserve"><value>При первом запуске Steam попросит подтвердить аргументы.</value></data>
+  <data name="Launch_Hint_Proton" xml:space="preserve"><value>Для Proton это нужно один раз указать в параметрах запуска игры в Steam. После этого «Играть» в Silkfly переключает загрузчик и запускает игру через Steam.</value></data>
+  <data name="Launch_Copy" xml:space="preserve"><value>Скопировать</value></data>
+  <data name="Launch_Copied" xml:space="preserve"><value>Скопировано</value></data>
+  <data name="Mods_WhatsNew_HowRecent" xml:space="preserve"><value>Как давно:</value></data>
+  <data name="Mods_WhatsNew_Week" xml:space="preserve"><value>Последняя неделя</value></data>
+  <data name="Mods_WhatsNew_Month" xml:space="preserve"><value>Последний месяц</value></data>
+  <data name="Mods_WhatsNew_Type" xml:space="preserve"><value>Что показывать:</value></data>
+  <data name="Mods_WhatsNew_New" xml:space="preserve"><value>Новые моды</value></data>
+  <data name="Mods_WhatsNew_Updated" xml:space="preserve"><value>Обновлённые моды</value></data>
+  <data name="Rail_OpenSaves" xml:space="preserve"><value>Папка сохранений</value></data>
+  <data name="Rail_OpenMods" xml:space="preserve"><value>Папка модов</value></data>
+  <data name="Update_Banner" xml:space="preserve"><value>Доступна версия Silkfly {0}</value></data>
+  <data name="Update_Install" xml:space="preserve"><value>Обновить и перезапустить</value></data>
+  <data name="Update_WhatsNew" xml:space="preserve"><value>Что нового</value></data>
+  <data name="Update_Later" xml:space="preserve"><value>Позже</value></data>
+  <data name="Update_Downloading" xml:space="preserve"><value>Загрузка обновления…</value></data>
+  <data name="Update_DownloadFailed" xml:space="preserve"><value>Не удалось установить обновление. Попробуйте позже или скачайте его с GitHub.</value></data>
+  <data name="Update_CheckNow" xml:space="preserve"><value>Проверить</value></data>
+  <data name="Update_Checking" xml:space="preserve"><value>Проверка…</value></data>
+  <data name="Update_UpToDate" xml:space="preserve"><value>Установлена последняя версия</value></data>
+  <data name="Update_Failed" xml:space="preserve"><value>Не удалось проверить обновления</value></data>
+  <data name="Update_NotInstalled" xml:space="preserve"><value>Обновления работают только в установленной версии</value></data>
+  <data name="Settings_Updates" xml:space="preserve"><value>Обновления Silkfly</value></data>
+  <data name="Settings_Channel_Stable" xml:space="preserve"><value>Стабильные</value></data>
+  <data name="Settings_Channel_Beta" xml:space="preserve"><value>Бета</value></data>
+  <data name="Settings_Channel_Tooltip" xml:space="preserve"><value>Бета-канал предлагает и предварительные версии</value></data>
+  <data name="Settings_About" xml:space="preserve"><value>О программе</value></data>
+  <data name="Settings_License" xml:space="preserve"><value>Лицензия (GPL-3.0)</value></data>
+  <data name="Settings_ThirdParty" xml:space="preserve"><value>Сторонние лицензии</value></data>
+  <data name="Profile_Error_NameInvalid" xml:space="preserve"><value>Имя не может содержать переносы строк и управляющие символы</value></data>
+  <data name="Rail_UninstallAll_Title" xml:space="preserve"><value>Удалить все моды?</value></data>
+  <data name="Rail_UninstallAll_Text" xml:space="preserve"><value>Из профиля «{1}» будут удалены все моды ({0}). Их файлы настроек останутся.</value></data>
+  <data name="Rail_UninstallAll_Confirm" xml:space="preserve"><value>Удалить все</value></data>
+  <data name="Error_Unexpected" xml:space="preserve"><value>Произошла непредвиденная ошибка. Silkfly продолжает работать, но если что-то выглядит не так, перезапустите его. Подробности также записаны в лог.</value></data>
+  <data name="Profile_LockRestored" xml:space="preserve"><value>Повреждённый файл профиля восстановлен из копии. Проверьте список модов.</value></data>
+  <data name="Profile_LockReset" xml:space="preserve"><value>Файл профиля повреждён, копии нет: его моды теперь показаны как добавленные вручную.</value></data>
+  <data name="Mod_OpenConfigs" xml:space="preserve"><value>Открыть файлы настроек</value></data>
+  <data name="Profiles_Icon_Change" xml:space="preserve"><value>Иконка профиля</value></data>
+  <data name="Profiles_Icon_Choose" xml:space="preserve"><value>Выбрать картинку…</value></data>
+  <data name="Profiles_Icon_Remove" xml:space="preserve"><value>Убрать иконку</value></data>
+  <data name="Profiles_Icon_Pick" xml:space="preserve"><value>Иконка профиля</value></data>
+  <data name="Profiles_Icon_Images" xml:space="preserve"><value>Картинки (PNG, JPEG)</value></data>
+  <data name="Profiles_Icon_Failed" xml:space="preserve"><value>Не удалось поставить иконку</value></data>
+  <data name="Profile_Error_IconFormat" xml:space="preserve"><value>поддерживаются только картинки PNG и JPEG</value></data>
+  <data name="Profile_Error_IconTooLarge" xml:space="preserve"><value>картинка больше {0} МБ</value></data>
+  <data name="Settings_ProfilesFolder" xml:space="preserve"><value>Папка профилей</value></data>
+  <data name="Settings_ProfilesFolder_Pick" xml:space="preserve"><value>Новая папка для профилей</value></data>
+  <data name="Settings_ProfilesFolder_Default" xml:space="preserve"><value>По умолчанию</value></data>
+  <data name="Settings_ProfilesFolder_Title" xml:space="preserve"><value>Перенести профили?</value></data>
+  <data name="Settings_ProfilesFolder_Confirm" xml:space="preserve"><value>Все профили ({0}) вместе с модами и настройками будут скопированы в {1}, затем удалены из старой папки. Не закрывайте Silkfly до конца переноса.</value></data>
+  <data name="Settings_ProfilesFolder_Move" xml:space="preserve"><value>Перенести</value></data>
+  <data name="Settings_ProfilesFolder_Busy" xml:space="preserve"><value>Перед переносом профилей закройте игру и дождитесь окончания операций с модами.</value></data>
+  <data name="Settings_ProfilesFolder_Done" xml:space="preserve"><value>Профили перенесены</value></data>
+  <data name="Settings_ProfilesFolder_Failed" xml:space="preserve"><value>Не удалось перенести профили</value></data>
+  <data name="Profile_Error_MoveNested" xml:space="preserve"><value>новая папка не может быть внутри текущей или содержать её</value></data>
+  <data name="Profile_Error_MoveNotEmpty" xml:space="preserve"><value>новая папка должна быть пустой</value></data>
+  <data name="Settings_VerboseLog" xml:space="preserve"><value>Подробный лог</value></data>
+  <data name="Settings_VerboseLog_Hint" xml:space="preserve"><value>Для отчётов об ошибках; лог растёт быстрее</value></data>
+  <data name="Mod_Link_Tooltip" xml:space="preserve"><value>Привязать к пакету Thunderstore</value></data>
+  <data name="Mod_Link_Title" xml:space="preserve"><value>Какой это мод? Silkfly установит этот пакет из каталога и удалит ручную копию — так мод будет обновляться.</value></data>
+  <data name="Mod_Link_None" xml:space="preserve"><value>Похожих по имени пакетов не нашлось.</value></data>
+  <data name="Mod_Link_Search" xml:space="preserve"><value>Найти в каталоге</value></data>
+</root>

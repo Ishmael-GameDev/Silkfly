@@ -1,0 +1,53 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:Silkfly.App.ViewModels"
+        x:Class="Silkfly.App.Views.MessageWindow"
+        x:DataType="vm:MessageDialogViewModel"
+        Title="{Binding Title}"
+        Width="440" SizeToContent="Height" MaxHeight="560" CanResize="False"
+        WindowStartupLocation="CenterOwner" ShowInTaskbar="False"
+        SystemDecorations="BorderOnly">
+
+  <Border BorderBrush="{DynamicResource BorderStrongBrush}" BorderThickness="1">
+    <Grid RowDefinitions="Auto,Auto,Auto" Margin="18,14,18,14">
+      <TextBlock Text="{Binding Title}" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,10"
+                 PointerPressed="OnTitlePointerPressed" Background="Transparent" />
+
+      <StackPanel Grid.Row="1" Spacing="10">
+        <TextBlock Text="{Binding Message}" TextWrapping="Wrap" IsVisible="{Binding Message, Converter={x:Static ObjectConverters.IsNotNull}}" />
+        <ScrollViewer MaxHeight="240" IsVisible="{Binding HasItems}">
+          <ItemsControl ItemsSource="{Binding Items}">
+            <ItemsControl.ItemTemplate>
+              <DataTemplate x:DataType="vm:DialogItem">
+                <Panel Margin="0,1">
+                  <CheckBox Content="{Binding Text}" IsChecked="{Binding IsChecked}" IsVisible="{Binding Checkable}" />
+                  <TextBlock Text="{Binding Text, StringFormat='• {0}'}" IsVisible="{Binding NotCheckable}" TextWrapping="Wrap" />
+                </Panel>
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+        </ScrollViewer>
+        <TextBlock Classes="caption" Text="{Binding Note}" TextWrapping="Wrap" IsVisible="{Binding HasNote}"
+                   Foreground="{DynamicResource WarningBrush}" />
+        <StackPanel Spacing="4" IsVisible="{Binding HasInput}">
+          <TextBlock Classes="caption" Text="{Binding InputLabel}" />
+          <TextBox x:Name="InputBox" Text="{Binding Input}" MaxLength="{Binding InputMaxLength}" />
+          <TextBlock Classes="caption" Foreground="{DynamicResource DangerBrush}" Text="{Binding Error}"
+                     IsVisible="{Binding Error, Converter={x:Static ObjectConverters.IsNotNull}}" />
+        </StackPanel>
+        <ScrollViewer MaxHeight="300" IsVisible="{Binding HasDetails}">
+          <SelectableTextBlock Text="{Binding Details}" FontFamily="Consolas, Menlo, monospace" FontSize="11.5"
+                               TextWrapping="Wrap" Foreground="{DynamicResource TextSecondaryBrush}" />
+        </ScrollViewer>
+      </StackPanel>
+
+      <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="8" Margin="0,16,0,0">
+        <Button x:Name="CopyButton" IsVisible="{Binding HasDetails}" Click="OnCopyClick" />
+        <Button x:Name="OpenLogButton" IsVisible="{Binding HasOpenLog}" Click="OnOpenLogClick" />
+        <Button Content="{Binding CancelText}" IsVisible="{Binding HasCancel}" IsCancel="True" Click="OnCancelClick" />
+        <Button x:Name="ConfirmButton" Classes="primary" Content="{Binding ConfirmText}" IsDefault="True"
+                IsEnabled="{Binding CanConfirm}" Click="OnConfirmClick" />
+      </StackPanel>
+    </Grid>
+  </Border>
+</Window>

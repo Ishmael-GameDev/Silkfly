@@ -1,0 +1,132 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:Silkfly.App.ViewModels"
+             xmlns:app="using:Silkfly.App"
+             xmlns:controls="using:Silkfly.App.Controls"
+             xmlns:loc="using:Silkfly.App.Localization"
+             mc:Ignorable="d" d:DesignWidth="850" d:DesignHeight="510"
+             x:Class="Silkfly.App.Views.ProfilesView"
+             x:DataType="vm:ProfilesViewModel">
+
+  <Grid RowDefinitions="Auto,*,Auto" Margin="8,8,8,8">
+    <TextBlock Text="{loc:Str Profiles_Available}" FontWeight="SemiBold" Margin="0,0,0,8" />
+
+    <ScrollViewer Grid.Row="1" Padding="0,0,18,0" HorizontalScrollBarVisibility="Disabled">
+      <ItemsControl ItemsSource="{Binding Session.Profiles}">
+        <ItemsControl.ItemTemplate>
+          <DataTemplate x:DataType="vm:ProfileItemViewModel">
+            <Grid ColumnDefinitions="*,Auto" Margin="0,0,0,6">
+              <Border Classes="card" Padding="0" Classes.active="{Binding IsActive}">
+                <StackPanel>
+                  <Grid ColumnDefinitions="Auto,*,Auto,Auto,Auto,Auto,Auto,Auto" Height="42" Margin="6,0,6,0">
+                    <Button Classes="ghost profileicon" Width="34" Height="34" Padding="2" Margin="0,0,8,0"
+                            VerticalAlignment="Center" ToolTip.Tip="{loc:Str Profiles_Icon_Change}">
+                      <Panel>
+                        <Border CornerRadius="4" ClipToBounds="True" IsVisible="{Binding HasIcon}">
+                          <Image Source="{Binding Icon}" Stretch="UniformToFill" />
+                        </Border>
+                        <Image Source="{x:Static app:ArtAssets.Logo}" Opacity="0.35" Width="24" Height="24"
+                               IsVisible="{Binding !HasIcon}" RenderOptions.BitmapInterpolationMode="HighQuality" />
+                      </Panel>
+                      <Button.Flyout>
+                        <MenuFlyout Placement="BottomEdgeAlignedLeft">
+                          <MenuItem Header="{loc:Str Profiles_Icon_Choose}" Command="{Binding ChooseIconCommand}" />
+                          <MenuItem Header="{loc:Str Profiles_Icon_Remove}" Command="{Binding RemoveIconCommand}"
+                                    IsEnabled="{Binding HasIconFile}" />
+                        </MenuFlyout>
+                      </Button.Flyout>
+                    </Button>
+                    <Grid Grid.Column="1" ColumnDefinitions="*,Auto,Auto" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,10,0"
+                          ToolTip.Tip="{Binding Name}">
+                      <TextBlock Text="{Binding Name}" FontSize="{StaticResource FontSizeModName}" TextTrimming="CharacterEllipsis" />
+                      <Border Grid.Column="1" Classes="tag" Margin="10,0,0,0" VerticalAlignment="Center" IsVisible="{Binding IsActive}">
+                        <TextBlock Text="{loc:Str Profiles_Active}" />
+                      </Border>
+                      <TextBlock Grid.Column="2" Classes="caption" Margin="10,0,0,0" Text="{Binding ModsText}" VerticalAlignment="Center" />
+                    </Grid>
+                    <Button Grid.Column="2" Classes="small" Margin="0,0,6,0"
+                            Command="{Binding $parent[ItemsControl].((vm:ProfilesViewModel)DataContext).RenameCommand}" CommandParameter="{Binding}">
+                      <StackPanel Orientation="Horizontal" Spacing="6">
+                        <TextBlock Text="{loc:Str Profiles_Rename}" />
+                        <controls:GlyphIcon Width="13" Height="13" Data="{StaticResource Icon.Pencil}" />
+                      </StackPanel>
+                    </Button>
+                    <Button Grid.Column="3" Classes="icon small" Margin="0,0,6,0" ToolTip.Tip="{loc:Str Profiles_Share}">
+                      <controls:GlyphIcon Width="15" Height="15" Data="{StaticResource Icon.Share}" />
+                      <Button.Flyout>
+                        <MenuFlyout Placement="BottomEdgeAlignedRight">
+                          <MenuItem Header="{loc:Str Profiles_ExportFile}"
+                                    Command="{Binding ExportFileCommand}" />
+                          <MenuItem Header="{loc:Str Profiles_ExportCode}"
+                                    Command="{Binding ShareCodeCommand}" />
+                        </MenuFlyout>
+                      </Button.Flyout>
+                    </Button>
+                    <Button Grid.Column="4" Classes="icon small" Margin="0,0,6,0" ToolTip.Tip="{loc:Str Profiles_Duplicate}"
+                            Command="{Binding $parent[ItemsControl].((vm:ProfilesViewModel)DataContext).DuplicateCommand}" CommandParameter="{Binding}">
+                      <controls:GlyphIcon Width="15" Height="15" Data="{StaticResource Icon.Copy}" />
+                    </Button>
+                    <Button Grid.Column="5" Classes="icon small" Margin="0,0,6,0" ToolTip.Tip="{loc:Str Profiles_OpenFolder}"
+                            Command="{Binding $parent[ItemsControl].((vm:ProfilesViewModel)DataContext).OpenFolderCommand}" CommandParameter="{Binding}">
+                      <controls:GlyphIcon Width="15" Height="15" Data="{StaticResource Icon.FolderOpen}" />
+                    </Button>
+                    <Button Grid.Column="6" Classes="icon small" Margin="0,0,6,0" ToolTip.Tip="{loc:Str Profiles_Delete}"
+                            Command="{Binding $parent[ItemsControl].((vm:ProfilesViewModel)DataContext).DeleteCommand}" CommandParameter="{Binding}">
+                      <controls:GlyphIcon Width="15" Height="15" Data="{StaticResource Icon.Trash}" />
+                    </Button>
+                    <ToggleButton Grid.Column="7" Classes="chevron" IsChecked="{Binding IsExpanded}" AutomationProperties.Name="{Binding Name}">
+                      <Panel>
+                        <controls:GlyphIcon Width="16" Height="16" Data="{StaticResource Icon.ChevronDown}" IsVisible="{Binding !IsExpanded}" />
+                        <controls:GlyphIcon Width="16" Height="16" Data="{StaticResource Icon.ChevronUp}" IsVisible="{Binding IsExpanded}" />
+                      </Panel>
+                    </ToggleButton>
+                  </Grid>
+                  <StackPanel Margin="14,0,14,12" Spacing="4" IsVisible="{Binding IsExpanded}">
+                    <TextBlock Classes="secondary" Text="{Binding LastPlayedText}" />
+                    <TextBlock Classes="caption" Text="{Binding Profile.RootPath}" TextTrimming="CharacterEllipsis" />
+                  </StackPanel>
+                </StackPanel>
+              </Border>
+
+              <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="4" Margin="8,6,0,0" VerticalAlignment="Top">
+                <Button Classes="small" Content="{loc:Str Profiles_SetActive}" IsVisible="{Binding !IsActive}"
+                        Command="{Binding $parent[ItemsControl].((vm:ProfilesViewModel)DataContext).SetActiveCommand}" CommandParameter="{Binding}" />
+                <Button Classes="small primary" Command="{Binding $parent[ItemsControl].((vm:ProfilesViewModel)DataContext).PlayCommand}"
+                        CommandParameter="{Binding}" IsEnabled="{Binding $parent[ItemsControl].((vm:ProfilesViewModel)DataContext).Session.IsLoaderInstalled}">
+                  <StackPanel Orientation="Horizontal" Spacing="6">
+                    <controls:GlyphIcon Width="11" Height="11" IsFilled="True" Data="{StaticResource Icon.Play}" />
+                    <TextBlock Text="{loc:Str Profiles_Play}" />
+                  </StackPanel>
+                </Button>
+              </StackPanel>
+            </Grid>
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
+    </ScrollViewer>
+
+    <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10" Margin="0,0,0,40"
+                IsVisible="{Binding !Session.Profiles.Count}">
+      <controls:GlyphIcon Width="40" Height="40" StrokeThickness="1.5" HorizontalAlignment="Center"
+                          Foreground="{DynamicResource BorderStrongBrush}" Data="{StaticResource Icon.FolderOpen}" />
+      <TextBlock Classes="title" HorizontalAlignment="Center" Text="{loc:Str Profiles_Empty_Title}" />
+      <TextBlock Classes="secondary" HorizontalAlignment="Center" TextAlignment="Center" MaxWidth="420"
+                 TextWrapping="Wrap" Text="{loc:Str Profiles_Empty_Text}" />
+    </StackPanel>
+
+    <Grid Grid.Row="2" ColumnDefinitions="*,*" ColumnSpacing="12" Margin="0,8,0,0">
+      <Button HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Content="{loc:Str Profiles_Create}"
+              Command="{Binding CreateCommand}" />
+      <Button Grid.Column="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Content="{loc:Str Profiles_Import}">
+        <Button.Flyout>
+          <MenuFlyout Placement="TopEdgeAlignedRight">
+            <MenuItem Header="{loc:Str Profiles_ImportFile}" Command="{Binding ImportFileCommand}" />
+            <MenuItem Header="{loc:Str Profiles_ImportCode}" Command="{Binding ImportCodeCommand}" />
+          </MenuFlyout>
+        </Button.Flyout>
+      </Button>
+    </Grid>
+  </Grid>
+</UserControl>

@@ -1,0 +1,158 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:app="using:Silkfly.App"
+             xmlns:vm="using:Silkfly.App.ViewModels"
+             xmlns:controls="using:Silkfly.App.Controls"
+             xmlns:loc="using:Silkfly.App.Localization"
+             mc:Ignorable="d" d:DesignWidth="850" d:DesignHeight="510"
+             x:Class="Silkfly.App.Views.InfoView"
+             x:DataType="vm:InfoViewModel">
+
+  <UserControl.Styles>
+    <Style Selector="Button.launch">
+      <Setter Property="MinWidth" Value="230" />
+      <Setter Property="Height" Value="46" />
+      <Setter Property="FontSize" Value="16" />
+      <Setter Property="Padding" Value="18,0" />
+      <Setter Property="HorizontalContentAlignment" Value="Center" />
+      <Setter Property="VerticalContentAlignment" Value="Center" />
+      <Setter Property="CornerRadius" Value="4" />
+    </Style>
+
+    <Style Selector="Button.news">
+      <Setter Property="Padding" Value="12,5" />
+      <Setter Property="CornerRadius" Value="14" />
+      <Setter Property="Background" Value="{DynamicResource SurfaceRaisedBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="Cursor" Value="Hand" />
+    </Style>
+    <Style Selector="Button.news:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource ControlHoverBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource BorderStrongBrush}" />
+    </Style>
+
+    <Style Selector="Button.tile">
+      <Setter Property="Width" Value="88" />
+      <Setter Property="Height" Value="88" />
+      <Setter Property="Padding" Value="4,8,4,6" />
+      <Setter Property="CornerRadius" Value="4" />
+      <Setter Property="Background" Value="{DynamicResource SurfaceRaisedBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
+      <Setter Property="HorizontalContentAlignment" Value="Center" />
+      <Setter Property="VerticalContentAlignment" Value="Center" />
+    </Style>
+    <Style Selector="Button.tile:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource ControlHoverBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource BorderStrongBrush}" />
+    </Style>
+    <Style Selector="Button.tile controls|GlyphIcon">
+      <Setter Property="Width" Value="36" />
+      <Setter Property="Height" Value="36" />
+      <Setter Property="StrokeThickness" Value="1.6" />
+      <Setter Property="HorizontalAlignment" Value="Center" />
+    </Style>
+    <Style Selector="Button.tile TextBlock">
+      <Setter Property="FontSize" Value="11.5" />
+      <Setter Property="TextAlignment" Value="Center" />
+      <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+  </UserControl.Styles>
+
+  <Panel>
+    <Image x:Name="Flies" Source="{x:Static app:ArtAssets.FliesScatter}" Stretch="UniformToFill" Opacity="0.45"
+           IsHitTestVisible="False" />
+
+    <Grid RowDefinitions="Auto,*,Auto,Auto,Auto" Margin="16,8,16,12">
+
+      <Button Grid.Row="0" Classes="news" HorizontalAlignment="Center" IsVisible="{Binding HasNews}"
+              IsHitTestVisible="{Binding HasNewsLink}" Command="{Binding OpenNewsCommand}">
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <controls:GlyphIcon Width="15" Height="15" Data="{StaticResource Icon.Megaphone}" Foreground="{DynamicResource AccentHoverBrush}"
+                              VerticalAlignment="Center" />
+          <TextBlock Text="{Binding NewsText}" TextWrapping="Wrap" MaxLines="2" TextTrimming="CharacterEllipsis" MaxWidth="640"
+                     VerticalAlignment="Center" ToolTip.Tip="{Binding NewsText}" />
+          <controls:GlyphIcon Width="12" Height="12" Data="{StaticResource Icon.ExternalLink}" VerticalAlignment="Center"
+                              IsVisible="{Binding HasNewsLink}" Opacity="0.7" />
+        </StackPanel>
+      </Button>
+
+      <Panel Grid.Row="1">
+        <Border IsHitTestVisible="False" Margin="-16,-8,-16,0">
+          <Border.Background>
+            <RadialGradientBrush Center="50%,55%" GradientOrigin="50%,55%" RadiusX="45%" RadiusY="60%">
+              <GradientStop Offset="0" Color="#552A1015" />
+              <GradientStop Offset="0.6" Color="#22200C10" />
+              <GradientStop Offset="1" Color="#00000000" />
+            </RadialGradientBrush>
+          </Border.Background>
+        </Border>
+        <Image Source="{x:Static app:ArtAssets.InfoLandscape}" Stretch="Uniform" IsVisible="{x:Static app:ArtAssets.HasInfoArt}"
+               HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="900" />
+        <Panel Width="160" Height="160" HorizontalAlignment="Center" VerticalAlignment="Center"
+               IsVisible="{x:Static app:ArtAssets.NoInfoArt}">
+          <controls:GlyphIcon Width="160" Height="160" IsFilled="True" Opacity="0.45"
+                              Data="{StaticResource Logo.Wings}" Foreground="{DynamicResource AccentHoverBrush}" />
+          <controls:GlyphIcon Width="160" Height="160" IsFilled="True"
+                              Data="{StaticResource Logo.Body}" Foreground="{DynamicResource AccentBrush}" />
+        </Panel>
+      </Panel>
+
+      <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="20" Margin="0,6,0,6">
+        <Button Classes="launch" Command="{Binding Session.LaunchVanillaCommand}">
+          <StackPanel Orientation="Horizontal" Spacing="10">
+            <controls:GlyphIcon Width="17" Height="17" Data="{StaticResource Icon.Play}" />
+            <TextBlock Text="{loc:Str Info_LaunchVanilla}" />
+          </StackPanel>
+        </Button>
+        <Button Classes="launch primary" Command="{Binding Session.LaunchModdedCommand}">
+          <StackPanel Orientation="Horizontal" Spacing="10">
+            <controls:GlyphIcon Width="17" Height="17" IsFilled="True" Data="{StaticResource Icon.Play}" />
+            <TextBlock Text="{loc:Str Info_LaunchModded}" />
+          </StackPanel>
+        </Button>
+      </StackPanel>
+
+      <TextBlock Grid.Row="3" Classes="caption" HorizontalAlignment="Center" Text="{Binding Session.StatusText}" />
+
+      <StackPanel Grid.Row="4" HorizontalAlignment="Center" Spacing="8" Margin="0,10,0,0">
+        <TextBlock Text="{loc:Str Info_Links}" FontWeight="SemiBold" FontSize="15" HorizontalAlignment="Center" />
+        <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Center">
+          <Button Classes="tile" Command="{Binding OpenThunderstoreCommand}">
+            <StackPanel Spacing="8">
+              <controls:GlyphIcon Data="{StaticResource Icon.Package}" />
+              <TextBlock Text="{loc:Str Info_Link_Thunderstore}" />
+            </StackPanel>
+          </Button>
+          <Button Classes="tile" Command="{Binding OpenDiscordCommand}">
+            <StackPanel Spacing="8">
+              <controls:GlyphIcon IsFilled="True" Data="{StaticResource Icon.Discord}" />
+              <TextBlock Text="{loc:Str Info_Link_Discord}" />
+            </StackPanel>
+          </Button>
+          <Button Classes="tile" Command="{Binding OpenBepInExDocsCommand}">
+            <StackPanel Spacing="8">
+              <controls:GlyphIcon Data="{StaticResource Icon.BookOpen}" />
+              <TextBlock Text="{loc:Str Info_Link_BepInEx}" />
+            </StackPanel>
+          </Button>
+          <Button Classes="tile" Command="{Binding OpenCreateModsCommand}">
+            <StackPanel Spacing="8">
+              <controls:GlyphIcon Data="{StaticResource Icon.Wrench}" />
+              <TextBlock Text="{loc:Str Info_Link_CreateMods}" />
+            </StackPanel>
+          </Button>
+          <Button Classes="tile" Command="{Binding OpenLogsCommand}">
+            <StackPanel Spacing="8">
+              <controls:GlyphIcon Data="{StaticResource Icon.FileText}" />
+              <TextBlock Text="{loc:Str Info_Link_Logs}" />
+            </StackPanel>
+          </Button>
+        </StackPanel>
+        <Border Height="1" Background="{DynamicResource BorderBrush}" Margin="-20,4,-20,0" />
+      </StackPanel>
+    </Grid>
+  </Panel>
+</UserControl>

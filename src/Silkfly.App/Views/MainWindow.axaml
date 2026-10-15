@@ -1,0 +1,163 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:app="using:Silkfly.App"
+        xmlns:vm="using:Silkfly.App.ViewModels"
+        xmlns:views="using:Silkfly.App.Views"
+        xmlns:controls="using:Silkfly.App.Controls"
+        xmlns:conv="using:Silkfly.App.Converters"
+        xmlns:loc="using:Silkfly.App.Localization"
+        xmlns:services="using:Silkfly.App.Services"
+        mc:Ignorable="d" d:DesignWidth="850" d:DesignHeight="550"
+        x:Class="Silkfly.App.Views.MainWindow"
+        x:DataType="vm:ShellViewModel"
+        Title="Silkfly"
+        Width="850" Height="550"
+        WindowStartupLocation="CenterScreen">
+
+  <Window.DataTemplates>
+    <DataTemplate DataType="vm:InfoViewModel"><views:InfoView /></DataTemplate>
+    <DataTemplate DataType="vm:ModListViewModel"><views:ModsView /></DataTemplate>
+    <DataTemplate DataType="vm:ProfilesViewModel"><views:ProfilesView /></DataTemplate>
+    <DataTemplate DataType="vm:SettingsViewModel"><views:SettingsView /></DataTemplate>
+    <DataTemplate DataType="vm:OnboardingViewModel"><views:OnboardingView /></DataTemplate>
+  </Window.DataTemplates>
+
+  <Border x:Name="Outline" BorderThickness="0" BorderBrush="{DynamicResource WindowOutlineBrush}">
+  <LayoutTransformControl x:Name="Scaler">
+  <Grid x:Name="Root" RowDefinitions="Auto,Auto,*">
+
+    <Border x:Name="Header" Grid.Row="0" Height="52"
+            Background="{DynamicResource RegionBrush}"
+            BorderBrush="{DynamicResource BorderBrush}" BorderThickness="0,0,0,1"
+            PointerPressed="OnHeaderPointerPressed"
+            DoubleTapped="OnHeaderDoubleTapped">
+      <Grid ColumnDefinitions="Auto,*,Auto,Auto">
+
+        <StackPanel x:Name="LogoPanel" Grid.Column="0" Orientation="Horizontal" Spacing="6"
+                    Margin="6,0,14,0" VerticalAlignment="Center">
+          <Image Width="36" Height="36" Source="{x:Static app:ArtAssets.Logo}" IsVisible="{x:Static app:ArtAssets.HasLogo}"
+                 RenderOptions.BitmapInterpolationMode="HighQuality" />
+          <Panel Width="30" Height="30" IsVisible="{x:Static app:ArtAssets.NoLogo}">
+            <controls:GlyphIcon Width="30" Height="30" IsFilled="True" Opacity="0.55"
+                                Data="{StaticResource Logo.Wings}" Foreground="{DynamicResource AccentHoverBrush}" />
+            <controls:GlyphIcon Width="30" Height="30" IsFilled="True"
+                                Data="{StaticResource Logo.Body}" Foreground="{DynamicResource AccentBrush}" />
+          </Panel>
+          <TextBlock VerticalAlignment="Center">
+            <Run Text="Silkfly" FontSize="21" /><Run Text=" " FontSize="13" /><Run Text="{Binding Version}" FontSize="11" FontWeight="SemiBold">
+              <Run.Foreground>
+                <SolidColorBrush Color="{DynamicResource TextPrimaryColor}" Opacity="0.8" />
+              </Run.Foreground>
+            </Run>
+          </TextBlock>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0" ClipToBounds="True">
+          <RadioButton Classes="tab" GroupName="ShellTabs" Content="{loc:Str Tab_Info}"
+                       IsChecked="{Binding CurrentPage, Converter={x:Static conv:EnumEqualsConverter.Instance}, ConverterParameter={x:Static vm:ShellPage.Info}}" />
+          <RadioButton Classes="tab" GroupName="ShellTabs" Content="{loc:Str Tab_Mods}"
+                       IsChecked="{Binding CurrentPage, Converter={x:Static conv:EnumEqualsConverter.Instance}, ConverterParameter={x:Static vm:ShellPage.Mods}}" />
+          <RadioButton Classes="tab" GroupName="ShellTabs" Content="{loc:Str Tab_Profiles}"
+                       IsChecked="{Binding CurrentPage, Converter={x:Static conv:EnumEqualsConverter.Instance}, ConverterParameter={x:Static vm:ShellPage.Profiles}}" />
+          <RadioButton Classes="tab" GroupName="ShellTabs" Content="{loc:Str Tab_Settings}"
+                       IsChecked="{Binding CurrentPage, Converter={x:Static conv:EnumEqualsConverter.Instance}, ConverterParameter={x:Static vm:ShellPage.Settings}}" />
+        </StackPanel>
+
+        <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center" Margin="8,7,10,0">
+          <ComboBox Classes="header" Width="132" Height="30" MinHeight="30" Padding="10,2,4,2" CornerRadius="3,0,0,3"
+                    PlaceholderText="{loc:Str Header_NoProfile}" MaxDropDownHeight="360"
+                    ItemsSource="{Binding Session.Profiles}" SelectedItem="{Binding Session.ActiveProfile}"
+                    ToolTip.Tip="{loc:Str Header_Profile_Tooltip}">
+            <ComboBox.ItemTemplate>
+              <DataTemplate x:DataType="vm:ProfileItemViewModel">
+                <StackPanel Orientation="Horizontal" Spacing="7">
+                  <Border Width="16" Height="16" CornerRadius="3" ClipToBounds="True" IsVisible="{Binding HasIcon}" VerticalAlignment="Center">
+                    <Image Source="{Binding Icon}" Stretch="UniformToFill" />
+                  </Border>
+                  <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" MaxWidth="300" ToolTip.Tip="{Binding Name}"
+                             VerticalAlignment="Center" />
+                </StackPanel>
+              </DataTemplate>
+            </ComboBox.ItemTemplate>
+          </ComboBox>
+          <Button Classes="primary icon" Width="34" Height="30" CornerRadius="0,3,3,0" Command="{Binding Session.LaunchModdedCommand}"
+                  ToolTip.Tip="{Binding Session.PlayTooltip}">
+            <Panel>
+              <controls:GlyphIcon Width="13" Height="13" IsFilled="True" Data="{StaticResource Icon.Play}"
+                                  IsVisible="{Binding !Session.IsGameRunning}" />
+              <ProgressBar IsIndeterminate="{Binding Session.IsGameRunning}" Width="16" MinWidth="16" Height="3" IsVisible="{Binding Session.IsGameRunning}" />
+            </Panel>
+          </Button>
+        </StackPanel>
+
+        <StackPanel x:Name="CaptionButtons" Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Top">
+          <Button Classes="caption" Click="OnMinimizeClick" ToolTip.Tip="{loc:Str Caption_Minimize}">
+            <controls:GlyphIcon Width="14" Height="14" StrokeThickness="1.5" Data="{StaticResource Caption.Minimize}" />
+          </Button>
+          <Button x:Name="MaximizeButton" Classes="caption" Click="OnMaximizeClick" ToolTip.Tip="{loc:Str Caption_Maximize}">
+            <controls:GlyphIcon x:Name="MaximizeGlyph" Width="14" Height="14" StrokeThickness="1.5" Data="{StaticResource Caption.Maximize}" />
+          </Button>
+          <Button Classes="caption close" Click="OnCloseClick" ToolTip.Tip="{loc:Str Caption_Close}">
+            <controls:GlyphIcon Width="14" Height="14" StrokeThickness="1.5" Data="{StaticResource Caption.Close}" />
+          </Button>
+        </StackPanel>
+      </Grid>
+    </Border>
+
+    <Border Grid.Row="1" Classes="update" IsVisible="{Binding Updates.IsBannerVisible}">
+      <Grid ColumnDefinitions="Auto,*,Auto,Auto,Auto">
+        <controls:GlyphIcon Width="15" Height="15" Data="{StaticResource Icon.ArrowUpCircle}" Foreground="{DynamicResource AccentHoverBrush}"
+                            VerticalAlignment="Center" />
+        <TextBlock Grid.Column="1" Margin="8,0" Text="{Binding Updates.BannerText}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" />
+        <Button Grid.Column="2" Classes="link" Margin="0,0,12,0" VerticalAlignment="Center" Content="{loc:Str Update_WhatsNew}"
+                Command="{Binding Updates.OpenReleaseNotesCommand}" />
+        <Panel Grid.Column="3" VerticalAlignment="Center">
+          <Button Classes="small primary" Content="{loc:Str Update_Install}" Command="{Binding Updates.UpdateCommand}"
+                  IsVisible="{Binding !Updates.IsDownloading}" />
+          <StackPanel Orientation="Horizontal" Spacing="8" IsVisible="{Binding Updates.IsDownloading}">
+            <TextBlock Classes="secondary" Text="{loc:Str Update_Downloading}" VerticalAlignment="Center" />
+            <ProgressBar Width="120" MinWidth="120" Maximum="1" Value="{Binding Updates.Progress}" VerticalAlignment="Center" />
+          </StackPanel>
+        </Panel>
+        <Button Grid.Column="4" Classes="ghost icon" Width="24" Height="24" Margin="8,0,0,0" VerticalAlignment="Center"
+                Command="{Binding Updates.DismissCommand}" IsEnabled="{Binding !Updates.IsDownloading}" ToolTip.Tip="{loc:Str Update_Later}">
+          <controls:GlyphIcon Width="12" Height="12" Data="{StaticResource Icon.X}" />
+        </Button>
+      </Grid>
+    </Border>
+
+    <TransitioningContentControl x:Name="Pages" Grid.Row="2" Content="{Binding CurrentContent}">
+      <TransitioningContentControl.PageTransition>
+        <CrossFade Duration="0:0:0.12" />
+      </TransitioningContentControl.PageTransition>
+    </TransitioningContentControl>
+
+    <Border Grid.Row="1" Grid.RowSpan="2" Background="#D0100A0B" IsVisible="{Binding IsOnboarding}">
+      <ContentControl Content="{Binding Onboarding}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+    </Border>
+
+    <ItemsControl Grid.Row="2" ItemsSource="{Binding Toasts.Toasts}" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                  Margin="0,0,14,12" Width="340" ZIndex="10">
+      <ItemsControl.ItemTemplate>
+        <DataTemplate x:DataType="services:ToastViewModel">
+          <Border Classes="toast" Classes.error="{Binding IsError}" Classes.warning="{Binding IsWarning}"
+                  Classes.success="{Binding IsSuccess}" Margin="0,6,0,0">
+            <Grid ColumnDefinitions="*,Auto,Auto">
+              <TextBlock Text="{Binding Text}" TextWrapping="Wrap" MaxLines="5" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
+              <Button Grid.Column="1" Classes="link" Margin="8,0,0,0" VerticalAlignment="Center" IsVisible="{Binding HasDetails}"
+                      Content="{loc:Str Toast_Details}" Command="{Binding ShowDetailsCommand}" />
+              <Button Grid.Column="2" Classes="ghost icon" Width="22" Height="22" Margin="6,0,0,0" VerticalAlignment="Top"
+                      Command="{Binding CloseCommand}" ToolTip.Tip="{loc:Str Toast_Close}">
+                <controls:GlyphIcon Width="12" Height="12" Data="{StaticResource Icon.X}" />
+              </Button>
+            </Grid>
+          </Border>
+        </DataTemplate>
+      </ItemsControl.ItemTemplate>
+    </ItemsControl>
+  </Grid>
+  </LayoutTransformControl>
+  </Border>
+</Window>

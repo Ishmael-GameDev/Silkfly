@@ -1,0 +1,114 @@
+name: release
+
+# Tag v1.2.3 (or v1.2.3-beta.1 for a pre-release) to build installers and publish a GitHub release.
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+env:
+  VPK_VERSION: 1.2.161
+  PACK_ID: SilkflyApp
+
+jobs:
+  pack:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            rid: win-x64
+            exe: Silkfly.exe
+            icon: build/icons/silkfly.ico
+          - os: ubuntu-22.04
+            rid: linux-x64
+            exe: Silkfly
+            icon: build/icons/silkfly.png
+          - os: macos-latest
+            rid: osx-arm64
+            exe: Silkfly
+            icon: build/icons/silkfly.icns
+          - os: macos-latest
+            rid: osx-x64
+            exe: Silkfly
+            icon: build/icons/silkfly.icns
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Version from tag
+        run: |
+          version="${GITHUB_REF_NAME#v}"
+          echo "VERSION=$version" >> "$GITHUB_ENV"
+          if [[ "$version" == *-* ]]; then echo "PRE=--pre" >> "$GITHUB_ENV"; else echo "PRE=" >> "$GITHUB_ENV"; fi
+
+      - name: Test
+        if: runner.os == 'Windows'
+        run: dotnet test -c Release
+
+      - name: Publish
+        run: dotnet publish src/Silkfly.App -c Release -r ${{ matrix.rid }} --self-contained -p:Version=$VERSION -o publish
+
+      - name: Release notes
+        run: |
+          awk -v v="$VERSION" '
+            /^## / { if (found) exit; if (index($0, "[" v "]")) { found = 1; next } }
+            found { print }
+          ' CHANGELOG.md > notes.md
+          [ -s notes.md ] || echo "Silkfly $VERSION" > notes.md
+          cat notes.md
+
+      - name: Pack
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          dotnet tool install -g vpk --version $VPK_VERSION
+          # previous release, for delta packages (none the first time)
+          vpk download github --repoUrl "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY" --channel ${{ matrix.rid }} --token "$GITHUB_TOKEN" $PRE -o releases || true
+          # re-releasing the same version: vpk won't pack over it, so drop the download
+          if ls releases/*-"$VERSION"-*full.nupkg >/dev/null 2>&1; then rm -rf releases; fi
+          vpk pack --packId $PACK_ID --packVersion $VERSION --packDir publish --mainExe ${{ matrix.exe }} \
+            --packTitle Silkfly --packAuthors "Silkfly contributors" --icon ${{ matrix.icon }} \
+            --channel ${{ matrix.rid }} --runtime ${{ matrix.rid }} --releaseNotes notes.md -o releases
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: releases-${{ matrix.rid }}
+          path: releases/
+
+  publish:
+    needs: pack
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: releases-*
+
+      # one channel at a time, so the release is created only once
+      - name: Upload to GitHub Releases
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          version="${GITHUB_REF_NAME#v}"
+          pre=""; [[ "$version" == *-* ]] && pre="--pre"
+          dotnet tool install -g vpk --version $VPK_VERSION
+          for rid in win-x64 linux-x64 osx-arm64 osx-x64; do
+            [ -d "releases-$rid" ] || { echo "::warning::no packages for $rid"; continue; }
+            vpk upload github --repoUrl "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY" --token "$GITHUB_TOKEN" \
+              -o "releases-$rid" --channel $rid --tag "$GITHUB_REF_NAME" --releaseName "Silkfly $version" \
+              --merge --publish $pre
+          done

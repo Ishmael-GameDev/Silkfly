@@ -1,0 +1,193 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:Silkfly.App.ViewModels"
+             xmlns:controls="using:Silkfly.App.Controls"
+             xmlns:loc="using:Silkfly.App.Localization"
+             mc:Ignorable="d" d:DesignWidth="850" d:DesignHeight="510"
+             x:Class="Silkfly.App.Views.SettingsView"
+             x:DataType="vm:SettingsViewModel">
+
+  <UserControl.Styles>
+    <Style Selector="Grid.row > TextBlock">
+      <Setter Property="FontSize" Value="14.5" />
+    </Style>
+    <Style Selector="TextBlock.secondary">
+      <Setter Property="FontSize" Value="14" />
+    </Style>
+  </UserControl.Styles>
+
+  <Grid RowDefinitions="*,Auto" Margin="12,10,12,10">
+    <ScrollViewer Grid.Row="0">
+      <StackPanel Margin="0,0,18,4">
+        <Grid Classes="row" ColumnDefinitions="230,*,Auto">
+          <TextBlock Text="{loc:Str Settings_Game_Path}" />
+          <TextBox Grid.Column="1" IsReadOnly="True" Text="{Binding Session.GamePathText}" VerticalAlignment="Center" />
+          <Button Grid.Column="2" Margin="8,0,0,0" Content="{loc:Str Settings_ChangePath}" Command="{Binding ChangeGamePathCommand}" />
+        </Grid>
+        <TextBlock Margin="230,0,0,6" Foreground="{DynamicResource DangerBrush}" TextWrapping="Wrap" Text="{Binding GameError}"
+                   IsVisible="{Binding GameError, Converter={x:Static ObjectConverters.IsNotNull}}" />
+
+        <Grid Classes="row" ColumnDefinitions="230,*">
+          <TextBlock Text="{loc:Str Settings_Group_Loader}" />
+          <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+            <TextBlock Classes="secondary" Text="{Binding Session.LoaderText}" VerticalAlignment="Center" />
+            <Button Classes="small" Content="{Binding Session.LoaderButtonText}" Command="{Binding Session.InstallLoaderCommand}" />
+            <Button Classes="small" Content="{loc:Str Loader_Remove}" Command="{Binding Session.RemoveLoaderCommand}"
+                    IsVisible="{Binding Session.IsLoaderInstalled}" />
+            <ProgressBar Width="120" Value="{Binding Session.LoaderProgress}" Maximum="1" VerticalAlignment="Center"
+                         IsVisible="{Binding Session.IsInstallingLoader}" />
+          </StackPanel>
+        </Grid>
+
+        <Grid Classes="row" ColumnDefinitions="230,*">
+          <TextBlock Text="{loc:Str Settings_Group_Launch}" />
+          <ComboBox Grid.Column="1" MinWidth="240" VerticalAlignment="Center"
+                    ItemsSource="{Binding LaunchModes}" SelectedItem="{Binding SelectedLaunchMode}">
+            <ComboBox.ItemTemplate>
+              <DataTemplate x:DataType="vm:LaunchModeOption">
+                <TextBlock Text="{Binding DisplayName}" />
+              </DataTemplate>
+            </ComboBox.ItemTemplate>
+          </ComboBox>
+        </Grid>
+
+        <Border Classes="banner" Margin="230,0,0,8" IsVisible="{Binding HasLaunchHint}">
+          <StackPanel Spacing="6">
+            <TextBlock Text="{Binding LaunchHintText}" TextWrapping="Wrap" />
+            <StackPanel Orientation="Horizontal" Spacing="8" IsVisible="{Binding LaunchOptionsText, Converter={x:Static ObjectConverters.IsNotNull}}">
+              <SelectableTextBlock Text="{Binding LaunchOptionsText}" FontFamily="Consolas, Menlo, monospace" VerticalAlignment="Center" />
+              <Button Classes="small" Content="{loc:Str Launch_Copy}" Command="{Binding CopyLaunchOptionsCommand}" />
+              <TextBlock Classes="caption" Foreground="{DynamicResource SuccessBrush}" Text="{loc:Str Launch_Copied}"
+                         VerticalAlignment="Center" IsVisible="{Binding LaunchOptionsCopied}" />
+            </StackPanel>
+          </StackPanel>
+        </Border>
+        <Grid Classes="row" ColumnDefinitions="230,*">
+          <TextBlock Text="{loc:Str Settings_Language}" />
+          <ComboBox Grid.Column="1" MinWidth="180" VerticalAlignment="Center"
+                    ItemsSource="{Binding Languages}" SelectedItem="{Binding SelectedLanguage}">
+            <ComboBox.ItemTemplate>
+              <DataTemplate x:DataType="vm:LanguageOption">
+                <TextBlock Text="{Binding DisplayName}" />
+              </DataTemplate>
+            </ComboBox.ItemTemplate>
+          </ComboBox>
+        </Grid>
+
+        <Grid Classes="row" ColumnDefinitions="230,*">
+          <TextBlock Text="{loc:Str Settings_UiScale}" />
+          <ComboBox Grid.Column="1" MinWidth="110" VerticalAlignment="Center" ItemsSource="{Binding ScaleOptions}" SelectedItem="{Binding SelectedScale}">
+            <ComboBox.ItemTemplate>
+              <DataTemplate x:DataType="x:Int32">
+                <TextBlock Text="{Binding StringFormat='{}{0}%'}" />
+              </DataTemplate>
+            </ComboBox.ItemTemplate>
+          </ComboBox>
+        </Grid>
+
+        <Grid Classes="row" ColumnDefinitions="230,*">
+          <TextBlock Text="{loc:Str Settings_ShowDeprecated}" />
+          <ToggleSwitch Grid.Column="1" IsChecked="{Binding ShowDeprecated}" OnContent="{loc:Str Settings_On}" OffContent="{loc:Str Settings_Off}" />
+        </Grid>
+
+        <Grid Classes="row" ColumnDefinitions="230,*">
+          <TextBlock Text="{loc:Str Settings_ShowNsfw}" />
+          <ToggleSwitch Grid.Column="1" IsChecked="{Binding ShowNsfw}" OnContent="{loc:Str Settings_On}" OffContent="{loc:Str Settings_Off}" />
+        </Grid>
+
+        <Grid Classes="row" ColumnDefinitions="230,*">
+          <TextBlock Text="{loc:Str Settings_Policy}" />
+          <ComboBox Grid.Column="1" MinWidth="260" VerticalAlignment="Center" ItemsSource="{Binding Policies}" SelectedItem="{Binding SelectedPolicy}">
+            <ComboBox.ItemTemplate>
+              <DataTemplate x:DataType="vm:PolicyOption">
+                <TextBlock Text="{Binding DisplayName}" />
+              </DataTemplate>
+            </ComboBox.ItemTemplate>
+          </ComboBox>
+        </Grid>
+
+        <Grid Classes="row" ColumnDefinitions="230,*">
+          <TextBlock Text="{loc:Str Settings_Cache}" />
+          <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
+            <TextBlock Classes="secondary" Text="{Binding CacheText}" VerticalAlignment="Center" />
+            <Button Classes="small" Content="{loc:Str Settings_ClearCache}" Command="{Binding ClearCacheCommand}" />
+          </StackPanel>
+        </Grid>
+        <Grid Classes="row" ColumnDefinitions="230,*">
+          <TextBlock Text="{loc:Str Settings_Updates}" />
+          <Grid Grid.Column="1" ColumnDefinitions="Auto,Auto,Auto,*" VerticalAlignment="Center">
+            <ToggleSwitch IsChecked="{Binding CheckForUpdates}" OnContent="{loc:Str Settings_On}" OffContent="{loc:Str Settings_Off}" />
+            <ComboBox Grid.Column="1" Margin="10,0,0,0" MinWidth="130" VerticalAlignment="Center"
+                      ItemsSource="{Binding Channels}" SelectedItem="{Binding SelectedChannel}"
+                      ToolTip.Tip="{loc:Str Settings_Channel_Tooltip}">
+              <ComboBox.ItemTemplate>
+                <DataTemplate x:DataType="vm:ChannelOption">
+                  <TextBlock Text="{Binding DisplayName}" />
+                </DataTemplate>
+              </ComboBox.ItemTemplate>
+            </ComboBox>
+            <Button Grid.Column="2" Classes="small" Margin="10,0,0,0" Content="{loc:Str Update_CheckNow}"
+                    Command="{Binding Updates.CheckNowCommand}" IsEnabled="{Binding Updates.IsIdle}" />
+            <TextBlock Grid.Column="3" Classes="secondary" Margin="10,0,0,0" Text="{Binding Updates.StatusText}"
+                       TextWrapping="Wrap" VerticalAlignment="Center" />
+          </Grid>
+        </Grid>
+
+        <Grid Classes="row" ColumnDefinitions="230,*">
+          <TextBlock Text="{loc:Str Settings_About}" />
+          <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="14" VerticalAlignment="Center">
+            <Button Classes="link" Content="GitHub" Command="{Binding OpenRepositoryCommand}" />
+            <Button Classes="link" Content="{loc:Str Settings_License}" Command="{Binding OpenLicenseCommand}" />
+            <Button Classes="link" Content="{loc:Str Settings_ThirdParty}" Command="{Binding OpenThirdPartyNoticesCommand}" />
+          </StackPanel>
+        </Grid>
+
+        <Grid Classes="row" ColumnDefinitions="230,*,Auto">
+          <TextBlock Text="{loc:Str Settings_ProfilesFolder}" />
+          <Grid Grid.Column="1" RowDefinitions="Auto,Auto" VerticalAlignment="Center">
+            <Button Classes="link" HorizontalAlignment="Left" Command="{Binding OpenProfilesFolderCommand}">
+              <TextBlock Text="{Binding ProfilesFolder}" TextTrimming="CharacterEllipsis" />
+            </Button>
+            <ProgressBar Grid.Row="1" Maximum="1" Value="{Binding MoveProgress}" Margin="0,4,0,0" IsVisible="{Binding IsMovingProfiles}" />
+          </Grid>
+          <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="8" Margin="8,0,0,0" VerticalAlignment="Center">
+            <Button Classes="small" Content="{loc:Str Settings_ProfilesFolder_Default}" Command="{Binding ResetProfilesFolderCommand}"
+                    IsVisible="{Binding IsCustomProfilesFolder}" IsEnabled="{Binding CanMoveProfiles}" />
+            <Button Classes="small" Content="{loc:Str Settings_ChangePath}" Command="{Binding ChangeProfilesFolderCommand}"
+                    IsEnabled="{Binding CanMoveProfiles}" />
+          </StackPanel>
+        </Grid>
+
+        <Grid Classes="row" ColumnDefinitions="230,*">
+          <TextBlock Text="{loc:Str Settings_VerboseLog}" />
+          <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
+            <ToggleSwitch IsChecked="{Binding VerboseLogging}" OnContent="{loc:Str Settings_On}" OffContent="{loc:Str Settings_Off}" />
+            <TextBlock Classes="secondary" Text="{loc:Str Settings_VerboseLog_Hint}" VerticalAlignment="Center" TextWrapping="Wrap" />
+          </StackPanel>
+        </Grid>
+
+        <Grid Classes="row" ColumnDefinitions="230,*">
+          <TextBlock Text="{loc:Str Settings_DataFolder}" />
+          <Button Grid.Column="1" Classes="link" HorizontalAlignment="Left" Command="{Binding OpenDataFolderCommand}">
+            <TextBlock Text="{Binding DataFolder}" TextTrimming="CharacterEllipsis" />
+          </Button>
+        </Grid>
+      </StackPanel>
+    </ScrollViewer>
+
+    <Border Grid.Row="1" Margin="0,6,0,0" Padding="0,10,0,0" BorderBrush="{DynamicResource BorderStrongBrush}" BorderThickness="0,1,0,0">
+      <Grid ColumnDefinitions="Auto,*,Auto">
+        <TextBlock Classes="caption" Text="{Binding VersionText}" VerticalAlignment="Center" />
+        <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="8">
+          <TextBlock Text="{loc:Str Settings_CopySystemInfo_Done}" Foreground="{DynamicResource SuccessBrush}"
+                     VerticalAlignment="Center" IsVisible="{Binding SystemInfoCopied}" />
+          <Button Content="{loc:Str Settings_RunOnboarding}" Command="{Binding RunOnboardingCommand}" />
+          <Button Content="{loc:Str Settings_OpenLogs}" Command="{Binding OpenLogsCommand}" />
+          <Button Content="{loc:Str Settings_CopySystemInfo}" Command="{Binding CopySystemInfoCommand}" />
+        </StackPanel>
+      </Grid>
+    </Border>
+  </Grid>
+</UserControl>
