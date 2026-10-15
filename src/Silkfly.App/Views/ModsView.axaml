@@ -1,0 +1,517 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:Silkfly.App.ViewModels"
+             xmlns:controls="using:Silkfly.App.Controls"
+             xmlns:conv="using:Silkfly.App.Converters"
+             xmlns:loc="using:Silkfly.App.Localization"
+             xmlns:catalog="using:Silkfly.Core.Catalog"
+             mc:Ignorable="d" d:DesignWidth="850" d:DesignHeight="500"
+             x:Class="Silkfly.App.Views.ModsView"
+             x:DataType="vm:ModListViewModel">
+
+  <UserControl.Styles>
+    <Style Selector="Border.rail">
+      <Setter Property="Width" Value="36" />
+      <Setter Property="Transitions">
+        <Transitions>
+          <DoubleTransition Property="Width" Duration="0:0:0.15" Easing="CubicEaseOut" />
+        </Transitions>
+      </Setter>
+    </Style>
+    <Style Selector="Border.rail:pointerover">
+      <Setter Property="Width" Value="210" />
+    </Style>
+    <Style Selector="Border.rail Button">
+      <Setter Property="HorizontalAlignment" Value="Stretch" />
+      <Setter Property="HorizontalContentAlignment" Value="Left" />
+      <Setter Property="Padding" Value="9,6" />
+      <Setter Property="CornerRadius" Value="0" />
+      <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" />
+    </Style>
+    <Style Selector="Border.rail Button.danger:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Foreground" Value="{DynamicResource DangerBrush}" />
+    </Style>
+    <Style Selector="Grid.cardheader">
+      <Setter Property="FocusAdorner">
+        <FocusAdornerTemplate>
+          <Border BorderThickness="2" BorderBrush="{DynamicResource AccentHoverBrush}" CornerRadius="5" Margin="-10,0,-6,0" />
+        </FocusAdornerTemplate>
+      </Setter>
+    </Style>
+    <Style Selector="Border.rail Button TextBlock">
+      <Setter Property="TextWrapping" Value="NoWrap" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+  </UserControl.Styles>
+
+  <Grid ColumnDefinitions="36,*" DragDrop.AllowDrop="True">
+
+    <Grid Grid.Column="1" RowDefinitions="Auto,Auto,Auto,Auto,*" Margin="0,8,8,0">
+
+      <Grid Grid.Row="0" ColumnDefinitions="*,Auto" IsVisible="{Binding !IsWhatsNew}" Margin="0,0,0,6">
+        <TextBox x:Name="SearchBox" Classes="search" Text="{Binding SearchText}" MaxLength="200" Watermark="{loc:Str Mods_Search_Placeholder}">
+          <TextBox.InnerLeftContent>
+            <controls:GlyphIcon Width="14" Height="14" Margin="8,0,0,0" Foreground="{DynamicResource TextMutedBrush}"
+                                Data="{StaticResource Icon.Search}" />
+          </TextBox.InnerLeftContent>
+        </TextBox>
+        <Button Grid.Column="1" Classes="ghost" Margin="6,0,0,0" Padding="8,4">
+          <StackPanel Orientation="Horizontal" Spacing="6">
+            <Ellipse Width="6" Height="6" Fill="{DynamicResource AccentHoverBrush}" IsVisible="{Binding HasAdvancedFilters}" />
+            <TextBlock Text="{loc:Str Mods_AdvancedSearch}" Foreground="{DynamicResource TextPrimaryBrush}" />
+            <controls:GlyphIcon Width="13" Height="13" Data="{StaticResource Icon.ChevronDown}" />
+          </StackPanel>
+          <Button.Flyout>
+            <Flyout Placement="BottomEdgeAlignedRight">
+              <StackPanel Width="300" Spacing="10" Margin="4">
+                <StackPanel Spacing="4">
+                  <TextBlock Classes="caption" Text="{loc:Str Mods_Sort}" />
+                  <ComboBox HorizontalAlignment="Stretch" ItemsSource="{Binding SortOptions}" SelectedItem="{Binding SelectedSort}">
+                    <ComboBox.ItemTemplate>
+                      <DataTemplate x:DataType="vm:SortOption">
+                        <TextBlock Text="{Binding DisplayName}" />
+                      </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                  </ComboBox>
+                </StackPanel>
+                <StackPanel Spacing="4">
+                  <TextBlock Classes="caption" Text="{loc:Str Mods_Author}" />
+                  <AutoCompleteBox x:Name="AuthorBox" ItemsSource="{Binding Authors}" SelectedItem="{Binding SelectedAuthor}"
+                                   FilterMode="ContainsOrdinal" Watermark="{loc:Str Mods_Author_Any}" MinimumPrefixLength="0"
+                                   MaxDropDownHeight="280" GotFocus="OnAuthorBoxFocus" PointerReleased="OnAuthorBoxFocus" />
+                </StackPanel>
+                <StackPanel Spacing="4">
+                  <TextBlock Classes="caption" Text="{loc:Str Mods_Categories}" />
+                  <ItemsControl ItemsSource="{Binding Categories}">
+                    <ItemsControl.ItemsPanel>
+                      <ItemsPanelTemplate><WrapPanel /></ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                      <DataTemplate x:DataType="vm:CategoryOption">
+                        <ToggleButton Classes="chip" Content="{Binding Name}" IsChecked="{Binding IsSelected}" />
+                      </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                  </ItemsControl>
+                </StackPanel>
+                <CheckBox Content="{loc:Str Mods_ShowDeprecated}" IsChecked="{Binding ShowDeprecated}" />
+                <CheckBox Content="{loc:Str Mods_ShowNsfw}" IsChecked="{Binding ShowNsfw}" />
+                <Button Classes="small" HorizontalAlignment="Right" Content="{loc:Str Mods_ResetFilters}"
+                        Command="{Binding ResetFiltersCommand}" />
+              </StackPanel>
+            </Flyout>
+          </Button.Flyout>
+        </Button>
+      </Grid>
+
+      <Grid Grid.Row="1" ColumnDefinitions="Auto,Auto,*,Auto" Margin="0,6,0,6">
+        <TextBlock Classes="caption" Text="{loc:Str Mods_Filter_Label}" VerticalAlignment="Center" Margin="0,0,8,0" />
+        <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="2">
+          <RadioButton Classes="chip" GroupName="ModFilter" Content="{loc:Str Mods_Filter_All}"
+                       IsChecked="{Binding Filter, Converter={x:Static conv:EnumEqualsConverter.Instance}, ConverterParameter={x:Static catalog:ModFilter.All}}" />
+          <RadioButton Classes="chip" GroupName="ModFilter" Content="{loc:Str Mods_Filter_Installed}"
+                       IsChecked="{Binding Filter, Converter={x:Static conv:EnumEqualsConverter.Instance}, ConverterParameter={x:Static catalog:ModFilter.Installed}}" />
+          <RadioButton Classes="chip" GroupName="ModFilter" Content="{loc:Str Mods_Filter_Enabled}"
+                       IsChecked="{Binding Filter, Converter={x:Static conv:EnumEqualsConverter.Instance}, ConverterParameter={x:Static catalog:ModFilter.Enabled}}" />
+          <RadioButton Classes="chip" GroupName="ModFilter" Content="{loc:Str Mods_Filter_Outdated}"
+                       IsChecked="{Binding Filter, Converter={x:Static conv:EnumEqualsConverter.Instance}, ConverterParameter={x:Static catalog:ModFilter.Outdated}}" />
+          <RadioButton Classes="chip" GroupName="ModFilter" Content="{loc:Str Mods_Filter_WhatsNew}"
+                       IsChecked="{Binding Filter, Converter={x:Static conv:EnumEqualsConverter.Instance}, ConverterParameter={x:Static catalog:ModFilter.WhatsNew}}" />
+        </StackPanel>
+        <Button Grid.Column="2" Classes="ghost" Padding="6,2" Margin="8,0,8,0" HorizontalAlignment="Right"
+                Command="{Binding RefreshCommand}" ToolTip.Tip="{loc:Str Mods_Refresh_Tooltip}">
+          <Grid ColumnDefinitions="*,Auto">
+            <TextBlock Classes="caption" Text="{Binding UpdatedText}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" />
+            <controls:GlyphIcon Grid.Column="1" Width="12" Height="12" Margin="6,0,0,0" Data="{StaticResource Icon.Refresh}" />
+          </Grid>
+        </Button>
+        <TextBlock Grid.Column="3" Classes="caption" VerticalAlignment="Center">
+          <Run Text="{Binding ShownCount}" /><Run Text=" / " /><Run Text="{Binding TotalCount}" />
+        </TextBlock>
+      </Grid>
+
+      <StackPanel Grid.Row="2" Spacing="4" Margin="0,0,0,8" IsVisible="{Binding IsWhatsNew}">
+        <StackPanel Orientation="Horizontal" Spacing="14">
+          <TextBlock Classes="caption" Width="110" VerticalAlignment="Center" Text="{loc:Str Mods_WhatsNew_HowRecent}" />
+          <RadioButton GroupName="WhatsNewRange" Content="{loc:Str Mods_WhatsNew_Week}" IsChecked="{Binding WhatsNewWeek}" />
+          <RadioButton GroupName="WhatsNewRange" Content="{loc:Str Mods_WhatsNew_Month}" IsChecked="{Binding WhatsNewMonth}" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Spacing="14">
+          <TextBlock Classes="caption" Width="110" VerticalAlignment="Center" Text="{loc:Str Mods_WhatsNew_Type}" />
+          <CheckBox Content="{loc:Str Mods_WhatsNew_New}" IsChecked="{Binding WhatsNewIncludesNew}" />
+          <CheckBox Content="{loc:Str Mods_WhatsNew_Updated}" IsChecked="{Binding WhatsNewIncludesUpdated}" />
+        </StackPanel>
+      </StackPanel>
+
+      <Border Grid.Row="3" Height="1" Background="{DynamicResource BorderBrush}" Margin="0,0,0,8" />
+
+      <Grid Grid.Row="4" RowDefinitions="Auto,*">
+        <Border Grid.Row="0" Classes="banner" Margin="0,0,0,8" IsVisible="{Binding OfflineText, Converter={x:Static ObjectConverters.IsNotNull}}">
+          <Grid ColumnDefinitions="Auto,*,Auto">
+            <controls:GlyphIcon Width="16" Height="16" Margin="0,0,8,0" Foreground="{DynamicResource WarningBrush}"
+                                Data="{StaticResource Icon.AlertTriangle}" />
+            <TextBlock Grid.Column="1" Text="{Binding OfflineText}" TextWrapping="Wrap" VerticalAlignment="Center" />
+            <Button Grid.Column="2" Classes="small" Content="{loc:Str Mods_Retry}" Command="{Binding RefreshCommand}" />
+          </Grid>
+        </Border>
+
+        <ScrollViewer x:Name="ModScroll" Grid.Row="1" HorizontalScrollBarVisibility="Disabled">
+          <controls:CardListPanel x:Name="ModList" Items="{Binding Items}" Margin="0,0,16,0">
+          <controls:CardListPanel.DataTemplates>
+            <DataTemplate x:DataType="vm:ModItemViewModel">
+              <Border Classes="card hoverable" Padding="0">
+                <StackPanel>
+                  <Grid Classes="cardheader" ColumnDefinitions="Auto,*,Auto,Auto" Height="42" Margin="10,0,6,0" Background="Transparent"
+                        Focusable="True" PointerPressed="OnCardHeaderPressed" KeyDown="OnCardHeaderKeyDown" GotFocus="OnCardHeaderGotFocus">
+                    <Panel Width="26" Height="26" Margin="0,0,10,0">
+                      <Border CornerRadius="3" ClipToBounds="True" IsVisible="{Binding HasIcon}">
+                        <Image Source="{Binding Icon}" Stretch="UniformToFill" />
+                      </Border>
+                      <controls:GlyphIcon Width="20" Height="20" StrokeThickness="1.5" IsVisible="{Binding !HasIcon}"
+                                          Foreground="{DynamicResource BorderStrongBrush}" Data="{StaticResource Icon.Package}" />
+                    </Panel>
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center" ClipToBounds="True">
+                      <TextBlock Text="{Binding Name}" FontSize="{StaticResource FontSizeModName}" TextTrimming="CharacterEllipsis" />
+                      <TextBlock Classes="caption" Text="{Binding Author}" VerticalAlignment="Center" />
+                      <Border Classes="tag warning" Margin="0" VerticalAlignment="Center" IsVisible="{Binding IsDeprecated}">
+                        <TextBlock Text="{loc:Str Mod_Deprecated}" />
+                      </Border>
+                      <Border Classes="tag warning" Margin="0" VerticalAlignment="Center" IsVisible="{Binding IsNsfw}">
+                        <TextBlock Text="{loc:Str Mod_Nsfw}" />
+                      </Border>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="6" Margin="8,0" VerticalAlignment="Center">
+                      <Button Classes="small danger" IsVisible="{Binding HasError}" Command="{Binding RetryCommand}"
+                              ToolTip.Tip="{Binding LastError}">
+                        <StackPanel Orientation="Horizontal" Spacing="6">
+                          <controls:GlyphIcon Width="13" Height="13" Data="{StaticResource Icon.AlertTriangle}" />
+                          <TextBlock Text="{loc:Str Mod_Retry}" />
+                        </StackPanel>
+                      </Button>
+
+                      <ContentControl Content="{Binding Actions}" VerticalAlignment="Center">
+                        <ContentControl.DataTemplates>
+                          <DataTemplate x:DataType="vm:BusyActions">
+                            <StackPanel DataContext="{Binding Mod}" x:DataType="vm:ModItemViewModel" Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
+                        <TextBlock Classes="caption" Text="{Binding OperationText}" VerticalAlignment="Center" />
+                        <ProgressBar Width="110" MinWidth="110" Value="{Binding OperationFraction}" Maximum="1" VerticalAlignment="Center" />
+                        <Button Classes="small" Content="{loc:Str Mod_Cancel}" Command="{Binding CancelCommand}" />
+                      </StackPanel>
+                          </DataTemplate>
+                          <DataTemplate x:DataType="vm:InstalledActions">
+                            <StackPanel DataContext="{Binding Mod}" x:DataType="vm:ModItemViewModel" Orientation="Horizontal" Spacing="6">
+                        <Border Classes="tag" Margin="0" VerticalAlignment="Center" IsVisible="{Binding IsManual}">
+                          <TextBlock Text="{loc:Str Mod_Manual}" />
+                        </Border>
+                        <ToggleSwitch IsChecked="{Binding IsEnabled}" OnContent="{loc:Str Mod_On}" OffContent="{loc:Str Mod_Off}"
+                                      MinWidth="0" Margin="0,0,4,0" VerticalAlignment="Center" />
+                        <Button Classes="small update" IsVisible="{Binding ShowUpdate}" Command="{Binding UpdateCommand}">
+                          <StackPanel Orientation="Horizontal" Spacing="6">
+                            <controls:GlyphIcon Width="13" Height="13" Data="{StaticResource Icon.History}" />
+                            <TextBlock Text="{loc:Str Mod_Update}" />
+                          </StackPanel>
+                        </Button>
+                        <Button Classes="small warning" IsVisible="{Binding ShowReinstall}" Command="{Binding ReinstallCommand}"
+                                ToolTip.Tip="{loc:Str Mod_Broken}">
+                          <TextBlock Text="{loc:Str Mod_Reinstall}" />
+                        </Button>
+                        <Button Classes="small" Command="{Binding UninstallCommand}">
+                          <StackPanel Orientation="Horizontal" Spacing="6">
+                            <controls:GlyphIcon Width="13" Height="13" Data="{StaticResource Icon.Trash}" />
+                            <TextBlock Text="{loc:Str Mod_Uninstall}" />
+                          </StackPanel>
+                        </Button>
+                      </StackPanel>
+                          </DataTemplate>
+                          <DataTemplate x:DataType="vm:InstallActions">
+                            <StackPanel DataContext="{Binding Mod}" x:DataType="vm:ModItemViewModel" Orientation="Horizontal" Spacing="1">
+                        <Button Classes="small" Command="{Binding InstallCommand}" CornerRadius="3,0,0,3">
+                          <StackPanel Orientation="Horizontal" Spacing="6">
+                            <controls:GlyphIcon Width="13" Height="13" Data="{StaticResource Icon.Download}" />
+                            <TextBlock Text="{loc:Str Mod_Install}" />
+                          </StackPanel>
+                        </Button>
+                        <Button Classes="small" Padding="5,3" CornerRadius="0,3,3,0" ToolTip.Tip="{loc:Str Mod_Versions}">
+                          <controls:GlyphIcon Width="12" Height="12" Data="{StaticResource Icon.ChevronDown}" />
+                          <Button.Flyout>
+                            <Flyout Placement="BottomEdgeAlignedRight">
+                              <ScrollViewer MaxHeight="260">
+                                <ItemsControl ItemsSource="{Binding Versions}">
+                                  <ItemsControl.ItemTemplate>
+                                    <DataTemplate x:DataType="vm:VersionOption">
+                                      <Button Classes="ghost" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"
+                                              Content="{Binding Text}"
+                                              Command="{Binding Command}"
+                                              CommandParameter="{Binding}" />
+                                    </DataTemplate>
+                                  </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                              </ScrollViewer>
+                            </Flyout>
+                          </Button.Flyout>
+                        </Button>
+                      </StackPanel>
+                          </DataTemplate>
+                        </ContentControl.DataTemplates>
+                      </ContentControl>
+                    </StackPanel>
+                    <ToggleButton Grid.Column="3" Classes="chevron" IsChecked="{Binding IsExpanded}" AutomationProperties.Name="{Binding Name}">
+                      <Panel>
+                        <controls:GlyphIcon Width="16" Height="16" Data="{StaticResource Icon.ChevronDown}" IsVisible="{Binding !IsExpanded}" />
+                        <controls:GlyphIcon Width="16" Height="16" Data="{StaticResource Icon.ChevronUp}" IsVisible="{Binding IsExpanded}" />
+                      </Panel>
+                    </ToggleButton>
+                  </Grid>
+
+                  <ContentControl Content="{Binding Details}">
+                    <ContentControl.ContentTemplate>
+                      <DataTemplate x:DataType="vm:ModDetails">
+                        <Grid DataContext="{Binding Mod}" x:DataType="vm:ModItemViewModel"
+                              Margin="14,2,14,12" RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="*,*">
+                    <TextBlock Grid.ColumnSpan="2" Text="{Binding Description}" TextWrapping="Wrap" Margin="0,0,0,10" />
+
+                    <StackPanel Grid.Row="1" Grid.Column="0" Spacing="8" Margin="0,0,16,0">
+                      <StackPanel>
+                        <TextBlock Classes="label" Text="{loc:Str Mod_Version}" />
+                        <TextBlock Text="{Binding VersionText}" Foreground="{DynamicResource TextPrimaryBrush}" Classes.outdated="{Binding IsOutdated}" />
+                        <TextBlock Classes="caption" Text="{loc:Str Mod_LocalOnly}" IsVisible="{Binding IsLocal}" />
+                      </StackPanel>
+                      <StackPanel>
+                        <TextBlock Classes="label" Text="{loc:Str Mod_Dependencies}" />
+                        <TextBlock Classes="secondary" Text="{loc:Str Mod_NoDependencies}" IsVisible="{Binding !HasDependencies}" />
+                        <ItemsControl ItemsSource="{Binding DependencyList}">
+                          <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate><WrapPanel /></ItemsPanelTemplate>
+                          </ItemsControl.ItemsPanel>
+                          <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="vm:DependencyItem">
+                              <Button Classes="link" Margin="0,0,12,2" Content="{Binding Text}" IsEnabled="{Binding InCatalog}"
+                                      Command="{Binding $parent[ItemsControl].((vm:ModItemViewModel)DataContext).OpenDependencyCommand}"
+                                      CommandParameter="{Binding}" />
+                            </DataTemplate>
+                          </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                      </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1" Grid.Column="1" Spacing="8">
+                      <StackPanel>
+                        <TextBlock Classes="label" Text="{loc:Str Mod_Author}" />
+                        <TextBlock Text="{Binding Author}" />
+                      </StackPanel>
+                      <StackPanel>
+                        <TextBlock Classes="label" Text="{loc:Str Mod_Categories}" />
+                        <ItemsControl ItemsSource="{Binding Categories}">
+                          <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate><WrapPanel /></ItemsPanelTemplate>
+                          </ItemsControl.ItemsPanel>
+                          <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="x:String">
+                              <Border Classes="tag"><TextBlock Text="{Binding}" /></Border>
+                            </DataTemplate>
+                          </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                      </StackPanel>
+                      <StackPanel>
+                        <TextBlock Classes="label" Text="{loc:Str Mod_Stats}" />
+                        <TextBlock Classes="secondary" TextWrapping="Wrap">
+                          <Run Text="{Binding DownloadsText}" /><Run Text=" · " /><Run Text="{Binding RatingText}" /><Run Text=" · " /><Run Text="{Binding UpdatedText}" />
+                        </TextBlock>
+                      </StackPanel>
+                      <StackPanel IsVisible="{Binding HasDependents}">
+                        <TextBlock Classes="label" Text="{loc:Str Mod_Dependents}" />
+                        <TextBlock Classes="secondary" TextWrapping="Wrap" Text="{Binding Dependents, Converter={x:Static conv:JoinConverter.Instance}}" />
+                      </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal" Spacing="6" Margin="0,12,0,0">
+                      <Button Classes="small" Content="{loc:Str Mod_Readme}" Command="{Binding ShowReadmeCommand}" />
+                      <Button Classes="icon small" Command="{Binding OpenPageCommand}" ToolTip.Tip="{loc:Str Mod_OpenPage}">
+                        <controls:GlyphIcon Width="15" Height="15" Data="{StaticResource Icon.ExternalLink}" />
+                      </Button>
+                      <Button Classes="icon small" Command="{Binding OpenWebsiteCommand}" IsEnabled="{Binding HasWebsite}"
+                              ToolTip.Tip="{loc:Str Mod_OpenWebsite}">
+                        <controls:GlyphIcon Width="15" Height="15" Data="{StaticResource Icon.Globe}" />
+                      </Button>
+                      <Button Classes="icon small" Command="{Binding CopyLinkCommand}" ToolTip.Tip="{loc:Str Mod_CopyLink}">
+                        <controls:GlyphIcon Width="15" Height="15" Data="{StaticResource Icon.Share}" />
+                      </Button>
+                      <Button Classes="icon small" Command="{Binding ShowChangelogCommand}" ToolTip.Tip="{loc:Str Mod_Changelog}">
+                        <controls:GlyphIcon Width="15" Height="15" Data="{StaticResource Icon.History}" />
+                      </Button>
+                      <Button Classes="icon small" Command="{Binding OpenFolderCommand}" IsEnabled="{Binding IsInstalled}" ToolTip.Tip="{loc:Str Mod_OpenFolder}">
+                        <controls:GlyphIcon Width="15" Height="15" Data="{StaticResource Icon.FolderOpen}" />
+                      </Button>
+                      <Button Classes="icon small" Command="{Binding OpenConfigsCommand}" IsEnabled="{Binding IsInstalled}" ToolTip.Tip="{loc:Str Mod_OpenConfigs}">
+                        <controls:GlyphIcon Width="15" Height="15" Data="{StaticResource Icon.Settings}" />
+                      </Button>
+                      <TextBlock Classes="caption" Text="{loc:Str Mod_LinkCopied}" VerticalAlignment="Center"
+                                 Foreground="{DynamicResource SuccessBrush}" IsVisible="{Binding LinkCopied}" />
+                    </StackPanel>
+                        </Grid>
+                      </DataTemplate>
+                    </ContentControl.ContentTemplate>
+                  </ContentControl>
+                </StackPanel>
+              </Border>
+            </DataTemplate>
+                      <DataTemplate x:DataType="vm:UnmanagedItemViewModel">
+              <Border Classes="card hoverable" Padding="0">
+                <Grid ColumnDefinitions="Auto,*,Auto,Auto,Auto" Height="42" Margin="10,0,6,0">
+                  <controls:GlyphIcon Width="20" Height="20" Margin="3,0,13,0" StrokeThickness="1.5"
+                                      Foreground="{DynamicResource BorderStrongBrush}" Data="{StaticResource Icon.FileText}" />
+                  <TextBlock Grid.Column="1" Text="{Binding Name}" FontSize="{StaticResource FontSizeModName}" VerticalAlignment="Center"
+                             TextTrimming="CharacterEllipsis" />
+                  <Border Grid.Column="2" Classes="tag" Margin="8,0" VerticalAlignment="Center">
+                    <TextBlock Text="{loc:Str Mod_Manual}" />
+                  </Border>
+                  <ToggleSwitch Grid.Column="3" IsChecked="{Binding IsEnabled}" OnContent="{loc:Str Mod_On}" OffContent="{loc:Str Mod_Off}"
+                                MinWidth="0" Margin="0,0,10,0" VerticalAlignment="Center" />
+                  <StackPanel Grid.Column="4" Orientation="Horizontal" Spacing="6" VerticalAlignment="Center" Margin="0,0,36,0">
+                    <Button Classes="icon small" ToolTip.Tip="{loc:Str Mod_Link_Tooltip}">
+                      <controls:GlyphIcon Width="15" Height="15" Data="{StaticResource Icon.Link}" />
+                      <Button.Flyout>
+                        <Flyout Placement="BottomEdgeAlignedRight">
+                          <StackPanel Spacing="4" MaxWidth="420">
+                            <TextBlock Classes="caption" Text="{loc:Str Mod_Link_Title}" TextWrapping="Wrap" Margin="4,0,4,4" />
+                            <ItemsControl ItemsSource="{Binding Suggestions}">
+                              <ItemsControl.ItemTemplate>
+                                <DataTemplate x:DataType="vm:LinkSuggestion">
+                                  <Button Classes="ghost" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"
+                                          Command="{Binding LinkCommand}">
+                                    <TextBlock Text="{Binding Text}" TextTrimming="CharacterEllipsis" />
+                                  </Button>
+                                </DataTemplate>
+                              </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                            <TextBlock Classes="secondary" Text="{loc:Str Mod_Link_None}" Margin="4,0" TextWrapping="Wrap"
+                                       IsVisible="{Binding HasNoSuggestions}" />
+                            <Button Classes="link" Margin="4,4,4,0" Content="{loc:Str Mod_Link_Search}" Command="{Binding SearchCatalogCommand}" />
+                          </StackPanel>
+                        </Flyout>
+                      </Button.Flyout>
+                    </Button>
+                    <Button Classes="icon small" Command="{Binding OpenFolderCommand}" ToolTip.Tip="{loc:Str Mod_OpenFolder}">
+                      <controls:GlyphIcon Width="15" Height="15" Data="{StaticResource Icon.FolderOpen}" />
+                    </Button>
+                    <Button Classes="small" Command="{Binding RemoveCommand}">
+                      <StackPanel Orientation="Horizontal" Spacing="6">
+                        <controls:GlyphIcon Width="13" Height="13" Data="{StaticResource Icon.Trash}" />
+                        <TextBlock Text="{loc:Str Mod_Uninstall}" />
+                      </StackPanel>
+                    </Button>
+                  </StackPanel>
+                </Grid>
+              </Border>
+            </DataTemplate>
+          </controls:CardListPanel.DataTemplates>
+          </controls:CardListPanel>
+        </ScrollViewer>
+
+        <ItemsControl Grid.Row="1" IsVisible="{Binding ShowSkeletons}" ItemsSource="{Binding SkeletonItems}">
+          <ItemsControl.ItemTemplate>
+            <DataTemplate>
+              <Border Classes="card" Padding="10,0" Height="42" Margin="0,0,0,6">
+                <StackPanel Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
+                  <Border Classes="skeleton" Width="26" Height="26" />
+                  <Border Classes="skeleton" Width="180" Height="12" />
+                  <Border Classes="skeleton" Width="70" Height="10" />
+                </StackPanel>
+              </Border>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10" Margin="0,0,0,40"
+                    IsVisible="{Binding ShowNothingFound}">
+          <controls:GlyphIcon Width="40" Height="40" StrokeThickness="1.5" HorizontalAlignment="Center"
+                              Foreground="{DynamicResource BorderStrongBrush}" Data="{StaticResource Icon.Search}" />
+          <TextBlock Classes="title" HorizontalAlignment="Center" Text="{loc:Str Mods_Empty_NothingFound}" />
+          <Button HorizontalAlignment="Center" Content="{loc:Str Mods_ResetFilters}" Command="{Binding ResetFiltersCommand}" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10" Margin="0,0,0,40"
+                    IsVisible="{Binding ShowUnavailable}">
+          <controls:GlyphIcon Width="40" Height="40" StrokeThickness="1.5" HorizontalAlignment="Center"
+                              Foreground="{DynamicResource BorderStrongBrush}" Data="{StaticResource Icon.AlertTriangle}" />
+          <TextBlock Classes="title" HorizontalAlignment="Center" Text="{loc:Str Mods_Empty_NoCatalog_Title}" />
+          <TextBlock Classes="secondary" HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" MaxWidth="380"
+                     Text="{loc:Str Mods_Empty_NoCatalog_Text}" />
+          <Button HorizontalAlignment="Center" Classes="primary" Content="{loc:Str Mods_Retry}" Command="{Binding RefreshCommand}" />
+        </StackPanel>
+      </Grid>
+    </Grid>
+
+    <Border Grid.Column="1" IsVisible="{Binding IsDropTarget}" Background="#B01B1013" BorderBrush="{DynamicResource AccentBrush}"
+            BorderThickness="2" CornerRadius="4" Margin="0,8,8,8" ZIndex="5" IsHitTestVisible="False">
+      <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="8">
+        <controls:GlyphIcon Width="40" Height="40" HorizontalAlignment="Center" Data="{StaticResource Icon.PackagePlus}" />
+        <TextBlock Classes="title" Text="{loc:Str Mods_DropHint}" />
+      </StackPanel>
+    </Border>
+
+    <Border Grid.Column="0" Grid.ColumnSpan="2" Classes="rail" HorizontalAlignment="Left" ZIndex="1"
+            Background="{DynamicResource BgBrush}" ClipToBounds="True">
+      <StackPanel VerticalAlignment="Bottom" Margin="0,0,0,6">
+        <Button Classes="ghost danger" Command="{Binding UninstallAllCommand}">
+          <StackPanel Orientation="Horizontal" Spacing="12">
+            <controls:GlyphIcon Data="{StaticResource Icon.Trash}" />
+            <TextBlock Text="{loc:Str Rail_UninstallAll}" />
+          </StackPanel>
+        </Button>
+        <Button Classes="ghost" Command="{Binding UpdateAllCommand}">
+          <StackPanel Orientation="Horizontal" Spacing="12">
+            <controls:GlyphIcon Data="{StaticResource Icon.ArrowUpCircle}" />
+            <TextBlock Text="{loc:Str Rail_UpdateAll}" />
+          </StackPanel>
+        </Button>
+        <Button Classes="ghost" Command="{Binding ToggleAllCommand}" IsEnabled="{Binding HasProfile}">
+          <StackPanel Orientation="Horizontal" Spacing="12">
+            <controls:GlyphIcon Data="{StaticResource Icon.ToggleLeft}" />
+            <Panel>
+              <TextBlock Text="{loc:Str Rail_DisableAll}" IsVisible="{Binding AnyEnabled}" />
+              <TextBlock Text="{loc:Str Rail_EnableAll}" IsVisible="{Binding !AnyEnabled}" />
+            </Panel>
+          </StackPanel>
+        </Button>
+        <Button Classes="ghost" Command="{Binding RefreshCommand}">
+          <StackPanel Orientation="Horizontal" Spacing="12">
+            <controls:GlyphIcon Data="{StaticResource Icon.Refresh}" />
+            <TextBlock Text="{loc:Str Rail_RefreshCatalog}" />
+          </StackPanel>
+        </Button>
+        <Button Classes="ghost" Command="{Binding OpenSavesFolderCommand}">
+          <StackPanel Orientation="Horizontal" Spacing="12">
+            <controls:GlyphIcon Data="{StaticResource Icon.Save}" />
+            <TextBlock Text="{loc:Str Rail_OpenSaves}" />
+          </StackPanel>
+        </Button>
+        <Button Classes="ghost" Command="{Binding OpenModsFolderCommand}" IsEnabled="{Binding HasProfile}">
+          <StackPanel Orientation="Horizontal" Spacing="12">
+            <controls:GlyphIcon Data="{StaticResource Icon.FolderOpen}" />
+            <TextBlock Text="{loc:Str Rail_OpenMods}" />
+          </StackPanel>
+        </Button>
+        <Button Classes="ghost" Command="{Binding OpenGameLogCommand}" IsEnabled="{Binding HasProfile}">
+          <StackPanel Orientation="Horizontal" Spacing="12">
+            <controls:GlyphIcon Data="{StaticResource Icon.FileText}" />
+            <TextBlock Text="{loc:Str Rail_OpenGameLog}" />
+          </StackPanel>
+        </Button>
+        <Button Classes="ghost" Command="{Binding ExportProfileCommand}" IsEnabled="{Binding HasProfile}">
+          <StackPanel Orientation="Horizontal" Spacing="12">
+            <controls:GlyphIcon Data="{StaticResource Icon.Upload}" />
+            <TextBlock Text="{loc:Str Rail_ExportProfile}" />
+          </StackPanel>
+        </Button>
+        <Button Classes="ghost" Command="{Binding ManualInstallCommand}" IsEnabled="{Binding HasProfile}">
+          <StackPanel Orientation="Horizontal" Spacing="12">
+            <controls:GlyphIcon Data="{StaticResource Icon.Download}" />
+            <TextBlock Text="{loc:Str Rail_ManualInstall}" />
+          </StackPanel>
+        </Button>
+      </StackPanel>
+    </Border>
+  </Grid>
+</UserControl>

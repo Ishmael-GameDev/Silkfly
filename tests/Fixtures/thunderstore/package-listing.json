@@ -1,0 +1,612 @@
+[
+    {
+        "name":  "BepInExPack_Silksong",
+        "full_name":  "silksong_modding-BepInExPack_Silksong",
+        "owner":  "silksong_modding",
+        "package_url":  "https://thunderstore.io/c/hollow-knight-silksong/p/silksong_modding/BepInExPack_Silksong/",
+        "donation_link":  null,
+        "date_created":  "2026-05-13T18:30:30.562287+00:00",
+        "date_updated":  "2026-06-12T04:29:37.297049+00:00",
+        "uuid4":  "a0c222c5-227a-47a5-8631-324bd48eff66",
+        "rating_score":  4,
+        "is_pinned":  true,
+        "is_deprecated":  false,
+        "has_nsfw_content":  false,
+        "categories":  [
+
+                       ],
+        "versions":  [
+                         {
+                             "name":  "BepInExPack_Silksong",
+                             "full_name":  "silksong_modding-BepInExPack_Silksong-1.0.3",
+                             "description":  "BepInEx modloader, preconfigured and ready to use for Silksong",
+                             "icon":  "https://ccdn.thunderstore.io/live/repository/icons/silksong_modding-BepInExPack_Silksong-1.0.3.png",
+                             "version_number":  "1.0.3",
+                             "dependencies":  [
+
+                                              ],
+                             "download_url":  "https://thunderstore.io/package/download/silksong_modding/BepInExPack_Silksong/1.0.3/",
+                             "downloads":  97437,
+                             "date_created":  "2026-06-12T04:29:36.886699+00:00",
+                             "website_url":  "https://github.com/silksong-modding/BepInExPack-Silksong",
+                             "is_active":  true,
+                             "uuid4":  "6299a12c-3b50-4bff-9828-37e094dc5ddb",
+                             "file_size":  694940
+                         },
+                         {
+                             "name":  "BepInExPack_Silksong",
+                             "full_name":  "silksong_modding-BepInExPack_Silksong-1.0.2",
+                             "description":  "BepInEx modloader, preconfigured and ready to use for Silksong",
+                             "icon":  "https://ccdn.thunderstore.io/live/repository/icons/silksong_modding-BepInExPack_Silksong-1.0.2.png",
+                             "version_number":  "1.0.2",
+                             "dependencies":  [
+
+                                              ],
+                             "download_url":  "https://thunderstore.io/package/download/silksong_modding/BepInExPack_Silksong/1.0.2/",
+                             "downloads":  12194,
+                             "date_created":  "2026-05-30T03:40:10.203816+00:00",
+                             "website_url":  "https://github.com/silksong-modding/BepInExPack-Silksong",
+                             "is_active":  true,
+                             "uuid4":  "708a4cb6-41a7-48ea-bf65-8294ea2f5e6a",
+                             "file_size":  25672
+                         },
+                         {
+                             "name":  "BepInExPack_Silksong",
+                             "full_name":  "silksong_modding-BepInExPack_Silksong-1.0.1",
+                             "description":  "BepInEx modloader, preconfigured and ready to use for Silksong",
+                             "icon":  "https://ccdn.thunderstore.io/live/repository/icons/silksong_modding-BepInExPack_Silksong-1.0.1.png",
+                             "version_number":  "1.0.1",
+                             "dependencies":  [
+
+                                              ],
+                             "download_url":  "https://thunderstore.io/package/download/silksong_modding/BepInExPack_Silksong/1.0.1/",
+                             "downloads":  4072,
+                             "date_created":  "2026-05-16T01:15:32.758840+00:00",
+                             "website_url":  "https://github.com/silksong-modding/BepInExPack-Silksong",
+                             "is_active":  true,
+                             "uuid4":  "dd975b15-f51b-49d7-a50c-4d039fc4514b",
+                             "file_size":  694939
+                         }
+                     ]
+    },
+    {
+        "name":  "ModMenu",
+        "full_name":  "silksong_modding-ModMenu",
+        "owner":  "silksong_modding",
+        "package_url":  "https://thunderstore.io/c/hollow-knight-silksong/p/silksong_modding/ModMenu/",
+        "donation_link":  null,
+        "date_created":  "2025-11-20T01:04:03.839630+00:00",
+        "date_updated":  "2026-09-26T17:17:17.751166+00:00",
+        "uuid4":  "c1ba37d9-fb02-4d9c-9d0f-a0e490e9910c",
+        "rating_score":  5,
+        "is_pinned":  false,
+        "is_deprecated":  false,
+        "has_nsfw_content":  false,
+        "categories":  [
+                           "Mods",
+                           "Libraries"
+                       ],
+        "versions":  [
+                         {
+                             "name":  "ModMenu",
+                             "full_name":  "silksong_modding-ModMenu-0.8.0",
+                             "description":  "API for extending Silksong Menus",
+                             "icon":  "https://ccdn.thunderstore.io/live/repository/icons/silksong_modding-ModMenu-0.8.0.png",
+                             "version_number":  "0.8.0",
+                             "dependencies":  [
+                                                  "MonoDetour-MonoDetour_BepInEx_5-0.7.5",
+                                                  "silksong_modding-BepInExPack_Silksong-1.0.3",
+                                                  "silksong_modding-UnityHelper-1.0.1"
+                                              ],
+                             "download_url":  "https://thunderstore.io/package/download/silksong_modding/ModMenu/0.8.0/",
+                             "downloads":  14993,
+                             "date_created":  "2026-09-26T17:17:17.395645+00:00",
+                             "website_url":  "https://github.com/silksong-modding/Silksong.ModMenu",
+                             "is_active":  true,
+                             "uuid4":  "283587a7-84ad-4a5f-a0c0-40ad7fae3728",
+                             "file_size":  313389
+                         },
+                         {
+                             "name":  "ModMenu",
+                             "full_name":  "silksong_modding-ModMenu-0.7.6",
+                             "description":  "API for extending Silksong Menus",
+                             "icon":  "https://ccdn.thunderstore.io/live/repository/icons/silksong_modding-ModMenu-0.7.6.png",
+                             "version_number":  "0.7.6",
+                             "dependencies":  [
+                                                  "MonoDetour-MonoDetour_BepInEx_5-0.7.5",
+                                                  "silksong_modding-BepInExPack_Silksong-1.0.3",
+                                                  "silksong_modding-UnityHelper-1.0.1"
+                                              ],
+                             "download_url":  "https://thunderstore.io/package/download/silksong_modding/ModMenu/0.7.6/",
+                             "downloads":  52812,
+                             "date_created":  "2026-07-01T16:07:02.773401+00:00",
+                             "website_url":  "https://github.com/silksong-modding/Silksong.ModMenu",
+                             "is_active":  true,
+                             "uuid4":  "6ff5613a-2693-4750-be99-3ccedfe16bb4",
+                             "file_size":  288868
+                         },
+                         {
+                             "name":  "ModMenu",
+                             "full_name":  "silksong_modding-ModMenu-0.7.5",
+                             "description":  "API for extending Silksong Menus",
+                             "icon":  "https://ccdn.thunderstore.io/live/repository/icons/silksong_modding-ModMenu-0.7.5.png",
+                             "version_number":  "0.7.5",
+                             "dependencies":  [
+                                                  "MonoDetour-MonoDetour_BepInEx_5-0.7.5",
+                                                  "silksong_modding-BepInExPack_Silksong-1.0.3",
+                                                  "silksong_modding-UnityHelper-1.0.1"
+                                              ],
+                             "download_url":  "https://thunderstore.io/package/download/silksong_modding/ModMenu/0.7.5/",
+                             "downloads":  7110,
+                             "date_created":  "2026-06-20T17:36:56.976916+00:00",
+                             "website_url":  "https://github.com/silksong-modding/Silksong.ModMenu",
+                             "is_active":  true,
+                             "uuid4":  "0e3dd9f4-491f-4bf0-8f6b-a77f9b8996a5",
+                             "file_size":  288844
+                         }
+                     ]
+    },
+    {
+        "name":  "MonoDetour_BepInEx_5",
+        "full_name":  "MonoDetour-MonoDetour_BepInEx_5",
+        "owner":  "MonoDetour",
+        "package_url":  "https://thunderstore.io/c/hollow-knight-silksong/p/MonoDetour/MonoDetour_BepInEx_5/",
+        "donation_link":  null,
+        "date_created":  "2025-06-01T02:23:54.749699+00:00",
+        "date_updated":  "2026-09-09T21:16:25.622736+00:00",
+        "uuid4":  "d5b65a03-1217-4496-8af6-8dda4d763676",
+        "rating_score":  20,
+        "is_pinned":  false,
+        "is_deprecated":  false,
+        "has_nsfw_content":  false,
+        "categories":  [
+                           "Libraries"
+                       ],
+        "versions":  [
+                         {
+                             "name":  "MonoDetour_BepInEx_5",
+                             "full_name":  "MonoDetour-MonoDetour_BepInEx_5-0.7.16",
+                             "description":  "HarmonyX interop \u0026 BepInEx 5 logger integration for MonoDetour. Initializes MonoDetour early as a side effect.",
+                             "icon":  "https://ccdn.thunderstore.io/live/repository/icons/MonoDetour-MonoDetour_BepInEx_5-0.7.16.png",
+                             "version_number":  "0.7.16",
+                             "dependencies":  [
+                                                  "MonoDetour-MonoDetour-0.7.16"
+                                              ],
+                             "download_url":  "https://thunderstore.io/package/download/MonoDetour/MonoDetour_BepInEx_5/0.7.16/",
+                             "downloads":  306462,
+                             "date_created":  "2026-09-09T21:16:25.132319+00:00",
+                             "website_url":  "https://github.com/MonoDetour/MonoDetour",
+                             "is_active":  true,
+                             "uuid4":  "65a28e28-884c-4830-8f3c-dfa8c55343c0",
+                             "file_size":  44409
+                         },
+                         {
+                             "name":  "MonoDetour_BepInEx_5",
+                             "full_name":  "MonoDetour-MonoDetour_BepInEx_5-0.7.15",
+                             "description":  "HarmonyX interop \u0026 BepInEx 5 logger integration for MonoDetour. Initializes MonoDetour early as a side effect.",
+                             "icon":  "https://ccdn.thunderstore.io/live/repository/icons/MonoDetour-MonoDetour_BepInEx_5-0.7.15.png",
+                             "version_number":  "0.7.15",
+                             "dependencies":  [
+                                                  "MonoDetour-MonoDetour-0.7.15"
+                                              ],
+                             "download_url":  "https://thunderstore.io/package/download/MonoDetour/MonoDetour_BepInEx_5/0.7.15/",
+                             "downloads":  634475,
+                             "date_created":  "2026-06-20T04:40:10.577231+00:00",
+                             "website_url":  "https://github.com/MonoDetour/MonoDetour",
+                             "is_active":  true,
+                             "uuid4":  "ab2dc9ae-f8f4-496b-a0ca-ca0a244c7cdb",
+                             "file_size":  44698
+                         },
+                         {
+                             "name":  "MonoDetour_BepInEx_5",
+                             "full_name":  "MonoDetour-MonoDetour_BepInEx_5-0.7.14",
+                             "description":  "HarmonyX interop \u0026 BepInEx 5 logger integration for MonoDetour. Initializes MonoDetour early as a side effect.",
+                             "icon":  "https://ccdn.thunderstore.io/live/repository/icons/MonoDetour-MonoDetour_BepInEx_5-0.7.14.png",
+                             "version_number":  "0.7.14",
+                             "dependencies":  [
+                                                  "MonoDetour-MonoDetour-0.7.14"
+                                              ],
+                             "download_url":  "https://thunderstore.io/package/download/MonoDetour/MonoDetour_BepInEx_5/0.7.14/",
+                             "downloads":  152628,
+                             "date_created":  "2026-06-06T07:56:19.497853+00:00",
+                             "website_url":  "https://github.com/MonoDetour/MonoDetour",
+                             "is_active":  true,
+                             "uuid4":  "9c574cb3-998c-4fee-8007-9a2e05dffa5f",
+                             "file_size":  44700
+                         }
+                     ]
+    },
+    {
+        "name":  "MonoDetour",
+        "full_name":  "MonoDetour-MonoDetour",
+        "owner":  "MonoDetour",
+        "package_url":  "https://thunderstore.io/c/hollow-knight-silksong/p/MonoDetour/MonoDetour/",
+        "donation_link":  null,
+        "date_created":  "2025-05-26T22:47:14.041642+00:00",
+        "date_updated":  "2026-09-09T21:16:19.158495+00:00",
+        "uuid4":  "d5419c5d-c22a-4a47-b73d-ba4101f28635",
+        "rating_score":  21,
+        "is_pinned":  false,
+        "is_deprecated":  false,
+        "has_nsfw_content":  false,
+        "categories":  [
+                           "Libraries"
+                       ],
+        "versions":  [
+                         {
+                             "name":  "MonoDetour",
+                             "full_name":  "MonoDetour-MonoDetour-0.7.16",
+                             "description":  "Easy and convenient .NET detouring library, powered by MonoMod.RuntimeDetour.",
+                             "icon":  "https://ccdn.thunderstore.io/live/repository/icons/MonoDetour-MonoDetour-0.7.16.png",
+                             "version_number":  "0.7.16",
+                             "dependencies":  [
+
+                                              ],
+                             "download_url":  "https://thunderstore.io/package/download/MonoDetour/MonoDetour/0.7.16/",
+                             "downloads":  306986,
+                             "date_created":  "2026-09-09T21:16:18.704297+00:00",
+                             "website_url":  "https://github.com/MonoDetour/MonoDetour",
+                             "is_active":  true,
+                             "uuid4":  "dd8dc453-a0cb-4c3a-b81e-5de5f6fe85ad",
+                             "file_size":  140385
+                         },
+                         {
+                             "name":  "MonoDetour",
+                             "full_name":  "MonoDetour-MonoDetour-0.7.15",
+                             "description":  "Easy and convenient .NET detouring library, powered by MonoMod.RuntimeDetour.",
+                             "icon":  "https://ccdn.thunderstore.io/live/repository/icons/MonoDetour-MonoDetour-0.7.15.png",
+                             "version_number":  "0.7.15",
+                             "dependencies":  [
+
+                                              ],
+                             "download_url":  "https://thunderstore.io/package/download/MonoDetour/MonoDetour/0.7.15/",
+                             "downloads":  636417,
+                             "date_created":  "2026-06-20T04:40:03.596363+00:00",
+                             "website_url":  "https://github.com/MonoDetour/MonoDetour",
+                             "is_active":  true,
+                             "uuid4":  "a8d2a687-bd4d-4e20-8a15-a544b0a5eecc",
+                             "file_size":  139361
+                         },
+                         {
+                             "name":  "MonoDetour",
+                             "full_name":  "MonoDetour-MonoDetour-0.7.14",
+                             "description":  "Easy and convenient .NET detouring library, powered by MonoMod.RuntimeDetour.",
+                             "icon":  "https://ccdn.thunderstore.io/live/repository/icons/MonoDetour-MonoDetour-0.7.14.png",
+                             "version_number":  "0.7.14",
+                             "dependencies":  [
+
+                                              ],
+                             "download_url":  "https://thunderstore.io/package/download/MonoDetour/MonoDetour/0.7.14/",
+                             "downloads":  152919,
+                             "date_created":  "2026-06-06T07:56:12.435830+00:00",
+                             "website_url":  "https://github.com/MonoDetour/MonoDetour",
+                             "is_active":  true,
+                             "uuid4":  "ce985ed6-b37a-465c-8bd6-9fc8a516f373",
+                             "file_size":  138305
+                         }
+                     ]
+    },
+    {
+        "name":  "WavLib",
+        "full_name":  "SFGrenade-WavLib",
+        "owner":  "SFGrenade",
+        "package_url":  "https://thunderstore.io/c/hollow-knight-silksong/p/SFGrenade/WavLib/",
+        "donation_link":  null,
+        "date_created":  "2025-11-06T22:49:42.026474+00:00",
+        "date_updated":  "2026-05-10T13:54:39.060619+00:00",
+        "uuid4":  "ea1e5ada-0937-411d-8ddd-89b4043be67e",
+        "rating_score":  2,
+        "is_pinned":  false,
+        "is_deprecated":  false,
+        "has_nsfw_content":  false,
+        "categories":  [
+                           "Mods",
+                           "Libraries"
+                       ],
+        "versions":  [
+                         {
+                             "name":  "WavLib",
+                             "full_name":  "SFGrenade-WavLib-1.1.9",
+                             "description":  "Lightweight RIFF WAVE library for .NET Framework, .NET Standard and .NET Core.",
+                             "icon":  "https://ccdn.thunderstore.io/live/repository/icons/SFGrenade-WavLib-1.1.9.png",
+                             "version_number":  "1.1.9",
+                             "dependencies":  [
+
+                                              ],
+                             "download_url":  "https://thunderstore.io/package/download/SFGrenade/WavLib/1.1.9/",
+                             "downloads":  77684,
+                             "date_created":  "2026-05-10T13:54:38.526489+00:00",
+                             "website_url":  "https://github.com/SFGrenade/WavLib",
+                             "is_active":  true,
+                             "uuid4":  "169ae938-0d22-4ea4-a3d4-a71fd4558dc6",
+                             "file_size":  34080
+                         },
+                         {
+                             "name":  "WavLib",
+                             "full_name":  "SFGrenade-WavLib-1.1.8",
+                             "description":  "Lightweight RIFF WAVE library for .NET Framework, .NET Standard and .NET Core.",
+                             "icon":  "https://ccdn.thunderstore.io/live/repository/icons/SFGrenade-WavLib-1.1.8.png",
+                             "version_number":  "1.1.8",
+                             "dependencies":  [
+
+                                              ],
+                             "download_url":  "https://thunderstore.io/package/download/SFGrenade/WavLib/1.1.8/",
+                             "downloads":  86,
+                             "date_created":  "2026-05-10T13:51:09.682311+00:00",
+                             "website_url":  "https://github.com/SFGrenade/WavLib",
+                             "is_active":  true,
+                             "uuid4":  "b5f96cd8-7b4c-4378-a24c-2d6c6deaa870",
+                             "file_size":  34075
+                         },
+                         {
+                             "name":  "WavLib",
+                             "full_name":  "SFGrenade-WavLib-1.1.1",
+                             "description":  "Lightweight RIFF WAVE library for .NET Framework, .NET Standard and .NET Core.",
+                             "icon":  "https://ccdn.thunderstore.io/live/repository/icons/SFGrenade-WavLib-1.1.1.png",
+                             "version_number":  "1.1.1",
+                             "dependencies":  [
+
+                                              ],
+                             "download_url":  "https://thunderstore.io/package/download/SFGrenade/WavLib/1.1.1/",
+                             "downloads":  53255,
+                             "date_created":  "2025-11-06T22:53:28.464495+00:00",
+                             "website_url":  "https://github.com/SFGrenade/WavLib",
+                             "is_active":  true,
+                             "uuid4":  "acaa7a1b-dffd-4c3b-83fa-3185d4150b8a",
+                             "file_size":  28857
+                         }
+                     ]
+    },
+    {
+        "name":  "UnityHelper",
+        "full_name":  "silksong_modding-UnityHelper",
+        "owner":  "silksong_modding",
+        "package_url":  "https://thunderstore.io/c/hollow-knight-silksong/p/silksong_modding/UnityHelper/",
+        "donation_link":  null,
+        "date_created":  "2025-11-09T05:57:44.840620+00:00",
+        "date_updated":  "2026-04-03T14:01:15.092001+00:00",
+        "uuid4":  "e145aa1c-af63-4093-b6ea-40db7793b4bd",
+        "rating_score":  3,
+        "is_pinned":  false,
+        "is_deprecated":  false,
+        "has_nsfw_content":  false,
+        "categories":  [
+                           "Mods",
+                           "Libraries"
+                       ],
+        "versions":  [
+                         {
+                             "name":  "UnityHelper",
+                             "full_name":  "silksong_modding-UnityHelper-1.2.0",
+                             "description":  "Library containing utility functions associated with Unity objects.",
+                             "icon":  "https://ccdn.thunderstore.io/live/repository/icons/silksong_modding-UnityHelper-1.2.0.png",
+                             "version_number":  "1.2.0",
+                             "dependencies":  [
+                                                  "BepInEx-BepInExPack_Silksong-5.4.2304",
+                                                  "SFGrenade-WavLib-1.1.1"
+                                              ],
+                             "download_url":  "https://thunderstore.io/package/download/silksong_modding/UnityHelper/1.2.0/",
+                             "downloads":  86459,
+                             "date_created":  "2026-04-03T14:01:14.419710+00:00",
+                             "website_url":  "https://github.com/silksong-modding/Silksong.UnityHelper",
+                             "is_active":  true,
+                             "uuid4":  "77ee2223-f528-4992-bda7-4e59c57ff415",
+                             "file_size":  31751
+                         },
+                         {
+                             "name":  "UnityHelper",
+                             "full_name":  "silksong_modding-UnityHelper-1.1.1",
+                             "description":  "Library containing utility functions associated with Unity objects.",
+                             "icon":  "https://ccdn.thunderstore.io/live/repository/icons/silksong_modding-UnityHelper-1.1.1.png",
+                             "version_number":  "1.1.1",
+                             "dependencies":  [
+                                                  "BepInEx-BepInExPack_Silksong-5.4.2304",
+                                                  "SFGrenade-WavLib-1.1.1"
+                                              ],
+                             "download_url":  "https://thunderstore.io/package/download/silksong_modding/UnityHelper/1.1.1/",
+                             "downloads":  22506,
+                             "date_created":  "2026-01-02T06:15:19.947084+00:00",
+                             "website_url":  "https://github.com/silksong-modding/Silksong.UnityHelper",
+                             "is_active":  true,
+                             "uuid4":  "67739e9f-f09e-41a2-9f7f-06f8f51a6142",
+                             "file_size":  31582
+                         },
+                         {
+                             "name":  "UnityHelper",
+                             "full_name":  "silksong_modding-UnityHelper-1.1.0",
+                             "description":  "Library containing utility functions associated with Unity objects.",
+                             "icon":  "https://ccdn.thunderstore.io/live/repository/icons/silksong_modding-UnityHelper-1.1.0.png",
+                             "version_number":  "1.1.0",
+                             "dependencies":  [
+                                                  "BepInEx-BepInExPack_Silksong-5.4.2304",
+                                                  "SFGrenade-WavLib-1.1.1"
+                                              ],
+                             "download_url":  "https://thunderstore.io/package/download/silksong_modding/UnityHelper/1.1.0/",
+                             "downloads":  4844,
+                             "date_created":  "2025-12-02T21:26:56.990153+00:00",
+                             "website_url":  "https://github.com/silksong-modding/Silksong.UnityHelper",
+                             "is_active":  true,
+                             "uuid4":  "c41ca20d-d947-4472-88d1-9f883b065952",
+                             "file_size":  28546
+                         }
+                     ]
+    },
+    {
+        "name":  "BepInExPack_Silksong",
+        "full_name":  "BepInEx-BepInExPack_Silksong",
+        "owner":  "BepInEx",
+        "package_url":  "https://thunderstore.io/c/hollow-knight-silksong/p/BepInEx/BepInExPack_Silksong/",
+        "donation_link":  null,
+        "date_created":  "2025-09-04T14:34:04.188902+00:00",
+        "date_updated":  "2026-06-16T01:05:02.807707+00:00",
+        "uuid4":  "34eac80c-5497-470e-b98c-f53421b828c0",
+        "rating_score":  13,
+        "is_pinned":  false,
+        "is_deprecated":  true,
+        "has_nsfw_content":  false,
+        "categories":  [
+
+                       ],
+        "versions":  [
+                         {
+                             "name":  "BepInExPack_Silksong",
+                             "full_name":  "BepInEx-BepInExPack_Silksong-5.4.75304",
+                             "description":  "BepInExPack_Silksong has migrated to the silksong_modding team.",
+                             "icon":  "https://ccdn.thunderstore.io/live/repository/icons/BepInEx-BepInExPack_Silksong-5.4.75304.png",
+                             "version_number":  "5.4.75304",
+                             "dependencies":  [
+                                                  "silksong_modding-BepInExPack_Silksong-1.0.3"
+                                              ],
+                             "download_url":  "https://thunderstore.io/package/download/BepInEx/BepInExPack_Silksong/5.4.75304/",
+                             "downloads":  65060,
+                             "date_created":  "2026-06-16T01:05:02.416713+00:00",
+                             "website_url":  "https://github.com/BepInEx/BepInEx",
+                             "is_active":  true,
+                             "uuid4":  "d24f516a-23c2-46ac-b3fc-daebef5bb280",
+                             "file_size":  692826
+                         },
+                         {
+                             "name":  "BepInExPack_Silksong",
+                             "full_name":  "BepInEx-BepInExPack_Silksong-5.4.75302",
+                             "description":  "BepInExPack_Silksong has migrated to the silksong_modding team.",
+                             "icon":  "https://ccdn.thunderstore.io/live/repository/icons/BepInEx-BepInExPack_Silksong-5.4.75302.png",
+                             "version_number":  "5.4.75302",
+                             "dependencies":  [
+                                                  "silksong_modding-BepInExPack_Silksong-1.0.3"
+                                              ],
+                             "download_url":  "https://thunderstore.io/package/download/BepInEx/BepInExPack_Silksong/5.4.75302/",
+                             "downloads":  2685,
+                             "date_created":  "2026-06-14T05:23:17.577804+00:00",
+                             "website_url":  "https://github.com/BepInEx/BepInEx",
+                             "is_active":  true,
+                             "uuid4":  "54ed23ab-70f0-4186-9c55-c145c53db80c",
+                             "file_size":  22714
+                         },
+                         {
+                             "name":  "BepInExPack_Silksong",
+                             "full_name":  "BepInEx-BepInExPack_Silksong-5.4.75301",
+                             "description":  "BepInExPack_Silksong has migrated to the silksong_modding team.",
+                             "icon":  "https://ccdn.thunderstore.io/live/repository/icons/BepInEx-BepInExPack_Silksong-5.4.75301.png",
+                             "version_number":  "5.4.75301",
+                             "dependencies":  [
+                                                  "silksong_modding-BepInExPack_Silksong-1.0.3"
+                                              ],
+                             "download_url":  "https://thunderstore.io/package/download/BepInEx/BepInExPack_Silksong/5.4.75301/",
+                             "downloads":  698,
+                             "date_created":  "2026-06-13T21:47:16.774681+00:00",
+                             "website_url":  "https://github.com/BepInEx/BepInEx",
+                             "is_active":  true,
+                             "uuid4":  "0c9325cb-e8e9-48b2-b8f4-c9c2e213f3af",
+                             "file_size":  22558
+                         }
+                     ]
+    },
+    {
+        "name":  "EasierGroal",
+        "full_name":  "isaac10025_afk-EasierGroal",
+        "owner":  "isaac10025_afk",
+        "package_url":  "https://thunderstore.io/c/hollow-knight-silksong/p/isaac10025_afk/EasierGroal/",
+        "donation_link":  null,
+        "date_created":  "2026-10-13T13:32:56.764892+00:00",
+        "date_updated":  "2026-10-13T13:32:59.910990+00:00",
+        "uuid4":  "d4e6dd2e-ac82-4958-93ec-bf8fd0c15d47",
+        "rating_score":  0,
+        "is_pinned":  false,
+        "is_deprecated":  true,
+        "has_nsfw_content":  false,
+        "categories":  [
+                           "Mods",
+                           "Accessibility",
+                           "Boss"
+                       ],
+        "versions":  [
+                         {
+                             "name":  "EasierGroal",
+                             "full_name":  "isaac10025_afk-EasierGroal-0.1.0",
+                             "description":  "Skip Groal the Great in Bilewater, or fight a weaker Groal: no enemy waves, half HP, and you respawn at the arena door.",
+                             "icon":  "https://ccdn.thunderstore.io/live/repository/icons/isaac10025_afk-EasierGroal-0.1.0.png",
+                             "version_number":  "0.1.0",
+                             "dependencies":  [
+                                                  "silksong_modding-BepInExPack_Silksong-1.0.3"
+                                              ],
+                             "download_url":  "https://thunderstore.io/package/download/isaac10025_afk/EasierGroal/0.1.0/",
+                             "downloads":  0,
+                             "date_created":  "2026-10-13T13:32:59.385402+00:00",
+                             "website_url":  "",
+                             "is_active":  true,
+                             "uuid4":  "e8e3e1aa-4b71-4718-ad17-e6d33c81673e",
+                             "file_size":  35603
+                         }
+                     ]
+    },
+    {
+        "name":  "Buttplug_Song",
+        "full_name":  "danatron1-Buttplug_Song",
+        "owner":  "danatron1",
+        "package_url":  "https://thunderstore.io/c/hollow-knight-silksong/p/danatron1/Buttplug_Song/",
+        "donation_link":  "https://ko-fi.com/danatron139618",
+        "date_created":  "2026-03-09T21:24:09.093162+00:00",
+        "date_updated":  "2026-08-21T22:10:45.962004+00:00",
+        "uuid4":  "23c17b80-a07e-42a6-b062-67a8df4aa985",
+        "rating_score":  1,
+        "is_pinned":  false,
+        "is_deprecated":  false,
+        "has_nsfw_content":  true,
+        "categories":  [
+                           "Mods"
+                       ],
+        "versions":  [
+                         {
+                             "name":  "Buttplug_Song",
+                             "full_name":  "danatron1-Buttplug_Song-1.2.4",
+                             "description":  "Silksong vibrator support, for a hornier Hornet.",
+                             "icon":  "https://ccdn.thunderstore.io/live/repository/icons/danatron1-Buttplug_Song-1.2.4.png",
+                             "version_number":  "1.2.4",
+                             "dependencies":  [
+                                                  "BepInEx-BepInExPack_Silksong-5.4.2304"
+                                              ],
+                             "download_url":  "https://thunderstore.io/package/download/danatron1/Buttplug_Song/1.2.4/",
+                             "downloads":  244,
+                             "date_created":  "2026-08-21T22:10:45.297036+00:00",
+                             "website_url":  "https://github.com/danatron1/ButtplugSong",
+                             "is_active":  true,
+                             "uuid4":  "afeefdef-43e2-436b-9c89-17219609a83f",
+                             "file_size":  392832
+                         },
+                         {
+                             "name":  "Buttplug_Song",
+                             "full_name":  "danatron1-Buttplug_Song-1.2.3",
+                             "description":  "Silksong vibrator support, for a hornier Hornet.",
+                             "icon":  "https://ccdn.thunderstore.io/live/repository/icons/danatron1-Buttplug_Song-1.2.3.png",
+                             "version_number":  "1.2.3",
+                             "dependencies":  [
+                                                  "BepInEx-BepInExPack_Silksong-5.4.2304"
+                                              ],
+                             "download_url":  "https://thunderstore.io/package/download/danatron1/Buttplug_Song/1.2.3/",
+                             "downloads":  52,
+                             "date_created":  "2026-08-20T00:35:00.900400+00:00",
+                             "website_url":  "https://github.com/danatron1/ButtplugSong",
+                             "is_active":  true,
+                             "uuid4":  "33295679-19ec-44de-b351-7cc6a20ac81b",
+                             "file_size":  392475
+                         },
+                         {
+                             "name":  "Buttplug_Song",
+                             "full_name":  "danatron1-Buttplug_Song-1.2.2",
+                             "description":  "Silksong vibrator support, for a hornier Hornet.",
+                             "icon":  "https://ccdn.thunderstore.io/live/repository/icons/danatron1-Buttplug_Song-1.2.2.png",
+                             "version_number":  "1.2.2",
+                             "dependencies":  [
+                                                  "BepInEx-BepInExPack_Silksong-5.4.2304"
+                                              ],
+                             "download_url":  "https://thunderstore.io/package/download/danatron1/Buttplug_Song/1.2.2/",
+                             "downloads":  295,
+                             "date_created":  "2026-03-27T16:39:20.831654+00:00",
+                             "website_url":  "https://github.com/danatron1/ButtplugSong",
+                             "is_active":  true,
+                             "uuid4":  "b21afa69-9992-42a1-8522-4af29869fa43",
+                             "file_size":  390924
+                         }
+                     ]
+    }
+]

@@ -1,0 +1,80 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:Silkfly.App.ViewModels"
+             xmlns:controls="using:Silkfly.App.Controls"
+             xmlns:loc="using:Silkfly.App.Localization"
+             x:Class="Silkfly.App.Views.OnboardingView"
+             x:DataType="vm:OnboardingViewModel">
+
+  <Border Classes="panel" Width="560">
+    <Grid RowDefinitions="Auto,Auto,*,Auto">
+      <Grid ColumnDefinitions="*,Auto">
+        <TextBlock Classes="title" Text="{loc:Str Onboarding_Title}" />
+        <TextBlock Grid.Column="1" Classes="caption" Text="{Binding StepText}" VerticalAlignment="Center" />
+      </Grid>
+      <Border Grid.Row="1" Height="1" Background="{DynamicResource BorderBrush}" Margin="0,10,0,14" />
+
+      <StackPanel Grid.Row="2" Spacing="10" IsVisible="{Binding IsGameStep}">
+        <TextBlock FontWeight="SemiBold" FontSize="15" Text="{loc:Str Onboarding_Game_Title}" />
+        <TextBlock Classes="secondary" TextWrapping="Wrap" Text="{loc:Str Onboarding_Game_Text}" />
+        <TextBlock Classes="caption" Text="{loc:Str Onboarding_Game_None}" IsVisible="{Binding HasNoGames}" />
+        <ListBox ItemsSource="{Binding Games}" SelectedItem="{Binding SelectedGame}" MaxHeight="160"
+                 Background="{DynamicResource SurfaceBrush}" IsVisible="{Binding !HasNoGames}">
+          <ListBox.ItemTemplate>
+            <DataTemplate x:DataType="vm:GameChoice">
+              <StackPanel Margin="2">
+                <TextBlock Text="{Binding Path}" TextTrimming="CharacterEllipsis" />
+                <TextBlock Classes="caption" Text="{Binding SourceText}" />
+              </StackPanel>
+            </DataTemplate>
+          </ListBox.ItemTemplate>
+        </ListBox>
+        <Button HorizontalAlignment="Left" Command="{Binding BrowseCommand}">
+          <StackPanel Orientation="Horizontal" Spacing="8">
+            <controls:GlyphIcon Width="14" Height="14" Data="{StaticResource Icon.FolderOpen}" />
+            <TextBlock Text="{loc:Str Onboarding_Game_Browse}" />
+          </StackPanel>
+        </Button>
+        <TextBlock Foreground="{DynamicResource DangerBrush}" TextWrapping="Wrap" Text="{Binding GameError}"
+                   IsVisible="{Binding GameError, Converter={x:Static ObjectConverters.IsNotNull}}" />
+      </StackPanel>
+
+      <StackPanel Grid.Row="2" Spacing="10" IsVisible="{Binding IsLoaderStep}">
+        <TextBlock FontWeight="SemiBold" FontSize="15" Text="{loc:Str Onboarding_Loader_Title}" />
+        <TextBlock Classes="secondary" TextWrapping="Wrap" Text="{loc:Str Onboarding_Loader_Text}" />
+        <Border Classes="banner" IsVisible="{Binding Session.ForeignLoader}">
+          <Grid ColumnDefinitions="Auto,*">
+            <controls:GlyphIcon Width="16" Height="16" Margin="0,0,8,0" VerticalAlignment="Top"
+                                Foreground="{DynamicResource WarningBrush}" Data="{StaticResource Icon.AlertTriangle}" />
+            <TextBlock Grid.Column="1" TextWrapping="Wrap" Text="{loc:Str Loader_Foreign}" />
+          </Grid>
+        </Border>
+        <Grid ColumnDefinitions="Auto,*">
+          <Button Classes="primary" Command="{Binding Session.InstallLoaderCommand}" Content="{Binding Session.LoaderButtonText}"
+                  IsVisible="{Binding !Session.IsLoaderInstalled}" />
+          <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8" Margin="12,0,0,0" VerticalAlignment="Center">
+            <controls:GlyphIcon Width="16" Height="16" Foreground="{DynamicResource SuccessBrush}" Data="{StaticResource Icon.Package}"
+                                IsVisible="{Binding Session.IsLoaderInstalled}" />
+            <TextBlock Text="{Binding Session.LoaderText}" VerticalAlignment="Center" />
+          </StackPanel>
+        </Grid>
+        <ProgressBar Value="{Binding Session.LoaderProgress}" Maximum="1" IsVisible="{Binding Session.IsInstallingLoader}" />
+      </StackPanel>
+
+      <StackPanel Grid.Row="2" Spacing="10" IsVisible="{Binding IsProfileStep}">
+        <TextBlock FontWeight="SemiBold" FontSize="15" Text="{loc:Str Onboarding_Profile_Title}" />
+        <TextBlock Classes="secondary" TextWrapping="Wrap" Text="{loc:Str Onboarding_Profile_Text}" />
+        <TextBlock Classes="caption" Text="{loc:Str Profiles_Name}" />
+        <TextBox Text="{Binding ProfileName}" />
+        <TextBlock Foreground="{DynamicResource DangerBrush}" Text="{Binding ProfileError}"
+                   IsVisible="{Binding ProfileError, Converter={x:Static ObjectConverters.IsNotNull}}" />
+      </StackPanel>
+
+      <Grid Grid.Row="3" ColumnDefinitions="Auto,*,Auto,Auto" Margin="0,20,0,0">
+        <Button Classes="ghost" Content="{loc:Str Onboarding_Skip}" Command="{Binding SkipCommand}" />
+        <Button Grid.Column="2" Margin="0,0,8,0" Content="{loc:Str Onboarding_Back}" Command="{Binding BackCommand}" />
+        <Button Grid.Column="3" Classes="primary" Content="{Binding NextText}" Command="{Binding NextCommand}" IsDefault="True" />
+      </Grid>
+    </Grid>
+  </Border>
+</UserControl>

@@ -1,0 +1,16 @@
+<Project>
+  <PropertyGroup>
+    <SilkflyTargetFramework>net10.0</SilkflyTargetFramework>
+
+    <Version>0.1.0</Version>
+    <Product>Silkfly</Product>
+    <Authors>Silkfly contributors</Authors>
+    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+
+    <TargetFramework>$(SilkflyTargetFramework)</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+</Project>

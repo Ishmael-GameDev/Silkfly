@@ -1,0 +1,13 @@
+"AppState"
+{
+	"appid"		"1030300"
+	"Universe"		"1"
+	"name"		"Hollow Knight: Silksong"
+	"StateFlags"		"4"
+	"installdir"		"Hollow Knight Silksong"
+	"LastUpdated"		"1757000000"
+	"UserConfig"
+	{
+		"language"		"english"
+	}
+}

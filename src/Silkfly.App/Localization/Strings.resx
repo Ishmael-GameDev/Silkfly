@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="App_Title" xml:space="preserve"><value>Silkfly</value></data>
+  <data name="Tab_Info" xml:space="preserve"><value>Info</value></data>
+  <data name="Tab_Mods" xml:space="preserve"><value>Mods</value></data>
+  <data name="Tab_Profiles" xml:space="preserve"><value>Profiles</value></data>
+  <data name="Tab_Settings" xml:space="preserve"><value>Settings</value></data>
+  <data name="Header_Play" xml:space="preserve"><value>Play with mods</value></data>
+  <data name="Header_NoProfile" xml:space="preserve"><value>No profile</value></data>
+  <data name="Header_Profile_Tooltip" xml:space="preserve"><value>Active profile</value></data>
+  <data name="Caption_Minimize" xml:space="preserve"><value>Minimize</value></data>
+  <data name="Caption_Maximize" xml:space="preserve"><value>Maximize</value></data>
+  <data name="Caption_Restore" xml:space="preserve"><value>Restore</value></data>
+  <data name="Caption_Close" xml:space="preserve"><value>Close</value></data>
+  <data name="Info_LaunchVanilla" xml:space="preserve"><value>Play without mods</value></data>
+  <data name="Info_LaunchModded" xml:space="preserve"><value>Play with mods</value></data>
+  <data name="Info_Status_ProfileNone" xml:space="preserve"><value>Profile: not selected</value></data>
+  <data name="Info_Status_LoaderNotInstalled" xml:space="preserve"><value>Loader: not installed</value></data>
+  <data name="Mods_Search_Placeholder" xml:space="preserve"><value>Search mods</value></data>
+  <data name="Mods_AdvancedSearch" xml:space="preserve"><value>Advanced search</value></data>
+  <data name="Mods_Filter_Label" xml:space="preserve"><value>Filter mods:</value></data>
+  <data name="Mods_Filter_All" xml:space="preserve"><value>All</value></data>
+  <data name="Mods_Filter_Installed" xml:space="preserve"><value>Installed</value></data>
+  <data name="Mods_Filter_Enabled" xml:space="preserve"><value>Enabled</value></data>
+  <data name="Mods_Filter_Outdated" xml:space="preserve"><value>Out of date</value></data>
+  <data name="Mods_Filter_WhatsNew" xml:space="preserve"><value>What's new</value></data>
+  <data name="Mods_Empty_NoCatalog_Title" xml:space="preserve"><value>Catalog is unavailable</value></data>
+  <data name="Mods_Empty_NoCatalog_Text" xml:space="preserve"><value>Could not reach Thunderstore. Check your connection and try again.</value></data>
+  <data name="Rail_UpdateAll" xml:space="preserve"><value>Update all</value></data>
+  <data name="Rail_ToggleAll" xml:space="preserve"><value>Enable / disable all</value></data>
+  <data name="Rail_RefreshCatalog" xml:space="preserve"><value>Refresh catalog</value></data>
+  <data name="Rail_ManualInstall" xml:space="preserve"><value>Install from file</value></data>
+  <data name="Rail_OpenProfileFolder" xml:space="preserve"><value>Open profile folder</value></data>
+  <data name="Rail_OpenGameLog" xml:space="preserve"><value>Open game log</value></data>
+  <data name="Rail_ExportProfile" xml:space="preserve"><value>Export profile</value></data>
+  <data name="Profiles_Title" xml:space="preserve"><value>Profiles</value></data>
+  <data name="Profiles_Create" xml:space="preserve"><value>New profile</value></data>
+  <data name="Profiles_Empty_Title" xml:space="preserve"><value>No profiles yet</value></data>
+  <data name="Profiles_Empty_Text" xml:space="preserve"><value>A profile is a separate set of mods. Create one to start modding.</value></data>
+  <data name="Settings_Title" xml:space="preserve"><value>Settings</value></data>
+  <data name="Settings_Group_Game" xml:space="preserve"><value>Game</value></data>
+  <data name="Settings_Game_Path" xml:space="preserve"><value>Game folder</value></data>
+  <data name="Settings_Game_NotFound" xml:space="preserve"><value>Not found</value></data>
+  <data name="Settings_Group_Loader" xml:space="preserve"><value>Loader</value></data>
+  <data name="Settings_Loader_NotInstalled" xml:space="preserve"><value>BepInEx is not installed</value></data>
+  <data name="Settings_Group_Interface" xml:space="preserve"><value>Interface</value></data>
+  <data name="Settings_Language" xml:space="preserve"><value>Language</value></data>
+  <data name="Settings_Language_Auto" xml:space="preserve"><value>Auto (system)</value></data>
+  <data name="Settings_Group_Diagnostics" xml:space="preserve"><value>Diagnostics</value></data>
+  <data name="Settings_OpenLogs" xml:space="preserve"><value>Open logs folder</value></data>
+  <data name="Settings_CopySystemInfo" xml:space="preserve"><value>Copy system info</value></data>
+  <data name="Settings_CopySystemInfo_Done" xml:space="preserve"><value>Copied</value></data>
+  <data name="Settings_Group_About" xml:space="preserve"><value>About</value></data>
+  <data name="Settings_Version" xml:space="preserve"><value>Version {0}</value></data>
+  <data name="Settings_DataFolder" xml:space="preserve"><value>Data folder</value></data>
+  <data name="Error_ThunderstoreUnavailable" xml:space="preserve"><value>Thunderstore is unavailable</value></data>
+  <data name="Error_ThunderstoreFormat" xml:space="preserve"><value>Thunderstore returned unexpected data</value></data>
+  <data name="Error_GameNotFound" xml:space="preserve"><value>Hollow Knight: Silksong was not found</value></data>
+  <data name="Error_GameRunning" xml:space="preserve"><value>The game is running with this profile. Close it first.</value></data>
+  <data name="Error_LoaderMissing" xml:space="preserve"><value>The mod loader (BepInEx) is not installed</value></data>
+  <data name="Error_InstallConflict" xml:space="preserve"><value>The file already exists and belongs to something else: {0}</value></data>
+  <data name="Error_UnsafeArchive" xml:space="preserve"><value>The archive contains an unsafe path: {0}</value></data>
+  <data name="Error_ProfileCorrupt" xml:space="preserve"><value>Profile "{0}" is damaged</value></data>
+  <data name="Error_InsufficientPermissions" xml:space="preserve"><value>No permission to write to {0}</value></data>
+  <data name="Mods_Empty_NothingFound" xml:space="preserve"><value>Nothing found</value></data>
+  <data name="Mods_ResetFilters" xml:space="preserve"><value>Reset filters</value></data>
+  <data name="Mods_Retry" xml:space="preserve"><value>Retry</value></data>
+  <data name="Mods_Offline" xml:space="preserve"><value>No connection to Thunderstore. Showing the catalog from {0}</value></data>
+  <data name="Mods_Updated" xml:space="preserve"><value>Updated {0}</value></data>
+  <data name="Mods_Refreshing" xml:space="preserve"><value>Updating catalog…</value></data>
+  <data name="Mods_Refresh_Tooltip" xml:space="preserve"><value>Refresh catalog (Ctrl+R)</value></data>
+  <data name="Mods_Sort" xml:space="preserve"><value>Sort by</value></data>
+  <data name="Mods_Sort_Name" xml:space="preserve"><value>Name</value></data>
+  <data name="Mods_Sort_Downloads" xml:space="preserve"><value>Downloads</value></data>
+  <data name="Mods_Sort_Rating" xml:space="preserve"><value>Rating</value></data>
+  <data name="Mods_Sort_Updated" xml:space="preserve"><value>Last updated</value></data>
+  <data name="Mods_Sort_Created" xml:space="preserve"><value>Newest</value></data>
+  <data name="Mods_Author" xml:space="preserve"><value>Author</value></data>
+  <data name="Mods_Author_Any" xml:space="preserve"><value>Any author</value></data>
+  <data name="Mods_Categories" xml:space="preserve"><value>Categories</value></data>
+  <data name="Mods_ShowDeprecated" xml:space="preserve"><value>Show deprecated mods</value></data>
+  <data name="Mods_ShowNsfw" xml:space="preserve"><value>Show NSFW mods</value></data>
+  <data name="Mod_Install" xml:space="preserve"><value>Install</value></data>
+  <data name="Mod_Uninstall" xml:space="preserve"><value>Uninstall</value></data>
+  <data name="Mod_Update" xml:space="preserve"><value>Update</value></data>
+  <data name="Mod_On" xml:space="preserve"><value>On</value></data>
+  <data name="Mod_Off" xml:space="preserve"><value>Off</value></data>
+  <data name="Mod_Version" xml:space="preserve"><value>Version:</value></data>
+  <data name="Mod_Dependencies" xml:space="preserve"><value>Dependencies:</value></data>
+  <data name="Mod_NoDependencies" xml:space="preserve"><value>None</value></data>
+  <data name="Mod_Author" xml:space="preserve"><value>Author:</value></data>
+  <data name="Mod_Categories" xml:space="preserve"><value>Categories:</value></data>
+  <data name="Mod_Stats" xml:space="preserve"><value>Statistics:</value></data>
+  <data name="Mod_Downloads" xml:space="preserve"><value>{0} downloads</value></data>
+  <data name="Mod_Rating" xml:space="preserve"><value>Rating {0}</value></data>
+  <data name="Mod_UpdatedOn" xml:space="preserve"><value>updated {0}</value></data>
+  <data name="Mod_Readme" xml:space="preserve"><value>View README</value></data>
+  <data name="Mod_Changelog" xml:space="preserve"><value>Changelog</value></data>
+  <data name="Mod_OpenPage" xml:space="preserve"><value>Open on Thunderstore</value></data>
+  <data name="Mod_OpenWebsite" xml:space="preserve"><value>Mod website</value></data>
+  <data name="Mod_CopyLink" xml:space="preserve"><value>Copy link</value></data>
+  <data name="Mod_LinkCopied" xml:space="preserve"><value>Link copied</value></data>
+  <data name="Mod_OpenFolder" xml:space="preserve"><value>Open mod folder</value></data>
+  <data name="Mod_Deprecated" xml:space="preserve"><value>Deprecated</value></data>
+  <data name="Mod_Nsfw" xml:space="preserve"><value>NSFW</value></data>
+  <data name="Mod_Pinned" xml:space="preserve"><value>Pinned</value></data>
+  <data name="Mod_NotInCatalog" xml:space="preserve"><value>not in the catalog</value></data>
+  <data name="Readme_Loading" xml:space="preserve"><value>Loading…</value></data>
+  <data name="Readme_Empty" xml:space="preserve"><value>This version has no {0}.</value></data>
+  <data name="Readme_Error" xml:space="preserve"><value>Could not load: {0}</value></data>
+  <data name="Readme_Close" xml:space="preserve"><value>Close</value></data>
+  <data name="Time_JustNow" xml:space="preserve"><value>just now</value></data>
+  <data name="Time_Minutes_One" xml:space="preserve"><value>{0} minute ago</value></data>
+  <data name="Time_Minutes_Few" xml:space="preserve"><value>{0} minutes ago</value></data>
+  <data name="Time_Minutes_Many" xml:space="preserve"><value>{0} minutes ago</value></data>
+  <data name="Time_Hours_One" xml:space="preserve"><value>{0} hour ago</value></data>
+  <data name="Time_Hours_Few" xml:space="preserve"><value>{0} hours ago</value></data>
+  <data name="Time_Hours_Many" xml:space="preserve"><value>{0} hours ago</value></data>
+  <data name="Time_Days_One" xml:space="preserve"><value>{0} day ago</value></data>
+  <data name="Time_Days_Few" xml:space="preserve"><value>{0} days ago</value></data>
+  <data name="Time_Days_Many" xml:space="preserve"><value>{0} days ago</value></data>
+  <data name="Rail_UninstallAll" xml:space="preserve"><value>Remove all mods</value></data>
+  <data name="Info_Links" xml:space="preserve"><value>Useful links</value></data>
+  <data name="Info_Link_Thunderstore" xml:space="preserve"><value>Thunderstore</value></data>
+  <data name="Info_Link_BepInEx" xml:space="preserve"><value>BepInEx docs</value></data>
+  <data name="Info_Link_CreateMods" xml:space="preserve"><value>Create mods</value></data>
+  <data name="Info_Link_Logs" xml:space="preserve"><value>Logs</value></data>
+  <data name="Settings_ChangePath" xml:space="preserve"><value>Change path</value></data>
+  <data name="Settings_CheckUpdates" xml:space="preserve"><value>Check for updates</value></data>
+  <data name="Error_DownloadSizeMismatch" xml:space="preserve"><value>The download of {0} is incomplete ({2} of {1} bytes)</value></data>
+  <data name="Error_UntrustedHost" xml:space="preserve"><value>Refusing to download from an untrusted host: {0}</value></data>
+  <data name="Error_HttpStatus" xml:space="preserve"><value>Server returned HTTP {0}</value></data>
+  <data name="Profiles_Available" xml:space="preserve"><value>Available profiles:</value></data>
+  <data name="Profiles_Import" xml:space="preserve"><value>Import profile</value></data>
+  <data name="Game_Problem_NotFound" xml:space="preserve"><value>Folder not found</value></data>
+  <data name="Game_Problem_NoExecutable" xml:space="preserve"><value>No Hollow Knight Silksong executable in this folder</value></data>
+  <data name="Game_Problem_NoDataFolder" xml:space="preserve"><value>The folder has no "Hollow Knight Silksong_Data"</value></data>
+  <data name="Game_Problem_NotMono" xml:space="preserve"><value>The game files are incomplete (Managed/Assembly-CSharp.dll is missing)</value></data>
+  <data name="Game_Source_Steam" xml:space="preserve"><value>Steam</value></data>
+  <data name="Game_Source_Gog" xml:space="preserve"><value>GOG</value></data>
+  <data name="Game_Source_Xbox" xml:space="preserve"><value>Xbox / Game Pass</value></data>
+  <data name="Game_Source_Manual" xml:space="preserve"><value>Chosen manually</value></data>
+  <data name="Loader_Problem_FilesMissing" xml:space="preserve"><value>Some loader files are missing from the game folder</value></data>
+  <data name="Loader_NotInstalled" xml:space="preserve"><value>BepInEx is not installed</value></data>
+  <data name="Loader_Installed" xml:space="preserve"><value>BepInEx pack {0}</value></data>
+  <data name="Loader_UpdateAvailable" xml:space="preserve"><value>BepInEx pack {0}, update to {1} available</value></data>
+  <data name="Loader_Foreign" xml:space="preserve"><value>Another mod manager's loader was found in the game folder. Silkfly will move its files to .silkfly-backup and can restore them later.</value></data>
+  <data name="Loader_Install" xml:space="preserve"><value>Install loader</value></data>
+  <data name="Loader_Update" xml:space="preserve"><value>Update loader</value></data>
+  <data name="Loader_Remove" xml:space="preserve"><value>Remove from game folder</value></data>
+  <data name="Loader_Installing" xml:space="preserve"><value>Installing BepInEx…</value></data>
+  <data name="Loader_Done" xml:space="preserve"><value>BepInEx is installed</value></data>
+  <data name="Loader_Removed" xml:space="preserve"><value>The loader was removed from the game folder</value></data>
+  <data name="Header_Running" xml:space="preserve"><value>The game is running</value></data>
+  <data name="Info_Status_Profile" xml:space="preserve"><value>Profile: {0}</value></data>
+  <data name="Info_Status_Loader" xml:space="preserve"><value>Loader: {0}</value></data>
+  <data name="Info_Status_NoGame" xml:space="preserve"><value>Game not found</value></data>
+  <data name="Launch_Started" xml:space="preserve"><value>The game is starting…</value></data>
+  <data name="Error_GameAlreadyRunning" xml:space="preserve"><value>The game is already running</value></data>
+  <data name="Error_LaunchFailed" xml:space="preserve"><value>Could not start the game: {0}</value></data>
+  <data name="Error_LoaderNotInCatalog" xml:space="preserve"><value>The loader package is not in the catalog yet. Refresh the catalog and try again.</value></data>
+  <data name="Error_LoaderPackInvalid" xml:space="preserve"><value>The loader package has an unexpected structure</value></data>
+  <data name="Error_BadArchive" xml:space="preserve"><value>The archive {0} is damaged</value></data>
+  <data name="Error_NoActiveProfile" xml:space="preserve"><value>Select a profile first</value></data>
+  <data name="Toast_Details" xml:space="preserve"><value>Details</value></data>
+  <data name="Toast_Close" xml:space="preserve"><value>Close</value></data>
+  <data name="Dialog_Ok" xml:space="preserve"><value>OK</value></data>
+  <data name="Dialog_Cancel" xml:space="preserve"><value>Cancel</value></data>
+  <data name="Dialog_Copy" xml:space="preserve"><value>Copy</value></data>
+  <data name="Dialog_OpenLog" xml:space="preserve"><value>Open log</value></data>
+  <data name="Dialog_Error_Title" xml:space="preserve"><value>Something went wrong</value></data>
+  <data name="Profile_Error_NameEmpty" xml:space="preserve"><value>Enter a name</value></data>
+  <data name="Profile_Error_NameTooLong" xml:space="preserve"><value>The name is longer than {0} characters</value></data>
+  <data name="Profile_Error_NameTaken" xml:space="preserve"><value>A profile named "{0}" already exists</value></data>
+  <data name="Profiles_Create_Title" xml:space="preserve"><value>New profile</value></data>
+  <data name="Profiles_Name" xml:space="preserve"><value>Profile name</value></data>
+  <data name="Profiles_Rename" xml:space="preserve"><value>Rename</value></data>
+  <data name="Profiles_Rename_Title" xml:space="preserve"><value>Rename profile</value></data>
+  <data name="Profiles_Duplicate" xml:space="preserve"><value>Duplicate</value></data>
+  <data name="Profiles_Duplicate_Name" xml:space="preserve"><value>{0} (copy)</value></data>
+  <data name="Profiles_Delete" xml:space="preserve"><value>Delete</value></data>
+  <data name="Profiles_Delete_Title" xml:space="preserve"><value>Delete profile?</value></data>
+  <data name="Profiles_Delete_Text" xml:space="preserve"><value>Profile "{0}" and all its mods and configs will be deleted (moved to the recycle bin where possible).</value></data>
+  <data name="Profiles_OpenFolder" xml:space="preserve"><value>Open folder</value></data>
+  <data name="Profiles_SetActive" xml:space="preserve"><value>Select</value></data>
+  <data name="Profiles_Active" xml:space="preserve"><value>Active</value></data>
+  <data name="Profiles_Play" xml:space="preserve"><value>Play</value></data>
+  <data name="Profiles_Mods" xml:space="preserve"><value>Mods: {0}</value></data>
+  <data name="Profiles_LastPlayed" xml:space="preserve"><value>last played {0}</value></data>
+  <data name="Profiles_NeverPlayed" xml:space="preserve"><value>never played</value></data>
+  <data name="Profiles_Created" xml:space="preserve"><value>Profile "{0}" created</value></data>
+  <data name="Onboarding_Title" xml:space="preserve"><value>Welcome to Silkfly</value></data>
+  <data name="Onboarding_Step" xml:space="preserve"><value>Step {0} of 3</value></data>
+  <data name="Onboarding_Game_Title" xml:space="preserve"><value>Find the game</value></data>
+  <data name="Onboarding_Game_Text" xml:space="preserve"><value>Silkfly looked for Hollow Knight: Silksong in Steam, GOG and Xbox. Choose an installation or point to the game folder.</value></data>
+  <data name="Onboarding_Game_None" xml:space="preserve"><value>No installations found automatically.</value></data>
+  <data name="Onboarding_Game_Browse" xml:space="preserve"><value>Choose folder…</value></data>
+  <data name="Onboarding_Game_PickTitle" xml:space="preserve"><value>Hollow Knight: Silksong folder</value></data>
+  <data name="Onboarding_Loader_Title" xml:space="preserve"><value>Install the mod loader</value></data>
+  <data name="Onboarding_Loader_Text" xml:space="preserve"><value>Mods for Silksong run on BepInEx. Silkfly puts a small launcher into the game folder; the game itself is not modified and still starts without mods from Steam or GOG.</value></data>
+  <data name="Onboarding_Profile_Title" xml:space="preserve"><value>Create a profile</value></data>
+  <data name="Onboarding_Profile_Text" xml:space="preserve"><value>A profile is a separate set of mods with its own settings. You can add more later.</value></data>
+  <data name="Onboarding_Back" xml:space="preserve"><value>Back</value></data>
+  <data name="Onboarding_Next" xml:space="preserve"><value>Next</value></data>
+  <data name="Onboarding_Finish" xml:space="preserve"><value>Done</value></data>
+  <data name="Onboarding_Skip" xml:space="preserve"><value>Skip for now</value></data>
+  <data name="Onboarding_DefaultProfile" xml:space="preserve"><value>Default</value></data>
+  <data name="Settings_RunOnboarding" xml:space="preserve"><value>Run setup again</value></data>
+  <data name="Settings_Group_Launch" xml:space="preserve"><value>Launch mode</value></data>
+  <data name="Settings_Launch_Direct" xml:space="preserve"><value>Directly (recommended)</value></data>
+  <data name="Settings_Launch_ViaSteam" xml:space="preserve"><value>Through Steam</value></data>
+  <data name="Settings_Launch_Proton" xml:space="preserve"><value>Proton (Linux, Windows build)</value></data>
+  <data name="Settings_GameChanged" xml:space="preserve"><value>Game folder changed</value></data>
+  <data name="Prompt_Deps_Title" xml:space="preserve"><value>Install {0}</value></data>
+  <data name="Prompt_Deps_Text" xml:space="preserve"><value>These dependencies will be installed too:</value></data>
+  <data name="Prompt_Issue_NotInCatalog" xml:space="preserve"><value>{0} is not in the catalog ({1}), so the mod may not work.</value></data>
+  <data name="Prompt_Issue_ConflictingMajor" xml:space="preserve"><value>{0}: mods need incompatible versions ({1}); the newest will be used.</value></data>
+  <data name="Prompt_Issue_VersionNotFound" xml:space="preserve"><value>{0}: version {1} was not found.</value></data>
+  <data name="Prompt_Dependents_Remove_Title" xml:space="preserve"><value>Remove {0}?</value></data>
+  <data name="Prompt_Dependents_Disable_Title" xml:space="preserve"><value>Disable {0}?</value></data>
+  <data name="Prompt_Dependents_Text" xml:space="preserve"><value>These installed mods depend on it and may stop working:</value></data>
+  <data name="Prompt_Remove_Anyway" xml:space="preserve"><value>Remove anyway</value></data>
+  <data name="Prompt_Disable_Anyway" xml:space="preserve"><value>Disable anyway</value></data>
+  <data name="Prompt_Orphans_Title" xml:space="preserve"><value>Remove unused dependencies?</value></data>
+  <data name="Prompt_Orphans_Text" xml:space="preserve"><value>These mods were installed only as dependencies and nothing needs them now:</value></data>
+  <data name="Prompt_Orphans_Remove" xml:space="preserve"><value>Remove selected</value></data>
+  <data name="Prompt_Orphans_Keep" xml:space="preserve"><value>Keep all</value></data>
+  <data name="Prompt_EnableDeps_Title" xml:space="preserve"><value>Enable dependencies?</value></data>
+  <data name="Prompt_EnableDeps_Text" xml:space="preserve"><value>{0} needs these disabled mods. Enable them too?</value></data>
+  <data name="Prompt_EnableDeps_Yes" xml:space="preserve"><value>Enable all</value></data>
+  <data name="Prompt_EnableDeps_No" xml:space="preserve"><value>Only this mod</value></data>
+  <data name="Mod_Retry" xml:space="preserve"><value>Retry</value></data>
+  <data name="Mod_Cancel" xml:space="preserve"><value>Cancel</value></data>
+  <data name="Mod_Manual" xml:space="preserve"><value>Manual</value></data>
+  <data name="Mod_Broken" xml:space="preserve"><value>Files are missing, reinstall</value></data>
+  <data name="Mod_Reinstall" xml:space="preserve"><value>Reinstall</value></data>
+  <data name="Mod_Versions" xml:space="preserve"><value>Other versions</value></data>
+  <data name="Mod_InstallVersion" xml:space="preserve"><value>Install {0}</value></data>
+  <data name="Mod_Dependents" xml:space="preserve"><value>Required by:</value></data>
+  <data name="Mod_LocalOnly" xml:space="preserve"><value>Not in the Thunderstore catalog</value></data>
+  <data name="Mod_Phase_Queued" xml:space="preserve"><value>Queued…</value></data>
+  <data name="Mod_Phase_Downloading" xml:space="preserve"><value>Downloading…</value></data>
+  <data name="Mod_Phase_Applying" xml:space="preserve"><value>Installing…</value></data>
+  <data name="Op_Installed" xml:space="preserve"><value>{0} installed</value></data>
+  <data name="Op_Updated" xml:space="preserve"><value>{0} updated</value></data>
+  <data name="Op_Uninstalled" xml:space="preserve"><value>{0} removed</value></data>
+  <data name="Op_Enabled" xml:space="preserve"><value>{0} enabled</value></data>
+  <data name="Op_Disabled" xml:space="preserve"><value>{0} disabled</value></data>
+  <data name="Op_UpdatedAll" xml:space="preserve"><value>All mods are up to date</value></data>
+  <data name="Op_ManualInstalled" xml:space="preserve"><value>Installed from file</value></data>
+  <data name="Op_Failed" xml:space="preserve"><value>Could not complete the operation</value></data>
+  <data name="Op_Running" xml:space="preserve"><value>{0} operation(s) in progress</value></data>
+  <data name="Error_NotInCatalog" xml:space="preserve"><value>Not in the catalog: {0}</value></data>
+  <data name="Error_VersionNotFound" xml:space="preserve"><value>Version not found: {0}</value></data>
+  <data name="Error_ModNotInstalled" xml:space="preserve"><value>Not installed: {0}</value></data>
+  <data name="Error_EmptyPackage" xml:space="preserve"><value>The package {0} contains no files to install</value></data>
+  <data name="Error_NoProfile" xml:space="preserve"><value>Create or select a profile first</value></data>
+  <data name="Manual_PickTitle" xml:space="preserve"><value>Install mod from file</value></data>
+  <data name="Manual_FileTypes" xml:space="preserve"><value>Mods (.zip, .dll)</value></data>
+  <data name="Manual_Unsupported" xml:space="preserve"><value>Only .zip and .dll files can be installed</value></data>
+  <data name="Mods_DropHint" xml:space="preserve"><value>Drop .zip or .dll to install</value></data>
+  <data name="Rail_EnableAll" xml:space="preserve"><value>Enable all</value></data>
+  <data name="Rail_DisableAll" xml:space="preserve"><value>Disable all</value></data>
+  <data name="Profiles_Share" xml:space="preserve"><value>Share</value></data>
+  <data name="Profiles_ExportFile" xml:space="preserve"><value>Export to file (.r2z)</value></data>
+  <data name="Profiles_ExportCode" xml:space="preserve"><value>Get a share code</value></data>
+  <data name="Profiles_ImportFile" xml:space="preserve"><value>From file (.r2z)</value></data>
+  <data name="Profiles_ImportCode" xml:space="preserve"><value>By share code</value></data>
+  <data name="Profiles_ImportCode_Title" xml:space="preserve"><value>Import by code</value></data>
+  <data name="Profiles_ImportCode_Label" xml:space="preserve"><value>Profile code</value></data>
+  <data name="Profiles_Exported" xml:space="preserve"><value>Exported mods: {0}, config files: {1}</value></data>
+  <data name="Profiles_ExportedSkipped" xml:space="preserve"><value>Not exported (installed manually): {0}</value></data>
+  <data name="Profiles_Code_Confirm_Title" xml:space="preserve"><value>Upload the profile to Thunderstore?</value></data>
+  <data name="Profiles_Code_Confirm_Text" xml:space="preserve"><value>The list of mods and the config files of "{0}" will be uploaded to Thunderstore, and anyone with the code can download them.</value></data>
+  <data name="Profiles_Code_Upload" xml:space="preserve"><value>Upload</value></data>
+  <data name="Profiles_Code_Title" xml:space="preserve"><value>Profile code</value></data>
+  <data name="Profiles_Code_Text" xml:space="preserve"><value>Share this code; it can be imported in Silkfly or r2modman.</value></data>
+  <data name="Profiles_Importing" xml:space="preserve"><value>Importing "{0}": installing {1} mods…</value></data>
+  <data name="Profiles_Import_Title" xml:space="preserve"><value>Import profile</value></data>
+  <data name="Profiles_ExportPickTitle" xml:space="preserve"><value>Export profile</value></data>
+  <data name="Profiles_ImportPickTitle" xml:space="preserve"><value>Import profile</value></data>
+  <data name="Profiles_FileType" xml:space="preserve"><value>Mod manager profile (.r2z)</value></data>
+  <data name="Op_ImportDone" xml:space="preserve"><value>Profile import finished</value></data>
+  <data name="Error_ImportNoManifest" xml:space="preserve"><value>The file is not a profile export (no export.r2x)</value></data>
+  <data name="Error_ImportBadManifest" xml:space="preserve"><value>The profile export is damaged</value></data>
+  <data name="Error_ImportMissingMods" xml:space="preserve"><value>Imported, but these mods were not found: {0}</value></data>
+  <data name="Error_BadProfileCode" xml:space="preserve"><value>This is not a profile code</value></data>
+  <data name="Error_ProfileCodeNotFound" xml:space="preserve"><value>No profile with code {0}</value></data>
+  <data name="Info_Link_Discord" xml:space="preserve"><value>Discord</value></data>
+  <data name="Settings_UiScale" xml:space="preserve"><value>Interface scale</value></data>
+  <data name="Settings_ShowDeprecated" xml:space="preserve"><value>Show deprecated mods</value></data>
+  <data name="Settings_ShowNsfw" xml:space="preserve"><value>Show NSFW mods</value></data>
+  <data name="Settings_WhatsNewDays" xml:space="preserve"><value>"What's new" covers, days</value></data>
+  <data name="Settings_Policy" xml:space="preserve"><value>Dependency versions</value></data>
+  <data name="Settings_Policy_LatestSameMajor" xml:space="preserve"><value>Newest compatible (recommended)</value></data>
+  <data name="Settings_Policy_Exact" xml:space="preserve"><value>Exactly as required</value></data>
+  <data name="Settings_Policy_Latest" xml:space="preserve"><value>Always the newest</value></data>
+  <data name="Settings_Cache" xml:space="preserve"><value>Download cache</value></data>
+  <data name="Settings_ClearCache" xml:space="preserve"><value>Clear cache</value></data>
+  <data name="Settings_CacheCleared" xml:space="preserve"><value>Cache cleared</value></data>
+  <data name="Settings_On" xml:space="preserve"><value>On</value></data>
+  <data name="Settings_Off" xml:space="preserve"><value>Off</value></data>
+  <data name="Launch_Hint_Steam" xml:space="preserve"><value>In Steam, open the game's Properties → Launch options and paste:</value></data>
+  <data name="Launch_Hint_SteamWindows" xml:space="preserve"><value>Steam will ask to confirm the launch arguments the first time.</value></data>
+  <data name="Launch_Hint_Proton" xml:space="preserve"><value>Proton needs this once in the game's Steam launch options. After that "Play" in Silkfly switches the loader and starts the game through Steam.</value></data>
+  <data name="Launch_Copy" xml:space="preserve"><value>Copy</value></data>
+  <data name="Launch_Copied" xml:space="preserve"><value>Copied</value></data>
+  <data name="Mods_WhatsNew_HowRecent" xml:space="preserve"><value>How recent:</value></data>
+  <data name="Mods_WhatsNew_Week" xml:space="preserve"><value>Last week</value></data>
+  <data name="Mods_WhatsNew_Month" xml:space="preserve"><value>Last month</value></data>
+  <data name="Mods_WhatsNew_Type" xml:space="preserve"><value>Recent type:</value></data>
+  <data name="Mods_WhatsNew_New" xml:space="preserve"><value>New mods</value></data>
+  <data name="Mods_WhatsNew_Updated" xml:space="preserve"><value>Updated mods</value></data>
+  <data name="Rail_OpenSaves" xml:space="preserve"><value>Open saves folder</value></data>
+  <data name="Rail_OpenMods" xml:space="preserve"><value>Open mods folder</value></data>
+  <data name="Update_Banner" xml:space="preserve"><value>Silkfly {0} is available</value></data>
+  <data name="Update_Install" xml:space="preserve"><value>Update and restart</value></data>
+  <data name="Update_WhatsNew" xml:space="preserve"><value>What's new</value></data>
+  <data name="Update_Later" xml:space="preserve"><value>Later</value></data>
+  <data name="Update_Downloading" xml:space="preserve"><value>Downloading the update…</value></data>
+  <data name="Update_DownloadFailed" xml:space="preserve"><value>Couldn't install the update. Try again later or download it from GitHub.</value></data>
+  <data name="Update_CheckNow" xml:space="preserve"><value>Check now</value></data>
+  <data name="Update_Checking" xml:space="preserve"><value>Checking…</value></data>
+  <data name="Update_UpToDate" xml:space="preserve"><value>You have the latest version</value></data>
+  <data name="Update_Failed" xml:space="preserve"><value>Couldn't check for updates</value></data>
+  <data name="Update_NotInstalled" xml:space="preserve"><value>Updates work in the installed version only</value></data>
+  <data name="Settings_Updates" xml:space="preserve"><value>Silkfly updates</value></data>
+  <data name="Settings_Channel_Stable" xml:space="preserve"><value>Stable</value></data>
+  <data name="Settings_Channel_Beta" xml:space="preserve"><value>Beta</value></data>
+  <data name="Settings_Channel_Tooltip" xml:space="preserve"><value>Beta also offers pre-release versions</value></data>
+  <data name="Settings_About" xml:space="preserve"><value>About</value></data>
+  <data name="Settings_License" xml:space="preserve"><value>License (GPL-3.0)</value></data>
+  <data name="Settings_ThirdParty" xml:space="preserve"><value>Third-party licenses</value></data>
+  <data name="Profile_Error_NameInvalid" xml:space="preserve"><value>The name can't contain line breaks or control characters</value></data>
+  <data name="Rail_UninstallAll_Title" xml:space="preserve"><value>Remove all mods?</value></data>
+  <data name="Rail_UninstallAll_Text" xml:space="preserve"><value>All mods of profile "{1}" will be removed ({0}). Their config files stay.</value></data>
+  <data name="Rail_UninstallAll_Confirm" xml:space="preserve"><value>Remove all</value></data>
+  <data name="Error_Unexpected" xml:space="preserve"><value>An unexpected error occurred. Silkfly keeps working, but if something looks wrong, restart it. The details are also in the log.</value></data>
+  <data name="Profile_LockRestored" xml:space="preserve"><value>A damaged profile file was restored from its backup. Check the mod list.</value></data>
+  <data name="Profile_LockReset" xml:space="preserve"><value>A profile file was damaged, with no backup: its mods now show as added manually.</value></data>
+  <data name="Mod_OpenConfigs" xml:space="preserve"><value>Open config files</value></data>
+  <data name="Profiles_Icon_Change" xml:space="preserve"><value>Profile icon</value></data>
+  <data name="Profiles_Icon_Choose" xml:space="preserve"><value>Choose a picture…</value></data>
+  <data name="Profiles_Icon_Remove" xml:space="preserve"><value>Remove the icon</value></data>
+  <data name="Profiles_Icon_Pick" xml:space="preserve"><value>Profile icon</value></data>
+  <data name="Profiles_Icon_Images" xml:space="preserve"><value>Pictures (PNG, JPEG)</value></data>
+  <data name="Profiles_Icon_Failed" xml:space="preserve"><value>Couldn't set the icon</value></data>
+  <data name="Profile_Error_IconFormat" xml:space="preserve"><value>only PNG and JPEG pictures are supported</value></data>
+  <data name="Profile_Error_IconTooLarge" xml:space="preserve"><value>the picture is larger than {0} MB</value></data>
+  <data name="Settings_ProfilesFolder" xml:space="preserve"><value>Profiles folder</value></data>
+  <data name="Settings_ProfilesFolder_Pick" xml:space="preserve"><value>New folder for profiles</value></data>
+  <data name="Settings_ProfilesFolder_Default" xml:space="preserve"><value>Default</value></data>
+  <data name="Settings_ProfilesFolder_Title" xml:space="preserve"><value>Move profiles?</value></data>
+  <data name="Settings_ProfilesFolder_Confirm" xml:space="preserve"><value>All profiles ({0}) with their mods and configs will be copied to {1}, then removed from the old folder. Don't close Silkfly until it's done.</value></data>
+  <data name="Settings_ProfilesFolder_Move" xml:space="preserve"><value>Move</value></data>
+  <data name="Settings_ProfilesFolder_Busy" xml:space="preserve"><value>Close the game and wait for mod operations to finish before moving profiles.</value></data>
+  <data name="Settings_ProfilesFolder_Done" xml:space="preserve"><value>Profiles moved</value></data>
+  <data name="Settings_ProfilesFolder_Failed" xml:space="preserve"><value>Couldn't move the profiles</value></data>
+  <data name="Profile_Error_MoveNested" xml:space="preserve"><value>the new folder can't be inside the current one or contain it</value></data>
+  <data name="Profile_Error_MoveNotEmpty" xml:space="preserve"><value>the new folder must be empty</value></data>
+  <data name="Settings_VerboseLog" xml:space="preserve"><value>Verbose log</value></data>
+  <data name="Settings_VerboseLog_Hint" xml:space="preserve"><value>For bug reports; the log grows faster</value></data>
+  <data name="Mod_Link_Tooltip" xml:space="preserve"><value>Link to a Thunderstore package</value></data>
+  <data name="Mod_Link_Title" xml:space="preserve"><value>Which mod is it? Silkfly installs that package from the catalog and removes this manual copy, so it gets updates.</value></data>
+  <data name="Mod_Link_None" xml:space="preserve"><value>No similar packages found by name.</value></data>
+  <data name="Mod_Link_Search" xml:space="preserve"><value>Find in the catalog</value></data>
+</root>
