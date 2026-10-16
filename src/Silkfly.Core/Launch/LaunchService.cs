@@ -19,6 +19,8 @@ public interface ILaunchService
 
     Task<LaunchResult> LaunchVanillaAsync(CancellationToken ct);
 
+    void AttachToRunningGame();
+
     bool IsGameRunning { get; }
 
     Profile? RunningProfile { get; }
@@ -67,7 +69,9 @@ public sealed class LaunchService(
 
     private async Task<LaunchResult> LaunchAsync(Profile? profile, CancellationToken ct)
     {
-        if (IsGameRunning || processes.FindByName(GameInfo.ProcessName).Count > 0)
+        if (!IsGameRunning)
+            AttachToRunningGame();
+        if (IsGameRunning)
             return LaunchResult.Fail("Error_GameAlreadyRunning");
 
         if (settings.Current.GamePath is not { } gamePath || locator.Validate(gamePath).Install is not { } game)
@@ -84,7 +88,16 @@ public sealed class LaunchService(
         }
 
         var mode = settings.Current.LaunchMode;
-        var command = LaunchCommandBuilder.Build(game, mode, profile?.PreloaderPath, env.HostPlatform, SteamExecutable());
+        LaunchCommand command;
+        try
+        {
+            command = LaunchCommandBuilder.Build(game, mode, profile?.PreloaderPath, env.HostPlatform, SteamExecutable(), MacArchitecturesOf(game, mode, profile));
+        }
+        catch (SilkflyException ex)
+        {
+            logger.LogWarning("Cannot launch: {Error}", ex.MessageKey);
+            return LaunchResult.Fail(ex.MessageKey, [.. ex.Args]);
+        }
 
         if (command.ConfigTarget is { } config)
             await loader.SetDoorstopConfigAsync(game, config.Enabled, config.TargetAssembly, ct).ConfigureAwait(false);
@@ -96,12 +109,15 @@ public sealed class LaunchService(
         };
         foreach (var arg in command.Arguments)
             info.ArgumentList.Add(arg);
+        foreach (var (name, value) in command.Environment ?? new Dictionary<string, string>())
+            info.Environment[name] = value;
 
         Process? process;
         try
         {
-            logger.LogInformation("Launching {Mode} ({Kind}): {File} {Args}",
-                mode, profile is null ? "vanilla" : $"profile {profile.Name}", info.FileName, string.Join(' ', command.Arguments));
+            logger.LogInformation("Launching {Mode} ({Kind}): {File} {Args} {Environment}",
+                mode, profile is null ? "vanilla" : $"profile {profile.Name}", info.FileName, string.Join(' ', command.Arguments),
+                string.Join(' ', (command.Environment ?? new Dictionary<string, string>()).Select(e => $"{e.Key}={e.Value}")));
             // Process.Start can block (error dialogs), keep it off the UI thread
             process = await Task.Run(() => processes.Start(info), ct).ConfigureAwait(false);
         }
@@ -133,6 +149,38 @@ public sealed class LaunchService(
             : WatchByNameAsync(_watch.Token);
 
         return new LaunchResult(true, processId, null);
+    }
+
+    // a game started before Silkfly was (re)opened
+    public void AttachToRunningGame()
+    {
+        if (IsGameRunning || processes.FindByName(GameInfo.ProcessName).FirstOrDefault() is not { } game)
+            return;
+
+        var profile = ProfileStartedWith(game);
+        logger.LogInformation("The game is already running (process {Id}), profile {Profile}", game.Id, profile?.Name ?? "unknown");
+        SetRunning(true, profile);
+        _watch?.Cancel();
+        _watch = new CancellationTokenSource();
+        _ = WatchProcessAsync(game, _watch.Token);
+    }
+
+    // the profile marked as played right before the game process started (through Steam the game starts later)
+    private Profile? ProfileStartedWith(Process game)
+    {
+        DateTimeOffset started;
+        try
+        {
+            started = game.StartTime.ToUniversalTime();
+        }
+        catch (Exception ex) when (ex is InvalidOperationException or System.ComponentModel.Win32Exception or NotSupportedException)
+        {
+            return null;
+        }
+
+        return profiles.Profiles
+            .Where(p => p.LastPlayedAt is { } played && played - started < TimeSpan.FromSeconds(30) && started - played < TimeSpan.FromMinutes(3))
+            .MaxBy(p => p.LastPlayedAt);
     }
 
     private async Task WatchProcessAsync(Process process, CancellationToken ct)
@@ -190,6 +238,19 @@ public sealed class LaunchService(
         IsGameRunning = running;
         RunningProfile = profile;
         RunningChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    private MacArchitectures? MacArchitecturesOf(GameInstall game, LaunchMode mode, Profile? profile)
+    {
+        if (profile is null || mode != LaunchMode.Direct || env.HostPlatform != GamePlatform.MacOS || game.Platform != GamePlatform.MacOS)
+            return null;
+
+        var mac = new MacArchitectures(
+            env.HostArchitecture == System.Runtime.InteropServices.Architecture.Arm64,
+            MachO.Read(fs, LaunchCommandBuilder.MacDoorstopPath(game)),
+            MachO.Read(fs, LaunchCommandBuilder.MacGameBinary(game)));
+        logger.LogInformation("macOS architectures: host arm64 {Arm64}, doorstop {Doorstop}, game {Game}", mac.HostIsArm64, mac.Doorstop, mac.Game);
+        return mac;
     }
 
     private string? SteamExecutable() =>

@@ -426,6 +426,30 @@
     </Style.Animations>
   </Style>
 
+  <!-- Game running: fixed sizes, so the animation never depends on when it started. -->
+  <Style Selector="Border.runtrack">
+    <Setter Property="Width" Value="16" />
+    <Setter Property="Height" Value="3" />
+    <Setter Property="CornerRadius" Value="1.5" />
+    <Setter Property="ClipToBounds" Value="True" />
+    <Setter Property="Background" Value="{DynamicResource BorderStrongBrush}" />
+  </Style>
+  <Style Selector="Border.runpulse">
+    <Setter Property="Width" Value="6" />
+    <Setter Property="HorizontalAlignment" Value="Left" />
+    <Setter Property="CornerRadius" Value="1.5" />
+    <Setter Property="Background" Value="{DynamicResource AccentBrush}" />
+    <Setter Property="RenderTransform">
+      <TranslateTransform />
+    </Setter>
+    <Style.Animations>
+      <Animation Duration="0:0:0.9" IterationCount="Infinite" PlaybackDirection="Alternate" Easing="SineEaseInOut">
+        <KeyFrame Cue="0%"><Setter Property="TranslateTransform.X" Value="0" /></KeyFrame>
+        <KeyFrame Cue="100%"><Setter Property="TranslateTransform.X" Value="10" /></KeyFrame>
+      </Animation>
+    </Style.Animations>
+  </Style>
+
   <Style Selector="Border.banner">
     <Setter Property="Background" Value="#2E1A12" />
     <Setter Property="BorderBrush" Value="#5A3A1A" />
@@ -484,9 +508,26 @@
   </Style>
   <Style Selector="ScrollViewer /template/ ScrollBar#PART_VerticalScrollBar">
     <Setter Property="CornerRadius" Value="3" />
+    <Setter Property="Margin" Value="0,0,2,2" />
+  </Style>
+  <Style Selector="ScrollBar /template/ RepeatButton#PART_LineUpButton, ScrollBar /template/ RepeatButton#PART_LineDownButton">
+    <Setter Property="IsVisible" Value="False" />
+  </Style>
+  <Style Selector="ScrollBar /template/ Rectangle#TrackRect">
+    <Setter Property="RadiusX" Value="3" />
+    <Setter Property="RadiusY" Value="3" />
+  </Style>
+  <!-- the thin bar is squeezed to 30% width: a wider radius keeps its ends round -->
+  <Style Selector="ScrollViewer:not(.near) /template/ ScrollBar#PART_VerticalScrollBar /template/ Rectangle#TrackRect">
+    <Setter Property="RadiusX" Value="8" />
+    <Setter Property="RadiusY" Value="2.4" />
   </Style>
   <Style Selector="ScrollViewer /template/ ScrollBar#PART_VerticalScrollBar /template/ Thumb">
     <Setter Property="CornerRadius" Value="3" />
+  </Style>
+  <!-- the squeezed rounded thumb bleeds a pixel past its edges: keep it inside, or it stays behind as a dot -->
+  <Style Selector="ScrollViewer /template/ ScrollBar#PART_VerticalScrollBar /template/ Thumb /template/ Border">
+    <Setter Property="Margin" Value="0,1" />
   </Style>
   <Style Selector="ScrollViewer:not(.near) /template/ ScrollBar#PART_VerticalScrollBar /template/ Thumb">
     <Setter Property="Background" Value="{DynamicResource TextPrimaryBrush}" />

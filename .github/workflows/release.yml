@@ -50,7 +50,6 @@ jobs:
         run: |
           version="${GITHUB_REF_NAME#v}"
           echo "VERSION=$version" >> "$GITHUB_ENV"
-          if [[ "$version" == *-* ]]; then echo "PRE=--pre" >> "$GITHUB_ENV"; else echo "PRE=" >> "$GITHUB_ENV"; fi
 
       - name: Test
         if: runner.os == 'Windows'
@@ -59,24 +58,24 @@ jobs:
       - name: Publish
         run: dotnet publish src/Silkfly.App -c Release -r ${{ matrix.rid }} --self-contained -p:Version=$VERSION -o publish
 
+      # .github/release-notes/<version>.md for people; the CHANGELOG section if there is none
       - name: Release notes
         run: |
-          awk -v v="$VERSION" '
-            /^## / { if (found) exit; if (index($0, "[" v "]")) { found = 1; next } }
-            found { print }
-          ' CHANGELOG.md > notes.md
+          if [ -f ".github/release-notes/$VERSION.md" ]; then
+            cp ".github/release-notes/$VERSION.md" notes.md
+          else
+            awk -v v="$VERSION" '
+              /^## / { if (found) exit; if (index($0, "[" v "]")) { found = 1; next } }
+              found { print }
+            ' CHANGELOG.md > notes.md
+          fi
           [ -s notes.md ] || echo "Silkfly $VERSION" > notes.md
           cat notes.md
 
       - name: Pack
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           dotnet tool install -g vpk --version $VPK_VERSION
-          # previous release, for delta packages (none the first time)
-          vpk download github --repoUrl "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY" --channel ${{ matrix.rid }} --token "$GITHUB_TOKEN" $PRE -o releases || true
-          # re-releasing the same version: vpk won't pack over it, so drop the download
-          if ls releases/*-"$VERSION"-*full.nupkg >/dev/null 2>&1; then rm -rf releases; fi
+          # full packages only: deltas would add four files to every release
           vpk pack --packId $PACK_ID --packVersion $VERSION --packDir publish --mainExe ${{ matrix.exe }} \
             --packTitle Silkfly --packAuthors "Silkfly contributors" --icon ${{ matrix.icon }} \
             --channel ${{ matrix.rid }} --runtime ${{ matrix.rid }} --releaseNotes notes.md -o releases
@@ -98,6 +97,26 @@ jobs:
         with:
           pattern: releases-*
 
+      # downloads get plain names and are uploaded separately; vpk uploads only the update feed
+      - name: Pick downloads
+        run: |
+          mkdir downloads
+          take() {
+            local file
+            file=$(ls releases-$1/$2 2>/dev/null | head -n 1 || true)
+            if [ -n "$file" ]; then mv "$file" "downloads/$3"; else echo "::warning::no $2 for $1"; fi
+          }
+          take win-x64 '*-Setup.exe' Silkfly-Windows-Setup.exe
+          take win-x64 '*-Portable.zip' Silkfly-Windows-Portable.zip
+          take linux-x64 '*.AppImage' Silkfly-Linux.AppImage
+          take osx-arm64 '*-Portable.zip' Silkfly-macOS-AppleSilicon.zip
+          take osx-x64 '*-Portable.zip' Silkfly-macOS-Intel.zip
+          # vpk uploads what assets.<channel>.json lists: keep only the update packages there
+          for list in releases-*/assets.*.json; do
+            jq '[.[] | select(.Type == "Full" or .Type == "Delta")]' "$list" > list.tmp && mv list.tmp "$list"
+          done
+          ls -l downloads releases-*
+
       # one channel at a time, so the release is created only once
       - name: Upload to GitHub Releases
         env:
@@ -112,3 +131,40 @@ jobs:
               -o "releases-$rid" --channel $rid --tag "$GITHUB_REF_NAME" --releaseName "Silkfly $version" \
               --merge --publish $pre
           done
+
+      - name: Upload downloads
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release upload "$GITHUB_REF_NAME" downloads/* --clobber -R "$GITHUB_REPOSITORY"
+
+      # a note on SmartScreen and antivirus heuristics; VirusTotal links when the VT_API_KEY secret is set
+      - name: Antivirus note
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VT_API_KEY: ${{ secrets.VT_API_KEY }}
+        run: |
+          {
+            echo "### SmartScreen and antivirus"
+            echo
+            echo "Silkfly is not code-signed yet: if SmartScreen warns on the first run, choose **More info → Run anyway**."
+            echo "One or two engines out of ~70 on VirusTotal may flag the files with machine-learning or generic heuristics"
+            echo "(\`ml.score\`, \`susgen\`, \`Wacatac\`). They often fire on new unsigned programs; the rest report the files clean."
+          } > antivirus.md
+
+          if [ -n "$VT_API_KEY" ]; then
+            echo >> antivirus.md
+            for f in downloads/Silkfly-Windows-Setup.exe downloads/Silkfly-Windows-Portable.zip; do
+              [ -f "$f" ] || continue
+              if url=$(curl -sf -H "x-apikey: $VT_API_KEY" https://www.virustotal.com/api/v3/files/upload_url | jq -er .data) &&
+                 curl -sf -H "x-apikey: $VT_API_KEY" -F "file=@$f" "$url" > /dev/null; then
+                echo "- [$(basename "$f")](https://www.virustotal.com/gui/file/$(sha256sum "$f" | cut -d' ' -f1))" >> antivirus.md
+              else
+                echo "::warning::VirusTotal upload failed for $f"
+              fi
+            done
+          fi
+
+          # a re-run replaces the old block
+          gh release view "$GITHUB_REF_NAME" -R "$GITHUB_REPOSITORY" --json body -q .body | sed '/^### SmartScreen and antivirus$/,$d' > notes.md
+          { echo; cat antivirus.md; } >> notes.md
+          gh release edit "$GITHUB_REF_NAME" -R "$GITHUB_REPOSITORY" --notes-file notes.md

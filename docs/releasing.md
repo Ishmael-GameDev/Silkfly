@@ -5,8 +5,9 @@ GitHub Releases, which is also where installed copies look for updates.
 
 ## Making a release
 
-1. Move the `[Unreleased]` notes in `CHANGELOG.md` under a new `## [X.Y.Z]` heading. That section becomes the release
-   notes (in the GitHub release and in Velopack's update package).
+1. Move the `[Unreleased]` notes in `CHANGELOG.md` under a new `## [X.Y.Z]` heading. For the release notes (the GitHub
+   release and Velopack's update package) write a short text for users in `.github/release-notes/X.Y.Z.md`; without it
+   the `CHANGELOG.md` section is used.
 2. Set `<Version>X.Y.Z</Version>` in `Directory.Build.props` so local builds show the same version.
 3. Optionally add an announcement to `news.json` (see below).
 4. Commit, then tag and push:
@@ -22,8 +23,12 @@ GitHub pre-release; only users who chose the **Beta** channel in Settings get it
 ## What the workflow does
 
 - `pack` (Windows, Linux, macOS arm64, macOS x64): tests (on Windows; `build.yml` runs them on every OS),
-  `dotnet publish` self-contained, downloads the previous release of the same channel for a delta package, then `vpk pack`.
-- `publish`: uploads all four channels to one GitHub release, one after another (`vpk upload github --merge`).
+  `dotnet publish` self-contained, then `vpk pack` (full packages only, no deltas).
+- `publish`: renames the downloads (`Silkfly-Windows-Setup.exe`, `Silkfly-Windows-Portable.zip`, `Silkfly-Linux.AppImage`,
+  `Silkfly-macOS-AppleSilicon.zip`, `Silkfly-macOS-Intel.zip`; the macOS `.pkg` installers are dropped), uploads the
+  update feed of all four channels to one GitHub release (`vpk upload github --merge`) and the downloads next to it, then
+  appends a short note on SmartScreen and antivirus heuristics to the release notes. With a `VT_API_KEY` repository
+  secret (a free VirusTotal API key) it also uploads the Windows downloads to VirusTotal and links the reports.
 
 Velopack channels are the runtime identifiers: `win-x64`, `linux-x64`, `osx-arm64`, `osx-x64`. Each installed copy
 updates from the channel it was packed with.

@@ -50,6 +50,10 @@
     <Style Selector="Button.link.installed:pointerover /template/ ContentPresenter#PART_ContentPresenter">
       <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" />
     </Style>
+    <!-- a click outside the open author list closes it and still reaches what was clicked -->
+    <Style Selector="AutoCompleteBox#AuthorBox /template/ Popup">
+      <Setter Property="OverlayDismissEventPassThrough" Value="True" />
+    </Style>
   </UserControl.Styles>
 
   <Grid ColumnDefinitions="36,*" DragDrop.AllowDrop="True">
@@ -65,13 +69,15 @@
         </TextBox>
         <Button Grid.Column="1" Classes="ghost" Margin="6,0,0,0" Padding="8,4">
           <StackPanel Orientation="Horizontal" Spacing="6">
-            <Ellipse Width="6" Height="6" Fill="{DynamicResource AccentHoverBrush}" IsVisible="{Binding HasAdvancedFilters}" />
+            <Panel Width="6" Height="6">
+              <Ellipse Fill="{DynamicResource AccentHoverBrush}" IsVisible="{Binding HasAdvancedFilters}" />
+            </Panel>
             <TextBlock Text="{loc:Str Mods_AdvancedSearch}" Foreground="{DynamicResource TextPrimaryBrush}" />
             <controls:GlyphIcon Width="13" Height="13" Data="{StaticResource Icon.ChevronDown}" />
           </StackPanel>
           <Button.Flyout>
             <Flyout Placement="BottomEdgeAlignedRight">
-              <StackPanel Width="300" Spacing="10" Margin="4">
+              <StackPanel x:Name="AdvancedPanel" Width="300" Spacing="10" Margin="4" Focusable="True" Background="Transparent">
                 <StackPanel Spacing="4">
                   <TextBlock Classes="caption" Text="{loc:Str Mods_Sort}" />
                   <ComboBox HorizontalAlignment="Stretch" ItemsSource="{Binding SortOptions}" SelectedItem="{Binding SelectedSort}">
@@ -85,8 +91,8 @@
                 <StackPanel Spacing="4">
                   <TextBlock Classes="caption" Text="{loc:Str Mods_Author}" />
                   <AutoCompleteBox x:Name="AuthorBox" ItemsSource="{Binding Authors}" SelectedItem="{Binding SelectedAuthor}"
-                                   FilterMode="ContainsOrdinal" Watermark="{loc:Str Mods_Author_Any}" MinimumPrefixLength="0"
-                                   MaxDropDownHeight="280" GotFocus="OnAuthorBoxFocus" PointerReleased="OnAuthorBoxFocus" />
+                                   FilterMode="Custom" Watermark="{loc:Str Mods_Author_Any}" MinimumPrefixLength="0"
+                                   MaxDropDownHeight="280" GotFocus="OnAuthorBoxGotFocus" PointerReleased="OnAuthorBoxPointerReleased" />
                 </StackPanel>
                 <StackPanel Spacing="4">
                   <TextBlock Classes="caption" Text="{loc:Str Mods_Categories}" />

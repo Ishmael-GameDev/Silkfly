@@ -14,6 +14,7 @@
         x:DataType="vm:ShellViewModel"
         Title="Silkfly"
         Width="850" Height="550"
+        RenderOptions.BitmapInterpolationMode="HighQuality"
         WindowStartupLocation="CenterScreen">
 
   <Window.DataTemplates>
@@ -24,7 +25,7 @@
     <DataTemplate DataType="vm:OnboardingViewModel"><views:OnboardingView /></DataTemplate>
   </Window.DataTemplates>
 
-  <Border x:Name="Outline" BorderThickness="0" BorderBrush="{DynamicResource WindowOutlineBrush}">
+  <Border x:Name="Outline" BorderThickness="0" BorderBrush="{DynamicResource WindowOutlineBrush}" Background="{DynamicResource BgBrush}">
   <LayoutTransformControl x:Name="Scaler">
   <Grid x:Name="Root" RowDefinitions="Auto,Auto,*">
 
@@ -87,7 +88,9 @@
             <Panel>
               <controls:GlyphIcon Width="13" Height="13" IsFilled="True" Data="{StaticResource Icon.Play}"
                                   IsVisible="{Binding !Session.IsGameRunning}" />
-              <ProgressBar IsIndeterminate="{Binding Session.IsGameRunning}" Width="16" MinWidth="16" Height="3" IsVisible="{Binding Session.IsGameRunning}" />
+              <Border Classes="runtrack" IsVisible="{Binding Session.IsGameRunning}">
+                <Border Classes="runpulse" />
+              </Border>
             </Panel>
           </Button>
         </StackPanel>

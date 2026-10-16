@@ -11,6 +11,12 @@ public sealed partial class MessageWindow : Window
     public MessageWindow()
     {
         InitializeComponent();
+        if (OperatingSystem.IsWindows())
+        {
+            SystemDecorations = SystemDecorations.Full;
+            Controls.WindowCorners.Apply(this, Frame);
+        }
+
         CopyButton.Bind(ContentProperty, StrExtension.CreateBinding("Dialog_Copy"));
         OpenLogButton.Bind(ContentProperty, StrExtension.CreateBinding("Dialog_OpenLog"));
         Opened += (_, _) =>

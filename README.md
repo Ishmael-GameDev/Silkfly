@@ -25,10 +25,10 @@ Download the latest version from [Releases](https://github.com/Ishmael-GameDev/S
 
 | System | File |
 |---|---|
-| Windows 10/11 (x64) | `…win-x64-Setup.exe`, or `…win-x64-Portable.zip` to run without installing |
-| Linux (x64) | `…linux-x64….AppImage`, make it executable (`chmod +x`) and run it |
-| macOS (Apple Silicon) | `…osx-arm64-Setup.pkg` |
-| macOS (Intel) | `…osx-x64-Setup.pkg` |
+| Windows 10/11 (x64) | `Silkfly-Windows-Setup.exe`, or `Silkfly-Windows-Portable.zip` to run without installing |
+| Linux (x64) | `Silkfly-Linux.AppImage`, make it executable (`chmod +x`) and run it |
+| macOS (Apple Silicon) | `Silkfly-macOS-AppleSilicon.zip`, unzip and move Silkfly to Applications |
+| macOS (Intel) | `Silkfly-macOS-Intel.zip`, unzip and move Silkfly to Applications |
 
 On first start Silkfly finds the game (Steam, GOG or a folder you choose), installs the BepInEx loader into it
 and creates a profile. The loader can be removed again in Settings; playing without mods works at any time.

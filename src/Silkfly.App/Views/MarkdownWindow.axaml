@@ -16,6 +16,7 @@
     <KeyBinding Gesture="Escape" Command="{Binding $parent[Window].Close}" />
   </Window.KeyBindings>
 
+  <Border x:Name="Outline" BorderThickness="0" BorderBrush="{DynamicResource WindowOutlineBrush}" Background="{DynamicResource BgBrush}">
   <Grid RowDefinitions="Auto,*,Auto">
     <Border Grid.Row="0" Background="{DynamicResource RegionBrush}" BorderBrush="{DynamicResource BorderBrush}"
             BorderThickness="0,0,0,1" PointerPressed="OnTitlePointerPressed">
@@ -77,4 +78,5 @@
       <Button HorizontalAlignment="Right" Content="{loc:Str Readme_Close}" Click="OnCloseClick" IsDefault="True" />
     </Border>
   </Grid>
+  </Border>
 </Window>

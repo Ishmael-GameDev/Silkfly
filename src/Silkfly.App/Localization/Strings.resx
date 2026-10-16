@@ -157,6 +157,7 @@
   <data name="Launch_Started" xml:space="preserve"><value>The game is starting…</value></data>
   <data name="Error_GameAlreadyRunning" xml:space="preserve"><value>The game is already running</value></data>
   <data name="Error_LaunchFailed" xml:space="preserve"><value>Could not start the game: {0}</value></data>
+  <data name="Error_AppleSiliconUnsupported" xml:space="preserve"><value>Mods can't start on this Mac: the current BepInEx loader doesn't support native Apple Silicon, and this game build has no Intel (x86_64) version to run under Rosetta.</value></data>
   <data name="Error_LoaderNotInCatalog" xml:space="preserve"><value>The loader package is not in the catalog yet. Refresh the catalog and try again.</value></data>
   <data name="Error_LoaderPackInvalid" xml:space="preserve"><value>The loader package has an unexpected structure</value></data>
   <data name="Error_BadArchive" xml:space="preserve"><value>The archive {0} is damaged</value></data>

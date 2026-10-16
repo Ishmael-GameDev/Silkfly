@@ -60,5 +60,27 @@ Checked 2026-10-14 on the GOG build 1.0.29315 with BepInExPack_Silksong 1.0.3 (B
   folder and `LogOutput.log` is written there; the game folder needs only the Doorstop files.
 - Silkfly keeps `enabled = false` in the ini, so a game started outside Silkfly runs without mods.
 
-Not checked yet: `run_bepinex.sh` on Linux and macOS, launching through Steam, and Proton.
+## macOS on Apple Silicon (checked on Mac17,4, macOS 26.6.2)
+
+- `libdoorstop.dylib` from BepInExPack_Silksong 1.0.3 (Doorstop 4.4.1) is built for `x86_64` only.
+- The game executable `Hollow Knight Silksong.app/Contents/MacOS/Hollow Knight Silksong` is universal
+  (`x86_64 arm64`) and starts natively as arm64, so `run_bepinex.sh` fails: dyld refuses to insert the dylib with
+  "incompatible architecture".
+- Started from the game folder like this, the game runs its x86_64 slice under Rosetta and loads BepInEx from the
+  profile:
+
+  ```
+  DOORSTOP_ENABLED=1 DOORSTOP_TARGET_ASSEMBLY="<profile>/BepInEx/core/BepInEx.Preloader.dll" \
+  arch -x86_64 -e DYLD_INSERT_LIBRARIES="<game>/libdoorstop.dylib" "<game>/Hollow Knight Silksong.app/Contents/MacOS/Hollow Knight Silksong"
+  ```
+
+  SIP strips `DYLD_*` variables from the environment of `/usr/bin/arch`, so `DYLD_INSERT_LIBRARIES` has to go through
+  `-e`; the `DOORSTOP_*` variables pass through as they are.
+
+Silkfly reads the architectures from the Mach-O headers (thin and universal) and, in the Direct launch mode on an
+Apple Silicon Mac, uses this command whenever `libdoorstop.dylib` has no arm64 slice. `arch` replaces itself with the
+game (exec), so the process Silkfly started is the game and its exit is tracked as usual. If the game has no x86_64
+slice, the launch stops with an error. Launching without mods, Intel Macs and a dylib with arm64 keep the old way.
+
+Not checked yet: `run_bepinex.sh` on Linux and on Intel Macs, launching through Steam, and Proton.
 

@@ -114,6 +114,7 @@ public sealed class GameLocatorTests
         public IReadOnlyList<string> Drives { get; set; } = [];
 
         public GamePlatform HostPlatform => GamePlatform.Windows;
+        public System.Runtime.InteropServices.Architecture HostArchitecture => System.Runtime.InteropServices.Architecture.X64;
         public string HomeDirectory => @"C:\Users\test";
         public IReadOnlyList<string> FixedDriveRoots => Drives;
 

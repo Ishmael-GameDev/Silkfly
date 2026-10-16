@@ -212,5 +212,6 @@ public sealed class OperationQueueTests
         public event EventHandler? RunningChanged { add { } remove { } }
         public Task<LaunchResult> LaunchModdedAsync(Profile profile, CancellationToken ct) => throw new NotSupportedException();
         public Task<LaunchResult> LaunchVanillaAsync(CancellationToken ct) => throw new NotSupportedException();
+        public void AttachToRunningGame() { }
     }
 }

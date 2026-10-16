@@ -8,7 +8,7 @@
         WindowStartupLocation="CenterOwner" ShowInTaskbar="False"
         SystemDecorations="BorderOnly">
 
-  <Border BorderBrush="{DynamicResource BorderStrongBrush}" BorderThickness="1">
+  <Border x:Name="Frame" BorderBrush="{DynamicResource BorderStrongBrush}" BorderThickness="1" Background="{DynamicResource BgBrush}">
     <Grid RowDefinitions="Auto,Auto,Auto" Margin="18,14,18,14">
       <TextBlock Text="{Binding Title}" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,10"
                  PointerPressed="OnTitlePointerPressed" Background="Transparent" />

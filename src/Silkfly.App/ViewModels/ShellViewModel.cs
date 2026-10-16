@@ -48,6 +48,12 @@ public sealed partial class ShellViewModel(
         _ => throw new ArgumentOutOfRangeException(nameof(CurrentPage), CurrentPage, null),
     };
 
+    partial void OnCurrentPageChanged(ShellPage oldValue, ShellPage newValue)
+    {
+        if (oldValue == ShellPage.Mods)
+            mods.Leave();
+    }
+
     public void ShowOnboarding() =>
         Onboarding = new OnboardingViewModel(session, picker, localizer, () => Onboarding = null);
 }

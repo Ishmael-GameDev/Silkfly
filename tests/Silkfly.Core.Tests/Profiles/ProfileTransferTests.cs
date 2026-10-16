@@ -59,6 +59,24 @@ public sealed class ProfileTransferTests
     }
 
     [Fact]
+    public async Task Profile_icon_travels_with_the_export()
+    {
+        var source = await _profiles.CreateAsync("With Icon", default);
+        var picture = TestPath.Of(@"C:\pics\fly.png");
+        _fs.AddFile(picture, new MockFileData([1, 2, 3]));
+        source = await _profiles.SetIconAsync(source, picture, default);
+
+        await CreateTransfer().ExportR2zAsync(source, TestPath.Of(@"C:\out\icon.r2z"), default);
+        var import = await CreateTransfer().ReadR2zAsync(TestPath.Of(@"C:\out\icon.r2z"), default);
+        var created = await CreateTransfer().CreateFromImportAsync(import, "Icon Copy", default);
+
+        import.Configs.ShouldBeEmpty();
+        created.IconFile.ShouldBe("icon.png");
+        _fs.File.ReadAllBytes(created.IconPath!).ShouldBe(new byte[] { 1, 2, 3 });
+        _fs.Directory.GetFiles(created.RootPath, ".import-icon*").ShouldBeEmpty();
+    }
+
+    [Fact]
     public void Import_accepts_config_folder_without_BepInEx_prefix()
     {
         var path = TestPath.Of(@"C:\in\a.r2z");

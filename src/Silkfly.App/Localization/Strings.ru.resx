@@ -157,6 +157,7 @@
   <data name="Launch_Started" xml:space="preserve"><value>Игра запускается…</value></data>
   <data name="Error_GameAlreadyRunning" xml:space="preserve"><value>Игра уже запущена</value></data>
   <data name="Error_LaunchFailed" xml:space="preserve"><value>Не удалось запустить игру: {0}</value></data>
+  <data name="Error_AppleSiliconUnsupported" xml:space="preserve"><value>Моды не запустятся на этом Mac: текущий загрузчик BepInEx не поддерживает Apple Silicon, а в этой сборке игры нет версии для Intel (x86_64), которую можно запустить через Rosetta.</value></data>
   <data name="Error_LoaderNotInCatalog" xml:space="preserve"><value>Пакета загрузчика пока нет в каталоге. Обновите каталог и попробуйте снова.</value></data>
   <data name="Error_LoaderPackInvalid" xml:space="preserve"><value>У пакета загрузчика неожиданная структура</value></data>
   <data name="Error_BadArchive" xml:space="preserve"><value>Архив {0} повреждён</value></data>

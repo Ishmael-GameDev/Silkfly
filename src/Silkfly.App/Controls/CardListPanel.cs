@@ -64,6 +64,18 @@ public sealed class CardListPanel : Panel
     public double? OffsetOf(object item) =>
         _indexOf.TryGetValue(item, out var index) && index < _offsets.Length ? _offsets[index] : null;
 
+    public object? ItemAt(double y)
+    {
+        var items = Items;
+        if (items is null || items.Count == 0 || _offsets.Length != items.Count)
+            return null;
+
+        var index = Array.BinarySearch(_offsets, y);
+        if (index < 0)
+            index = ~index - 1;
+        return items[Math.Clamp(index, 0, items.Count - 1)];
+    }
+
     protected override Size MeasureOverride(Size availableSize)
     {
         var items = Items ?? [];

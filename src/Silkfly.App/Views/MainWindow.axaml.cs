@@ -121,10 +121,7 @@ public sealed partial class MainWindow : Window
     {
         if (OperatingSystem.IsWindows())
         {
-            Outline.BorderThickness = new Thickness(1);
-            ExtendClientAreaToDecorationsHint = true;
-            ExtendClientAreaChromeHints = ExtendClientAreaChromeHints.NoChrome;
-            ExtendClientAreaTitleBarHeightHint = -1;
+            Controls.WindowCorners.Apply(this, Outline);
         }
         else if (OperatingSystem.IsMacOS())
         {
@@ -152,8 +149,6 @@ public sealed partial class MainWindow : Window
 
         // maximized + extended client area overflows the screen on Windows
         Root.Margin = maximized ? OffScreenMargin : default;
-        if (OperatingSystem.IsWindows())
-            Outline.BorderThickness = new Thickness(maximized ? 0 : 1);
 
         MaximizeGlyph.Data = (Avalonia.Media.Geometry?)this.FindResource(maximized ? "Caption.Restore" : "Caption.Maximize");
         MaximizeButton.Bind(ToolTip.TipProperty, StrExtension.CreateBinding(maximized ? "Caption_Restore" : "Caption_Maximize"));

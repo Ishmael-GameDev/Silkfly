@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using Microsoft.Win32;
 
@@ -6,6 +7,8 @@ namespace Silkfly.Core.Game;
 public interface ISystemEnvironment
 {
     GamePlatform HostPlatform { get; }
+
+    Architecture HostArchitecture { get; }
 
     string HomeDirectory { get; }
 
@@ -24,6 +27,8 @@ public sealed class SystemEnvironment : ISystemEnvironment
         OperatingSystem.IsWindows() ? GamePlatform.Windows :
         OperatingSystem.IsMacOS() ? GamePlatform.MacOS :
         GamePlatform.Linux;
+
+    public Architecture HostArchitecture => RuntimeInformation.OSArchitecture;
 
     public string HomeDirectory => Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
 

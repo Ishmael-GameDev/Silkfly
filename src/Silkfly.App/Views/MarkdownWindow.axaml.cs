@@ -1,7 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
-using Avalonia.Platform;
 using CommunityToolkit.Mvvm.Input;
 using Silkfly.Core.Infrastructure;
 
@@ -13,11 +12,7 @@ public sealed partial class MarkdownWindow : Window
     {
         InitializeComponent();
         if (OperatingSystem.IsWindows())
-        {
-            ExtendClientAreaToDecorationsHint = true;
-            ExtendClientAreaChromeHints = ExtendClientAreaChromeHints.NoChrome;
-            ExtendClientAreaTitleBarHeightHint = -1;
-        }
+            Controls.WindowCorners.Apply(this, Outline);
         else
         {
             CloseButton.IsVisible = false;

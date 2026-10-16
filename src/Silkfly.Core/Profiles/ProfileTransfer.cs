@@ -14,7 +14,12 @@ namespace Silkfly.Core.Profiles;
 
 public sealed record ExportedMod(PackageId Id, SemVersion Version, bool Enabled);
 
-public sealed record ProfileImport(string ProfileName, IReadOnlyList<ExportedMod> Mods, IReadOnlyDictionary<string, byte[]> Configs);
+public sealed record ProfileImport(string ProfileName, IReadOnlyList<ExportedMod> Mods, IReadOnlyDictionary<string, byte[]> Configs)
+{
+    public ProfileIconData? Icon { get; init; }
+}
+
+public sealed record ProfileIconData(string Extension, byte[] Content);
 
 public sealed record ExportResult(int ModCount, int ConfigCount, IReadOnlyList<PackageId> SkippedManual);
 
@@ -72,6 +77,24 @@ public sealed class ProfileTransfer(
             await fs.File.WriteAllBytesAsync(target, content, ct).ConfigureAwait(false);
         }
 
+        if (import.Icon is { } icon)
+        {
+            var temp = fs.Path.Combine(profile.RootPath, ".import-icon" + icon.Extension);
+            await fs.File.WriteAllBytesAsync(temp, icon.Content, ct).ConfigureAwait(false);
+            try
+            {
+                profile = await profiles.SetIconAsync(profile, temp, ct).ConfigureAwait(false);
+            }
+            catch (SilkflyException ex)
+            {
+                logger.LogWarning("Imported profile icon skipped: {Error}", ex.MessageKey);
+            }
+            finally
+            {
+                fs.File.Delete(temp);
+            }
+        }
+
         return profile;
     }
 
@@ -118,6 +141,13 @@ public sealed class ProfileTransfer(
                     configs++;
                 }
             }
+
+            if (profile.IconPath is { } iconPath && fs.File.Exists(iconPath) && fs.FileInfo.New(iconPath).Length <= ProfileService.MaxIconBytes)
+            {
+                using var output = zip.CreateEntry(fs.Path.GetFileName(iconPath)).Open();
+                using var input = fs.File.OpenRead(iconPath);
+                input.CopyTo(output);
+            }
         }
 
         result = new ExportResult(exported.Count, configs, skipped);
@@ -152,11 +182,18 @@ public sealed class ProfileTransfer(
         }
 
         var configs = new Dictionary<string, byte[]>(StringComparer.OrdinalIgnoreCase);
+        ProfileIconData? icon = null;
         foreach (var entry in zip.Entries)
         {
             var path = SafeZip.Normalize(entry.FullName);
             if (path.EndsWith('/'))
                 continue;
+
+            if (icon is null && IconExtension(path) is { } extension && entry.Length <= ProfileService.MaxIconBytes)
+            {
+                icon = new ProfileIconData(extension, Read(entry));
+                continue;
+            }
 
             string? relative = path.StartsWith(ConfigPrefix, StringComparison.OrdinalIgnoreCase) ? path[ConfigPrefix.Length..]
                 : path.StartsWith("config/", StringComparison.OrdinalIgnoreCase) ? path["config/".Length..]
@@ -164,13 +201,24 @@ public sealed class ProfileTransfer(
             if (relative is null || relative.Length == 0)
                 continue;
 
-            using var input = entry.Open();
-            using var copy = new MemoryStream();
-            input.CopyTo(copy);
-            configs[relative] = copy.ToArray();
+            configs[relative] = Read(entry);
         }
 
-        return new ProfileImport(string.IsNullOrWhiteSpace(manifest.ProfileName) ? "Imported" : manifest.ProfileName!, mods, configs);
+        return new ProfileImport(string.IsNullOrWhiteSpace(manifest.ProfileName) ? "Imported" : manifest.ProfileName!, mods, configs)
+        {
+            Icon = icon,
+        };
+    }
+
+    private static string? IconExtension(string path) =>
+        ProfileService.IconExtensions.FirstOrDefault(e => path.Equals("icon" + e, StringComparison.OrdinalIgnoreCase));
+
+    private static byte[] Read(ZipArchiveEntry entry)
+    {
+        using var input = entry.Open();
+        using var copy = new MemoryStream();
+        input.CopyTo(copy);
+        return copy.ToArray();
     }
 
     private static ZipArchive OpenZip(byte[] bytes)

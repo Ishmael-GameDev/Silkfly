@@ -59,6 +59,8 @@ public sealed partial class SettingsViewModel : ObservableObject
     [ObservableProperty]
     private LanguageOption _selectedLanguage;
 
+    public double ScrollOffset { get; set; }
+
     [ObservableProperty]
     private LaunchModeOption _selectedLaunchMode;
 

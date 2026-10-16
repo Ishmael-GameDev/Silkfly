@@ -143,12 +143,12 @@ public sealed partial class ModListViewModel : ObservableObject
     partial void OnWhatsNewMonthChanged(bool value)
     {
         OnPropertyChanged(nameof(WhatsNewWeek));
-        Apply();
+        CollapseAndApply();
     }
 
-    partial void OnWhatsNewIncludesNewChanged(bool value) => Apply();
+    partial void OnWhatsNewIncludesNewChanged(bool value) => CollapseAndApply();
 
-    partial void OnWhatsNewIncludesUpdatedChanged(bool value) => Apply();
+    partial void OnWhatsNewIncludesUpdatedChanged(bool value) => CollapseAndApply();
 
     public ModListViewModel(
         ICatalogService catalog,
@@ -261,6 +261,16 @@ public sealed partial class ModListViewModel : ObservableObject
 
     public event EventHandler<ModItemViewModel>? ScrollToRequested;
 
+    public event EventHandler? Leaving;
+
+    public event EventHandler? FiltersReset;
+
+    public object? ScrollAnchor { get; set; }
+
+    public double ScrollAnchorDelta { get; set; }
+
+    public double ScrollOffset { get; set; }
+
     public async Task InitializeAsync(CancellationToken ct = default)
     {
         try
@@ -289,6 +299,7 @@ public sealed partial class ModListViewModel : ObservableObject
             category.IsSelected = false;
         _suspendApply = false;
         Apply();
+        FiltersReset?.Invoke(this, EventArgs.Empty);
     }
 
     private bool CanUninstallAll() => HasInstalled;
@@ -395,6 +406,7 @@ public sealed partial class ModListViewModel : ObservableObject
         if (!_cards.TryGetValue(id, out var card))
             return;
 
+        CollapseAll();
         if (!Items.Contains(card))
         {
             ResetFilters();
@@ -415,8 +427,27 @@ public sealed partial class ModListViewModel : ObservableObject
         SearchText = text;
     }
 
+    public void Leave()
+    {
+        Leaving?.Invoke(this, EventArgs.Empty);
+        CollapseAll();
+    }
+
+    public void CollapseAll()
+    {
+        foreach (var card in _cards.Values)
+            card.IsExpanded = false;
+    }
+
+    private void CollapseAndApply()
+    {
+        CollapseAll();
+        Apply();
+    }
+
     partial void OnSearchTextChanged(string value)
     {
+        CollapseAll();
         _debounce.Stop();
         _debounce.Start();
     }
@@ -424,22 +455,22 @@ public sealed partial class ModListViewModel : ObservableObject
     partial void OnFilterChanged(ModFilter value)
     {
         OnPropertyChanged(nameof(IsWhatsNew));
-        Apply();
+        CollapseAndApply();
     }
 
-    partial void OnSelectedSortChanged(SortOption value) => Apply();
+    partial void OnSelectedSortChanged(SortOption value) => CollapseAndApply();
 
-    partial void OnSelectedAuthorChanged(string? value) => Apply();
+    partial void OnSelectedAuthorChanged(string? value) => CollapseAndApply();
 
     partial void OnShowDeprecatedChanged(bool value)
     {
-        Apply();
+        CollapseAndApply();
         _ = _settings.UpdateAsync(s => s with { ShowDeprecated = value });
     }
 
     partial void OnShowNsfwChanged(bool value)
     {
-        Apply();
+        CollapseAndApply();
         _ = _settings.UpdateAsync(s => s with { ShowNsfw = value });
     }
 
@@ -535,7 +566,7 @@ public sealed partial class ModListViewModel : ObservableObject
     private void OnCategoryChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (e.PropertyName == nameof(CategoryOption.IsSelected))
-            Apply();
+            CollapseAndApply();
     }
 
     private void OnRefreshStateChanged()

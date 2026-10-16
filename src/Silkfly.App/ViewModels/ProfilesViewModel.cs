@@ -19,6 +19,8 @@ public sealed partial class ProfilesViewModel(
 {
     public SessionViewModel Session => session;
 
+    public double ScrollOffset { get; set; }
+
     [RelayCommand]
     private async Task CreateAsync()
     {

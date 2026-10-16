@@ -22,6 +22,15 @@ public sealed partial class ModsView : UserControl
         AddHandler(DragDrop.DropEvent, OnDrop);
 
         ModScroll.AddHandler(PointerWheelChangedEvent, OnWheel, Avalonia.Interactivity.RoutingStrategies.Tunnel);
+        ModScroll.Loaded += (_, _) => RestoreScroll();
+        AuthorBox.AddHandler(PointerPressedEvent, (_, _) => _authorHadFocus = AuthorBox.IsKeyboardFocusWithin,
+            Avalonia.Interactivity.RoutingStrategies.Tunnel, handledEventsToo: true);
+        AuthorBox.ItemFilter = FilterAuthor;
+        AuthorBox.DropDownClosed += (_, _) =>
+        {
+            if (AuthorBox.SelectedItem is not null)
+                Dispatcher.UIThread.Post(LeaveAuthorBox, DispatcherPriority.Background);
+        };
         _scrollTimer = new DispatcherTimer(TimeSpan.FromMilliseconds(15), DispatcherPriority.Render, OnScrollTick);
     }
 
@@ -80,9 +89,40 @@ public sealed partial class ModsView : UserControl
 
     private static double MaxScroll(ScrollViewer scroll) => Math.Max(0, scroll.Extent.Height - scroll.Viewport.Height);
 
-    private void OnAuthorBoxFocus(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    // a click on a list item bubbles up here too and must not reopen the list
+    private void OnAuthorBoxPointerReleased(object? sender, PointerReleasedEventArgs e)
     {
-        if (sender is AutoCompleteBox { IsDropDownOpen: false } box)
+        if (sender is not AutoCompleteBox box || e.Source is not Visual source || source.GetVisualRoot() != box.GetVisualRoot())
+            return;
+
+        // the first click selects the whole name, so typing replaces it
+        if (!_authorHadFocus)
+            box.FindDescendantOfType<TextBox>()?.SelectAll();
+        OpenAuthorList(box);
+    }
+
+    private bool _authorHadFocus;
+
+    // while the box shows the picked author, the list offers every author
+    private bool FilterAuthor(string? search, object? item) =>
+        string.IsNullOrEmpty(search) || Equals(search, AuthorBox.SelectedItem) ||
+        item is string name && name.Contains(search, StringComparison.OrdinalIgnoreCase);
+
+    private void LeaveAuthorBox()
+    {
+        AuthorBox.FindDescendantOfType<TextBox>()?.ClearSelection();
+        AdvancedPanel.Focus();
+    }
+
+    private void OnAuthorBoxGotFocus(object? sender, GotFocusEventArgs e)
+    {
+        if (sender is AutoCompleteBox box && e.NavigationMethod == NavigationMethod.Tab)
+            OpenAuthorList(box);
+    }
+
+    private static void OpenAuthorList(AutoCompleteBox box)
+    {
+        if (!box.IsDropDownOpen)
             box.IsDropDownOpen = true;
     }
 
@@ -113,19 +153,61 @@ public sealed partial class ModsView : UserControl
     protected override void OnDataContextChanged(EventArgs e)
     {
         base.OnDataContextChanged(e);
-        if (_vm is not null)
-            _vm.ScrollToRequested -= OnScrollToRequested;
+        Unsubscribe();
         _vm = DataContext as ModListViewModel;
         if (_vm is not null)
+        {
             _vm.ScrollToRequested += OnScrollToRequested;
+            _vm.Leaving += OnLeaving;
+            _vm.FiltersReset += OnFiltersReset;
+        }
     }
 
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnDetachedFromVisualTree(e);
-        if (_vm is not null)
-            _vm.ScrollToRequested -= OnScrollToRequested;
+        Unsubscribe();
         _vm = null;
+    }
+
+    private void Unsubscribe()
+    {
+        if (_vm is null)
+            return;
+        _vm.ScrollToRequested -= OnScrollToRequested;
+        _vm.Leaving -= OnLeaving;
+        _vm.FiltersReset -= OnFiltersReset;
+    }
+
+    // a cleared selection puts the typed part of the name back into the author box
+    private void OnFiltersReset(object? sender, EventArgs e) =>
+        Dispatcher.UIThread.Post(() => AuthorBox.Text = string.Empty, DispatcherPriority.Background);
+
+    // remember the card at the top: the cards above it collapse on leaving
+    private void OnLeaving(object? sender, EventArgs e)
+    {
+        if (_vm is null)
+            return;
+
+        var y = ModScroll.Offset.Y;
+        var anchor = ModList.ItemAt(y);
+        _vm.ScrollOffset = y;
+        _vm.ScrollAnchor = anchor;
+        _vm.ScrollAnchorDelta = anchor is null or ModItemViewModel { IsExpanded: true }
+            ? 0
+            : y - (ModList.OffsetOf(anchor) ?? y);
+    }
+
+    private void RestoreScroll()
+    {
+        if (_vm is null)
+            return;
+
+        var y = _vm.ScrollAnchor is { } anchor && ModList.OffsetOf(anchor) is { } offset
+            ? offset + _vm.ScrollAnchorDelta
+            : _vm.ScrollOffset;
+        ModScroll.Offset = ModScroll.Offset.WithY(Math.Clamp(y, 0, MaxScroll(ModScroll)));
+        _lastSetY = ModScroll.Offset.Y;
     }
 
     public void FocusSearch()

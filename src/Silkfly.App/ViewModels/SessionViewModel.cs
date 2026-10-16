@@ -209,6 +209,7 @@ public sealed partial class SessionViewModel : ObservableObject
         foreach (var profile in _profiles.Profiles)
             await _installer.RecoverAsync(profile, ct);
         RebuildProfiles();
+        _launcher.AttachToRunningGame();
         var game = _settings.Current.GamePath is { } saved ? _locator.Validate(saved).Install : null;
         if (game is null)
         {
