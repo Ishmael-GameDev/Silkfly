@@ -1,0 +1,34 @@
+# Thunderstore CLI (tcli) config. Run from this folder; the version comes from the release tag (--package-version).
+[config]
+schemaVersion = "0.0.1"
+
+[package]
+namespace = "Ishmael"
+name = "Silkfly"
+versionNumber = "0.0.0"
+description = "Mod manager for Hollow Knight: Silksong. Installs Thunderstore mods with their dependencies, sets up BepInEx and keeps mods in profiles. This package has the Windows installer; Linux and macOS versions are on the website."
+websiteUrl = "https://ishmael-gamedev.github.io/Silkfly/"
+containsNsfwContent = false
+
+[package.dependencies]
+
+[build]
+icon = "./icon.png"
+readme = "./README.md"
+outdir = "./build"
+
+[[build.copy]]
+source = "../CHANGELOG.md"
+target = "CHANGELOG.md"
+
+# put there by the release workflow
+[[build.copy]]
+source = "../downloads/Silkfly-Windows-Setup.exe"
+target = "Silkfly-Windows-Setup.exe"
+
+[publish]
+repository = "https://thunderstore.io"
+communities = ["hollow-knight-silksong"]
+
+[publish.categories]
+hollow-knight-silksong = ["utility"]

@@ -82,7 +82,7 @@ public sealed class CatalogService(
 
     public PackageVersion? FindVersion(PackageId id, SemVersion version) => Find(id)?.FindVersion(version);
 
-    public IReadOnlyList<Package> Query(CatalogQuery query) => CatalogSearch.Query(_current.Listable, query);
+    public IReadOnlyList<Package> Query(CatalogQuery query) => CatalogSearch.Query(_current.Listable(), query);
 
     private void Replace(CatalogSnapshot snapshot)
     {

@@ -133,6 +133,6 @@ public sealed class LoaderServiceTests
         public Task RefreshAsync(bool force, CancellationToken ct) => Task.CompletedTask;
         public Package? Find(PackageId id) => _packages.GetValueOrDefault(id);
         public PackageVersion? FindVersion(PackageId id, SemVersion version) => Find(id)?.FindVersion(version);
-        public IReadOnlyList<Package> Query(CatalogQuery query) => CatalogSearch.Query(Current.Listable, query);
+        public IReadOnlyList<Package> Query(CatalogQuery query) => CatalogSearch.Query(Current.Listable(), query);
     }
 }

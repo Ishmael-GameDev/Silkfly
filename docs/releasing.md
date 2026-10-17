@@ -34,6 +34,21 @@ The download names (`Silkfly-Windows-Setup.exe`, `Silkfly-Windows-Portable.zip`,
 `Silkfly-macOS-AppleSilicon.zip`, `Silkfly-macOS-Intel.zip`) must not change: the buttons of the website (`site/`) link
 to `releases/latest/download/<name>`.
 
+## Thunderstore
+
+Stable tags (no suffix) are also published to Thunderstore as `Ishmael-Silkfly`, after the GitHub release. The package
+holds the README from `thunderstore/`, `CHANGELOG.md`, the icon and the Windows installer; `thunderstore/thunderstore.toml`
+is the Thunderstore CLI (tcli) config. Silkfly hides its own package from the in-app catalog by the `ThunderstoreNamespace`
+setting (`Ishmael` by default), so if the team name ever changes, change it there and in `thunderstore.toml`.
+
+The upload needs a `THUNDERSTORE_TOKEN` repository secret; without it the step is skipped with a warning. To get one:
+on thunderstore.io open **Teams → Ishmael → Service Accounts**, add a service account and copy its token (it is shown
+once), then add it under **Settings → Secrets and variables → Actions** of the repository.
+
+Thunderstore never accepts the same version twice and a published version can't be replaced. So a stable release can no
+longer be deleted and tagged again: the rebuild would fail at the Thunderstore step and the files there would differ
+from GitHub. Fix mistakes in a new version instead.
+
 Velopack channels are the runtime identifiers: `win-x64`, `linux-x64`, `osx-arm64`, `osx-x64`. Each installed copy
 updates from the channel it was packed with.
 

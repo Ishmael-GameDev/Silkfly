@@ -1,6 +1,7 @@
 using Microsoft.Extensions.Logging.Abstractions;
 using Silkfly.Core.Catalog;
 using Silkfly.Core.Models;
+using Silkfly.Core.Settings;
 using Silkfly.Core.Thunderstore;
 
 namespace Silkfly.Core.Tests.Catalog;
@@ -46,8 +47,21 @@ public sealed class CatalogMapperTests
     {
         var snapshot = CatalogSnapshot.Create(Fixture.ListingPackages(), DateTimeOffset.UtcNow, CatalogSource.Network);
 
-        snapshot.Listable.ShouldNotContain(p => p.Id.IsLoaderPack());
+        snapshot.Listable().ShouldNotContain(p => p.Id.IsLoaderPack());
         snapshot.ById.ContainsKey(CatalogRules.LoaderPackage).ShouldBeTrue();
+    }
+
+    [Fact]
+    public void Own_package_is_hidden_by_the_namespace_setting()
+    {
+        var own = AppSettings.DefaultThunderstoreNamespace;
+
+        CatalogRules.IsHidden(new PackageId("Ishmael", "Silkfly"), own).ShouldBeTrue();
+        CatalogRules.IsHidden(new PackageId("ishmael", "silkfly"), own).ShouldBeTrue();
+        CatalogRules.IsHidden(new PackageId("Someone", "Silkfly"), own).ShouldBeFalse();
+        CatalogRules.IsHidden(new PackageId("Someone", "Silkfly"), "Someone").ShouldBeTrue();
+        CatalogRules.IsHidden(new PackageId("Ishmael", "OtherMod"), own).ShouldBeFalse();
+        new AppSettings { ThunderstoreNamespace = " " }.Normalized().ThunderstoreNamespace.ShouldBe(own);
     }
 
     private static PackageDto Dto(string fullName, params string[] versions) => new()

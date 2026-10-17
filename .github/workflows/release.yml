@@ -89,6 +89,9 @@ jobs:
     needs: pack
     runs-on: ubuntu-latest
     steps:
+      # thunderstore/ and CHANGELOG.md for the Thunderstore package
+      - uses: actions/checkout@v4
+
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 10.0.x
@@ -168,3 +171,18 @@ jobs:
           gh release view "$GITHUB_REF_NAME" -R "$GITHUB_REPOSITORY" --json body -q .body | sed '/^### SmartScreen and antivirus$/,$d' > notes.md
           { echo; cat antivirus.md; } >> notes.md
           gh release edit "$GITHUB_REF_NAME" -R "$GITHUB_REPOSITORY" --notes-file notes.md
+
+      # stable releases only: a version on Thunderstore can't be uploaded twice
+      - name: Publish to Thunderstore
+        if: ${{ !contains(github.ref_name, '-') }}
+        working-directory: thunderstore
+        env:
+          THUNDERSTORE_TOKEN: ${{ secrets.THUNDERSTORE_TOKEN }}
+          DOTNET_ROLL_FORWARD: Major
+        run: |
+          if [ -z "$THUNDERSTORE_TOKEN" ]; then
+            echo "::warning::THUNDERSTORE_TOKEN is not set, the release is not published to Thunderstore"
+            exit 0
+          fi
+          dotnet tool install -g tcli --version 0.2.4
+          tcli publish --config-path thunderstore.toml --package-version "${GITHUB_REF_NAME#v}" --token "$THUNDERSTORE_TOKEN"

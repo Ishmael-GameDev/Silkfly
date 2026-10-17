@@ -50,7 +50,8 @@ public sealed record CatalogSnapshot(
     public static readonly CatalogSnapshot Empty =
         new([], new Dictionary<PackageId, Package>(), DateTimeOffset.MinValue, CatalogSource.Empty);
 
-    public IEnumerable<Package> Listable => Packages.Where(p => !CatalogRules.IsHidden(p.Id));
+    public IEnumerable<Package> Listable(string? appNamespace = null) =>
+        Packages.Where(p => !CatalogRules.IsHidden(p.Id, appNamespace));
 
     public static CatalogSnapshot Create(IEnumerable<Package> packages, DateTimeOffset fetchedAt, CatalogSource source)
     {
@@ -74,5 +75,14 @@ public static class CatalogRules
         new("Kesomannen", "GaleModManager"),
     ];
 
-    public static bool IsHidden(PackageId id) => id.IsLoaderPack() || HiddenTools.Contains(id);
+    public const string AppPackageName = "Silkfly";
+
+    public static bool IsHidden(PackageId id, string? appNamespace = null) =>
+        id.IsLoaderPack() || HiddenTools.Contains(id) || IsApp(id, appNamespace);
+
+    // Silkfly's own package
+    private static bool IsApp(PackageId id, string? appNamespace) =>
+        appNamespace is not null &&
+        string.Equals(id.Namespace, appNamespace, StringComparison.OrdinalIgnoreCase) &&
+        string.Equals(id.Name, AppPackageName, StringComparison.OrdinalIgnoreCase);
 }

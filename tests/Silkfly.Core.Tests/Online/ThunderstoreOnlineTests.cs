@@ -57,7 +57,7 @@ public sealed class ThunderstoreOnlineTests : IDisposable
         var packages = await LoadCatalogAsync(client);
 
         var version = packages
-            .Where(p => !CatalogRules.IsHidden(p.Id) && !p.IsDeprecated)
+            .Where(p => !CatalogRules.IsHidden(p.Id, AppSettings.DefaultThunderstoreNamespace) && !p.IsDeprecated)
             .Select(p => p.Latest)
             .Where(v => v.IsActive && v.FileSize > 0 && v.Dependencies.All(d => d.Id.IsLoaderPack()))
             .MinBy(v => v.FileSize);

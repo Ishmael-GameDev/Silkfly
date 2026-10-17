@@ -488,7 +488,7 @@ public sealed partial class ModListViewModel : ObservableObject
         }
 
         var catalogSnapshot = _catalog.Current;
-        var listable = catalogSnapshot.Listable.ToList();
+        var listable = catalogSnapshot.Listable(_settings.Current.ThunderstoreNamespace).ToList();
         var local = _snapshot.LocalPackages;
 
         foreach (var package in listable)

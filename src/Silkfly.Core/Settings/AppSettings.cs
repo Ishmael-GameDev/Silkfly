@@ -12,6 +12,7 @@ public sealed record WindowPlacement(int X, int Y, double Width, double Height, 
 public sealed record AppSettings
 {
     public const int CurrentSchemaVersion = 1;
+    public const string DefaultThunderstoreNamespace = "Ishmael";
 
     public int SchemaVersion { get; set; } = CurrentSchemaVersion;
     public string? GamePath { get; set; }
@@ -25,6 +26,7 @@ public sealed record AppSettings
     public int WhatsNewDays { get; set; } = 7;
     public DependencyPolicy DependencyPolicy { get; set; } = DependencyPolicy.LatestSameMajor;
     public bool CheckForUpdates { get; set; } = true;
+    public string ThunderstoreNamespace { get; set; } = DefaultThunderstoreNamespace;
 
     public bool VerboseLogging { get; set; }
     public string UpdateChannel { get; set; } = UpdateChannels.Stable;
@@ -37,6 +39,7 @@ public sealed record AppSettings
         UiScale = UiScale is >= 0.9 and <= 1.3 ? UiScale : 1.0,
         WhatsNewDays = WhatsNewDays is >= 1 and <= 365 ? WhatsNewDays : 7,
         Language = string.IsNullOrWhiteSpace(Language) ? "auto" : Language,
+        ThunderstoreNamespace = string.IsNullOrWhiteSpace(ThunderstoreNamespace) ? DefaultThunderstoreNamespace : ThunderstoreNamespace.Trim(),
         UpdateChannel = UpdateChannel is UpdateChannels.Beta ? UpdateChannels.Beta : UpdateChannels.Stable,
     };
 }
