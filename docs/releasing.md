@@ -30,6 +30,10 @@ GitHub pre-release; only users who chose the **Beta** channel in Settings get it
   appends a short note on SmartScreen and antivirus heuristics to the release notes. With a `VT_API_KEY` repository
   secret (a free VirusTotal API key) it also uploads the Windows downloads to VirusTotal and links the reports.
 
+The download names (`Silkfly-Windows-Setup.exe`, `Silkfly-Windows-Portable.zip`, `Silkfly-Linux.AppImage`,
+`Silkfly-macOS-AppleSilicon.zip`, `Silkfly-macOS-Intel.zip`) must not change: the buttons of the website (`site/`) link
+to `releases/latest/download/<name>`.
+
 Velopack channels are the runtime identifiers: `win-x64`, `linux-x64`, `osx-arm64`, `osx-x64`. Each installed copy
 updates from the channel it was packed with.
 

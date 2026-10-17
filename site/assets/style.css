@@ -1,0 +1,353 @@
+/* Colors from src/Silkfly.App/Styles/Tokens.axaml */
+:root {
+  --bg: #1B1013;
+  --surface: #0B0708;
+  --border: #3B2327;
+  --border-strong: #6A343A;
+  --text: #F3E9E7;
+  --text-secondary: #B9A3A0;
+  --text-muted: #94807D;
+  --accent: #C8323C;
+  --accent-pressed: #9E2630;
+  --accent-soft: #3A1518;
+  --on-accent: #FFFFFF;
+  --link: #FF7A7F;
+  --control: #33201F;
+  --radius: 4px;
+  color-scheme: dark;
+}
+
+@font-face {
+  font-family: "Noto Sans";
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/noto-sans-400.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Noto Sans";
+  font-weight: 600;
+  font-display: swap;
+  src: url("fonts/noto-sans-600.woff2") format("woff2");
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 400 1rem/1.6 "Noto Sans", system-ui, sans-serif;
+  text-align: center;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: var(--link);
+}
+
+a:hover {
+  color: var(--text);
+}
+
+:focus-visible {
+  outline: 2px solid var(--link);
+  outline-offset: 3px;
+}
+
+code {
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.9em;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.05em 0.35em;
+  overflow-wrap: anywhere;
+}
+
+.skip {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  padding: 0.5rem 1rem;
+  background: var(--accent);
+  color: var(--on-accent);
+  border-radius: var(--radius);
+}
+
+.skip:focus {
+  top: 1rem;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0.9rem 1.25rem;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.brand img {
+  border-radius: 6px;
+}
+
+.lang {
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 0.5rem 0;
+}
+
+.lang:hover {
+  color: var(--text);
+}
+
+main {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+.hero .art {
+  display: block;
+  width: 560px;
+  margin: 0 auto -1.5rem;
+}
+
+h1 {
+  font-size: 3rem;
+  line-height: 1.1;
+  margin: 0;
+}
+
+.tagline {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  margin: 0.4rem 0 1.75rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 3rem;
+  padding: 0 1.75rem;
+  background: var(--accent);
+  color: var(--on-accent);
+  border-radius: var(--radius);
+  font-weight: 600;
+  font-size: 1.1rem;
+  text-decoration: none;
+}
+
+.btn:hover,
+.btn:active {
+  background: var(--accent-pressed);
+  color: var(--on-accent);
+}
+
+.btn svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.meta {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin: 0.6rem 0 0.25rem;
+}
+
+.intro {
+  color: var(--text-secondary);
+  margin: 2rem auto 0;
+}
+
+/* collapsible blocks */
+summary {
+  list-style: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.5rem;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+summary h2 {
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.chevron {
+  width: 1.1rem;
+  height: 1.1rem;
+  flex: none;
+  transition: transform 0.15s;
+}
+
+details[open] > summary .chevron {
+  transform: rotate(180deg);
+}
+
+.others summary {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.others ul {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem auto 0;
+  max-width: 420px;
+  text-align: left;
+}
+
+.others a {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.55rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  text-decoration: none;
+}
+
+.others a:hover {
+  background: var(--control);
+}
+
+.others span {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.others .current a {
+  background: var(--accent-soft);
+}
+
+.others .current span {
+  color: var(--text-secondary);
+}
+
+.more {
+  margin-top: 2.5rem;
+  display: grid;
+  gap: 0.25rem;
+}
+
+.body {
+  text-align: left;
+  padding: 0.5rem 0 1.5rem;
+}
+
+.body ul,
+.body ol {
+  margin: 0 0 1rem;
+  padding-left: 1.4rem;
+}
+
+.body li {
+  margin: 0.25rem 0;
+}
+
+.body p {
+  color: var(--text-secondary);
+  margin: 0.5rem 0;
+}
+
+.body .shot {
+  display: block;
+  border: 1px solid var(--border-strong);
+  border-radius: 6px;
+  margin: 0 0 1rem;
+}
+
+.faq h3 {
+  font-size: 1rem;
+  margin: 1rem 0 0.2rem;
+}
+
+.faq p {
+  margin: 0;
+}
+
+.links {
+  list-style: none;
+  padding: 0;
+  margin: 2.5rem 0 0;
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+}
+
+.links a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 0.25rem;
+}
+
+.links a:hover {
+  color: var(--text);
+}
+
+.links svg {
+  width: 2rem;
+  height: 2rem;
+}
+
+.foot {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 2rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 2.4rem;
+  }
+
+  .hero .art {
+    margin-bottom: -0.75rem;
+  }
+
+  summary h2 {
+    font-size: 1.1rem;
+  }
+
+  .links {
+    gap: 1.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chevron {
+    transition: none;
+  }
+}

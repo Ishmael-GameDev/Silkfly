@@ -4,6 +4,8 @@ A cross-platform mod manager for **Hollow Knight: Silksong**. Mods come from
 [Thunderstore](https://thunderstore.io/c/hollow-knight-silksong/) and are loaded with
 [BepInEx](https://github.com/BepInEx/BepInEx) through UnityDoorstop. Windows, Linux and macOS.
 
+Website: [ishmael-gamedev.github.io/Silkfly](https://ishmael-gamedev.github.io/Silkfly/)
+
 <p align="center">
   <img src="docs/screenshots/mods.png" width="49%" alt="Mods screen" />
   <img src="docs/screenshots/info.png" width="49%" alt="Info screen" />

@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Silkfly — Hollow Knight: Silksong Mod Manager</title>
+  <meta name="description" content="Silkfly is a free mod manager for Hollow Knight: Silksong. Install Silksong mods from Thunderstore with BepInEx on Windows, Linux, macOS and Steam Deck.">
+  <link rel="canonical" href="https://ishmael-gamedev.github.io/Silkfly/">
+  <link rel="alternate" hreflang="en" href="https://ishmael-gamedev.github.io/Silkfly/">
+  <link rel="alternate" hreflang="ru" href="https://ishmael-gamedev.github.io/Silkfly/ru/">
+  <link rel="alternate" hreflang="x-default" href="https://ishmael-gamedev.github.io/Silkfly/">
+  <!-- <meta name="google-site-verification" content=""> -->
+  <!-- <meta name="yandex-verification" content=""> -->
+  <meta name="theme-color" content="#1B1013">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="preload" href="assets/fonts/noto-sans-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/style.css">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Silkfly">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ru_RU">
+  <meta property="og:url" content="https://ishmael-gamedev.github.io/Silkfly/">
+  <meta property="og:title" content="Silkfly — Hollow Knight: Silksong Mod Manager">
+  <meta property="og:description" content="Free mod manager for Hollow Knight: Silksong. Thunderstore mods, BepInEx, profiles. Windows, Linux and macOS.">
+  <meta property="og:image" content="https://ishmael-gamedev.github.io/Silkfly/og.png">
+  <meta property="og:image:width" content="1280">
+  <meta property="og:image:height" content="640">
+  <meta property="og:image:alt" content="Silkfly logo next to the Mods screen of the app">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Silkfly — Hollow Knight: Silksong Mod Manager">
+  <meta name="twitter:description" content="Free mod manager for Hollow Knight: Silksong. Thunderstore mods, BepInEx, profiles. Windows, Linux and macOS.">
+  <meta name="twitter:image" content="https://ishmael-gamedev.github.io/Silkfly/og.png">
+  <meta name="twitter:image:alt" content="Silkfly logo next to the Mods screen of the app">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Silkfly",
+  "description": "Free mod manager for Hollow Knight: Silksong. Installs mods from Thunderstore with the BepInEx loader and keeps them in profiles.",
+  "url": "https://ishmael-gamedev.github.io/Silkfly/",
+  "image": "https://ishmael-gamedev.github.io/Silkfly/og.png",
+  "screenshot": "https://ishmael-gamedev.github.io/Silkfly/assets/img/mods.png",
+  "applicationCategory": "GameApplication",
+  "operatingSystem": "Windows 10, Windows 11, Linux, macOS",
+  "downloadUrl": "https://github.com/Ishmael-GameDev/Silkfly/releases/latest",
+  "license": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Ishmael",
+    "url": "https://github.com/Ishmael-GameDev"
+  }
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is Silkfly safe?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Silkfly is open source and every release is built on GitHub from the source code. It is not code-signed yet, so SmartScreen warns about it, and one or two of about 70 antivirus engines on VirusTotal may flag it with machine-learning heuristics."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "I already use another mod manager.",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "If BepInEx is already in the game folder, Silkfly asks first and moves those files to .silkfly-backup, so they can be restored."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where are my files?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Settings and profiles are in %LOCALAPPDATA%\\Silkfly on Windows, ~/.local/share/Silkfly on Linux and ~/Library/Application Support/Silkfly on macOS."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "The game hangs on a black screen with mods.",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Usually a mod does not support your game version. Check the game with Play without mods, then turn mods off one by one. The log is in BepInEx/LogOutput.log in the profile folder."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it work on Steam Deck?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Silkfly has a Linux version that runs in Desktop Mode. The game on Steam Deck runs through Proton, and that setup has not been tested yet."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is it free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, Silkfly is free and open source under GPL-3.0."
+      }
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="top">
+    <a class="brand" href="./"><img src="assets/img/logo.png" width="28" height="28" alt="">Silkfly</a>
+    <a class="lang" href="ru/" hreflang="ru" lang="ru">Русский</a>
+  </header>
+
+  <main id="main">
+    <div class="hero">
+      <picture>
+        <source type="image/webp" srcset="assets/img/art-760.webp 760w, assets/img/art.webp 1140w" sizes="(max-width: 600px) 92vw, 560px">
+        <img class="art" src="assets/img/art.png" width="760" height="412" alt="A glowing cracked shell with silk flies flying out of it, from the Info screen of Silkfly" fetchpriority="high">
+      </picture>
+      <h1>Silkfly</h1>
+      <p class="tagline">Mod manager for Hollow Knight: Silksong</p>
+
+      <a class="btn" id="download" href="https://github.com/Ishmael-GameDev/Silkfly/releases/latest"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg><span>Download</span></a>
+      <p class="meta"><span id="version" data-template="Version {v} · " hidden></span>Free and open source</p>
+
+      <details class="others">
+        <summary>Other systems<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+        <ul id="files">
+            <li data-os="windows" data-button="Download for Windows"><a href="https://github.com/Ishmael-GameDev/Silkfly/releases/latest/download/Silkfly-Windows-Setup.exe">Windows installer <span>Silkfly-Windows-Setup.exe</span></a></li>
+            <li><a href="https://github.com/Ishmael-GameDev/Silkfly/releases/latest/download/Silkfly-Windows-Portable.zip">Windows, no install <span>Silkfly-Windows-Portable.zip</span></a></li>
+            <li data-os="linux" data-button="Download for Linux"><a href="https://github.com/Ishmael-GameDev/Silkfly/releases/latest/download/Silkfly-Linux.AppImage">Linux <span>Silkfly-Linux.AppImage</span></a></li>
+            <li data-os="mac-arm" data-button="Download for macOS"><a href="https://github.com/Ishmael-GameDev/Silkfly/releases/latest/download/Silkfly-macOS-AppleSilicon.zip">macOS, Apple Silicon <span>Silkfly-macOS-AppleSilicon.zip</span></a></li>
+            <li data-os="mac-intel" data-button="Download for macOS (Intel)"><a href="https://github.com/Ishmael-GameDev/Silkfly/releases/latest/download/Silkfly-macOS-Intel.zip">macOS, Intel <span>Silkfly-macOS-Intel.zip</span></a></li>
+        </ul>
+      </details>
+
+      <p class="intro">Install Silksong mods from Thunderstore in one click. Silkfly sets up the BepInEx loader, installs dependencies and keeps your mods in profiles. Windows, Linux and macOS.</p>
+    </div>
+
+    <div class="more">
+      <details>
+        <summary><h2>Features</h2><svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+        <div class="body">
+          <picture>
+            <source type="image/webp" srcset="assets/img/mods.webp">
+            <img class="shot" src="assets/img/mods.png" width="850" height="550" loading="lazy" alt="Mods screen of Silkfly: the Thunderstore catalog with search, filters and Install buttons">
+          </picture>
+          <ul>
+            <li>Thunderstore catalog with search, filters and categories</li>
+            <li>One-click install with dependencies; update all mods at once</li>
+            <li>Profiles: separate mod sets you can switch and share as a file or a code</li>
+            <li>Play with or without mods</li>
+            <li>Works offline from a cached catalog</li>
+            <li>English and Russian</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary><h2>How to install Silksong mods</h2><svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+        <div class="body">
+          <ol>
+            <li>Download Silkfly and run it.</li>
+            <li>It finds the game in Steam or GOG, or you pick the folder, and installs BepInEx.</li>
+            <li>Click Install on the mods you want.</li>
+            <li>Press Play with mods.</li>
+          </ol>
+          <p><strong>Windows.</strong> If SmartScreen warns, click More info, then Run anyway. Silkfly is not code-signed yet.</p>
+          <p><strong>macOS.</strong> If macOS says the app is damaged, move it to Applications and run <code>xattr -dr com.apple.quarantine /Applications/Silkfly.app</code> in Terminal.</p>
+          <p><strong>Linux.</strong> Run <code>chmod +x Silkfly-Linux.AppImage</code> first.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary><h2>FAQ</h2><svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+        <div class="body faq">
+          <h3>Is Silkfly safe?</h3>
+          <p>Silkfly is open source and every release is built on GitHub from the source code. It is not code-signed yet, so SmartScreen warns about it, and one or two of about 70 antivirus engines on VirusTotal may flag it with machine-learning heuristics.</p>
+          <h3>I already use another mod manager.</h3>
+          <p>If BepInEx is already in the game folder, Silkfly asks first and moves those files to .silkfly-backup, so they can be restored.</p>
+          <h3>Where are my files?</h3>
+          <p>Settings and profiles are in %LOCALAPPDATA%\Silkfly on Windows, ~/.local/share/Silkfly on Linux and ~/Library/Application Support/Silkfly on macOS.</p>
+          <h3>The game hangs on a black screen with mods.</h3>
+          <p>Usually a mod does not support your game version. Check the game with Play without mods, then turn mods off one by one. The log is in BepInEx/LogOutput.log in the profile folder.</p>
+          <h3>Does it work on Steam Deck?</h3>
+          <p>Silkfly has a Linux version that runs in Desktop Mode. The game on Steam Deck runs through Proton, and that setup has not been tested yet.</p>
+          <h3>Is it free?</h3>
+          <p>Yes, Silkfly is free and open source under GPL-3.0.</p>
+        </div>
+      </details>
+    </div>
+
+    <ul class="links" aria-label="Links">
+        <li><a href="https://thunderstore.io/c/hollow-knight-silksong/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16.5 9.4 7.55 4.24M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16ZM3.27 6.96 12 12.01l8.73-5.05M12 22.08V12"/></svg><span>Thunderstore</span></a></li>
+        <li><a href="https://discord.com/invite/VDsg3HmWuB"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg><span>Discord</span></a></li>
+        <li><a href="https://github.com/Ishmael-GameDev/Silkfly"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4M9 18c-4.51 2-5-2-7-2"/></svg><span>GitHub</span></a></li>
+    </ul>
+  </main>
+
+  <footer class="foot">
+    <p>Silkfly is a fan project and is not affiliated with Team Cherry. Art: Hollow Knight: Silksong, © Team Cherry. Code: <a href="https://github.com/Ishmael-GameDev/Silkfly/blob/main/LICENSE">GPL-3.0</a>. Font: Noto Sans, <a href="assets/fonts/OFL.txt">OFL</a>.</p>
+  </footer>
+
+  <script src="assets/site.js" defer></script>
+</body>
+</html>

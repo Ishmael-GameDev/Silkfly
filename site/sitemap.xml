@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://ishmael-gamedev.github.io/Silkfly/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ishmael-gamedev.github.io/Silkfly/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://ishmael-gamedev.github.io/Silkfly/ru/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ishmael-gamedev.github.io/Silkfly/"/>
+  </url>
+  <url>
+    <loc>https://ishmael-gamedev.github.io/Silkfly/ru/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ishmael-gamedev.github.io/Silkfly/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://ishmael-gamedev.github.io/Silkfly/ru/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ishmael-gamedev.github.io/Silkfly/"/>
+  </url>
+</urlset>
