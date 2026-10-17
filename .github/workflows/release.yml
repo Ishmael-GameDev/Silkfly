@@ -89,9 +89,6 @@ jobs:
     needs: pack
     runs-on: ubuntu-latest
     steps:
-      # thunderstore/ and CHANGELOG.md for the Thunderstore package
-      - uses: actions/checkout@v4
-
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 10.0.x
@@ -172,10 +169,25 @@ jobs:
           { echo; cat antivirus.md; } >> notes.md
           gh release edit "$GITHUB_REF_NAME" -R "$GITHUB_REPOSITORY" --notes-file notes.md
 
-      # stable releases only: a version on Thunderstore can't be uploaded twice
+  # a job of its own, so a failed upload can be re-run without the GitHub steps
+  thunderstore:
+    needs: publish
+    # stable releases only: a version on Thunderstore can't be uploaded twice
+    if: ${{ !contains(github.ref_name, '-') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: releases-win-x64
+          path: releases-win-x64
+
       - name: Publish to Thunderstore
-        if: ${{ !contains(github.ref_name, '-') }}
-        working-directory: thunderstore
         env:
           THUNDERSTORE_TOKEN: ${{ secrets.THUNDERSTORE_TOKEN }}
           DOTNET_ROLL_FORWARD: Major
@@ -184,5 +196,8 @@ jobs:
             echo "::warning::THUNDERSTORE_TOKEN is not set, the release is not published to Thunderstore"
             exit 0
           fi
+          mkdir -p downloads
+          cp releases-win-x64/*-Setup.exe downloads/Silkfly-Windows-Setup.exe
           dotnet tool install -g tcli --version 0.2.4
+          cd thunderstore
           tcli publish --config-path thunderstore.toml --package-version "${GITHUB_REF_NAME#v}" --token "$THUNDERSTORE_TOKEN"

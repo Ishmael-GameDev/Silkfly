@@ -5,6 +5,16 @@ versions follow [SemVer](https://semver.org/). The release workflow uses the sec
 
 ## [Unreleased]
 
+## [0.1.1]
+
+### Added
+
+- Silkfly is now also published on Thunderstore.
+
+### Changed
+
+- Silkfly's own Thunderstore package is hidden from the mod list.
+
 ## [0.1.0]
 
 First public release.
